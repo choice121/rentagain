@@ -1,0 +1,7 @@
+{
+  "name": "RentAgain - Rental Approval & Housing Assistance",
+  "description": "Overcome rental denial, credit challenges, and income barriers. Professional housing packages, co-applicant solutions, ADP-verified income, and instant approval services nationwide.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
