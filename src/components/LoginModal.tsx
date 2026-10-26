@@ -22,28 +22,29 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="relative max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 flex flex-col">
+    <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+      <div className="relative max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 flex flex-col max-h-[92vh]">
         {/* Header */}
-        <div className="bg-[#0D4F3D] text-white px-6 py-5 flex items-center justify-between">
+        <div className="bg-[#0D4F3D] text-white px-5 sm:px-6 py-4 sm:py-5 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-emerald-700/80 border border-emerald-400/40 flex items-center justify-center">
               <Lock className="w-4 h-4 text-emerald-200" />
             </div>
             <div>
-              <h3 className="font-bold font-display text-lg">Client Case Portal</h3>
-              <p className="text-xs text-emerald-200">RentAgain Secure Access</p>
+              <h3 className="font-bold font-display text-base sm:text-lg">Client Case Portal</h3>
+              <p className="text-[11px] text-emerald-200">RentAgain Secure Access</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-full hover:bg-emerald-800 text-emerald-200 hover:text-white transition-colors cursor-pointer"
+            className="p-2 rounded-full hover:bg-emerald-800 text-emerald-200 hover:text-white transition-colors cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center"
+            aria-label="Close"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="p-6">
+        <div className="p-5 sm:p-6 overflow-y-auto">
           {!loggedIn ? (
             <form onSubmit={handleSubmit} className="space-y-4">
               <p className="text-xs text-gray-500 leading-relaxed">
@@ -58,7 +59,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                   placeholder="client@rentagain.org"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600"
+                  className="w-full px-3.5 py-3 rounded-lg border border-gray-300 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600"
                 />
               </div>
 
@@ -75,21 +76,21 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                   placeholder="••••••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600"
+                  className="w-full px-3.5 py-3 rounded-lg border border-gray-300 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600"
                 />
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-2.5 bg-[#0D4F3D] hover:bg-emerald-800 text-white font-bold text-sm rounded-lg shadow transition-all cursor-pointer flex items-center justify-center gap-2"
+                  className="w-full py-3.5 bg-[#0D4F3D] hover:bg-emerald-800 text-white font-bold text-sm rounded-xl shadow transition-all cursor-pointer flex items-center justify-center gap-2 min-h-[48px]"
                 >
                   <span>Sign In To Portal</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
 
-              <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
+              <div className="pt-3 border-t border-gray-100 flex flex-col xs:flex-row items-center justify-between text-xs text-gray-500 gap-2">
                 <span className="flex items-center gap-1">
                   <Shield className="w-3.5 h-3.5 text-emerald-600" />
                   256-bit TLS Encrypted
@@ -103,7 +104,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                 <CheckCircle className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="font-bold text-gray-900 text-lg">Case Portal Active</h4>
+                <h4 className="font-bold text-gray-900 text-base sm:text-lg">Case Portal Active</h4>
                 <p className="text-xs text-gray-500 mt-1">Logged in as {email}</p>
               </div>
 
@@ -124,7 +125,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                   setLoggedIn(false);
                   onClose();
                 }}
-                className="w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold rounded-lg cursor-pointer"
+                className="w-full py-3 bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold rounded-lg cursor-pointer min-h-[44px]"
               >
                 Close Portal
               </button>

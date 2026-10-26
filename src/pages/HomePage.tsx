@@ -71,27 +71,27 @@ export const HomePage: React.FC<HomePageProps> = ({ setCurrentPage, onOpenQuesti
           <div className="absolute top-1/2 right-10 w-[450px] h-[450px] bg-teal-300 rounded-full blur-[160px]" />
         </div>
 
-        <div className="relative max-w-5xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-800/80 border border-emerald-500/30 text-emerald-200 text-xs font-bold tracking-widest uppercase shadow-sm">
+        <div className="relative max-w-5xl mx-auto text-center space-y-4 sm:space-y-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-800/80 border border-emerald-500/30 text-emerald-200 text-[11px] sm:text-xs font-bold tracking-widest uppercase shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-emerald-300" />
             A BETTER PATH FORWARD
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight font-display leading-[1.08] text-white">
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight font-display leading-[1.12] text-white">
             Get Back Into Housing — <br className="hidden sm:inline" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-200 to-emerald-400">
               Even If You've Been Denied Before.
             </span>
           </h1>
 
-          <p className="max-w-3xl mx-auto text-base sm:text-xl text-emerald-100/90 leading-relaxed font-normal">
+          <p className="max-w-3xl mx-auto text-sm sm:text-xl text-emerald-100/90 leading-relaxed font-normal px-2">
             We help renters overcome common approval challenges with personalized solutions designed to improve your approval odds and get you moving forward.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2 sm:pt-4">
             <button
               onClick={onOpenQuestionnaire}
-              className="w-full sm:w-auto px-8 py-4 bg-white text-[#0D4F3D] hover:bg-emerald-50 font-extrabold text-base rounded-xl shadow-xl hover:shadow-2xl transition-all hover:scale-105 cursor-pointer flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-3.5 sm:py-4 bg-white text-[#0D4F3D] hover:bg-emerald-50 font-extrabold text-sm sm:text-base rounded-xl shadow-xl hover:shadow-2xl transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2 min-h-[48px]"
             >
               <span>Get Started</span>
               <ArrowRight className="w-4 h-4" />
@@ -101,14 +101,14 @@ export const HomePage: React.FC<HomePageProps> = ({ setCurrentPage, onOpenQuesti
                 const el = document.getElementById('how-it-works');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="w-full sm:w-auto px-7 py-4 bg-emerald-900/60 hover:bg-emerald-900/90 text-white font-semibold text-base rounded-xl border border-emerald-400/30 transition-all cursor-pointer"
+              className="w-full sm:w-auto px-7 py-3.5 sm:py-4 bg-emerald-900/60 hover:bg-emerald-900/90 text-white font-semibold text-sm sm:text-base rounded-xl border border-emerald-400/30 transition-all cursor-pointer min-h-[48px] flex items-center justify-center"
             >
               See How It Works
             </button>
           </div>
 
           {/* Trust badges bar */}
-          <div className="pt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto border-t border-emerald-700/40 text-xs sm:text-sm font-semibold text-emerald-100">
+          <div className="pt-8 sm:pt-12 grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 max-w-4xl mx-auto border-t border-emerald-700/40 text-xs sm:text-sm font-semibold text-emerald-100">
             <div className="flex items-center justify-center gap-2 py-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
               <span>Nationwide Assistance</span>

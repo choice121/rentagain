@@ -102,14 +102,15 @@ export default function App() {
       <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
 
       {/* Floating 109% Replication Inspector Button & Modal */}
-      <div className="fixed bottom-5 left-5 z-40">
+      <div className="fixed bottom-3 left-3 sm:bottom-5 sm:left-5 z-40">
         <button
           onClick={() => setInspectorOpen(true)}
-          className="flex items-center gap-2 px-3.5 py-2 bg-gray-900/90 hover:bg-black text-white text-xs font-bold rounded-full shadow-2xl backdrop-blur-md border border-white/20 transition-all hover:scale-105 cursor-pointer group"
+          className="flex items-center gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-3.5 sm:py-2 bg-gray-900/90 hover:bg-black text-white text-[10px] sm:text-xs font-bold rounded-full shadow-2xl backdrop-blur-md border border-white/20 transition-all active:scale-95 cursor-pointer group"
           title="Open Replication & Architecture Breakdown"
         >
-          <Sparkles className="w-3.5 h-3.5 text-emerald-400 group-hover:rotate-12 transition-transform" />
-          <span>109% Replication Notes</span>
+          <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400 group-hover:rotate-12 transition-transform" />
+          <span className="hidden xs:inline">109% Replication Notes</span>
+          <span className="xs:hidden">Notes</span>
         </button>
       </div>
 
