@@ -15,6 +15,8 @@ const routeFiles = [
   "auto-approval/index.html",
   "book-consultation/index.html",
   "book-online/index.html",
+  "request-consultation/index.html",
+  "readiness/index.html",
   "account/index.html",
   "staff/index.html",
   "privacy/index.html",
@@ -41,6 +43,8 @@ const renderedRoutes = [
   { path: "/auto-approval/", heading: "A clearer path toward your auto goals." },
   { path: "/book-consultation/", heading: "Let's Find The Right Solution For You." },
   { path: "/book-online/", heading: "BOOK A CONSULTATION" },
+  { path: "/request-consultation/", heading: "Request a consultation" },
+  { path: "/readiness/", heading: "Know where you stand before you apply." },
   { path: "/account/", heading: "YOUR RENT AGAIN ACCOUNT" },
   { path: "/staff/", heading: "STAFF CONSOLE" },
   { path: "/privacy/", heading: "PRIVACY NOTICE" },
@@ -77,18 +81,83 @@ for (const route of renderedRoutes) {
     document,
     HTMLAnchorElement: class HTMLAnchorElement {},
   });
-  assert.ok(appRoot.innerHTML.includes(`<h1>${route.heading}`), `${route.path} renders the expected page heading`);
+  const headingTag = route.path === "/readiness/" ? "h2" : "h1";
+  assert.ok(appRoot.innerHTML.includes(`<${headingTag}>${route.heading}`), `${route.path} renders the expected page heading`);
   assert.ok(document.title.endsWith("RentAgain") || route.path === "/", `${route.path} sets a page title`);
 
   if (route.path === "/") {
-    assert.match(appRoot.innerHTML, /fictional profiles and quotes are design-preview copy, not real client reviews or endorsements/i);
-    assert.equal((appRoot.innerHTML.match(/Sample · fictional profile/g) ?? []).length, 3, "each sample testimonial is clearly labeled");
-    assert.match(appRoot.innerHTML, /Replace these samples with feedback from real clients only after receiving their permission/);
+    assert.match(appRoot.innerHTML, /SUCCESS STORIES/);
+    assert.equal((appRoot.innerHTML.match(/Rent Again success story photo/g) ?? []).length, 18, "the original success story gallery is restored");
+    assert.match(appRoot.innerHTML, /Improve your rental profile and approval positioning\./);
+    assert.match(appRoot.innerHTML, /Add qualified support to strengthen your application\./);
+    assert.match(appRoot.innerHTML, /Organize and strengthen income documentation\./);
+    assert.match(appRoot.innerHTML, /View All Services ➜/);
+    assert.match(appRoot.innerHTML, /An FAQ section can be used to quickly answer common questions about your business like/);
+    assert.match(appRoot.innerHTML, /href="\/account\/">Log In<\/a>/);
+    assert.match(appRoot.innerHTML, /href="\/book-online\/">Get Started ➜<\/a>/);
+    assert.doesNotMatch(appRoot.innerHTML, /testimonial|readiness-guide|auto-approval/);
+    assert.doesNotMatch(appRoot.innerHTML, /href="\/(?:staff|privacy)\//);
+    assert.ok(appRoot.innerHTML.indexOf("SUCCESS STORIES") < appRoot.innerHTML.indexOf("HOW IT WORKS"), "homepage sections match original order");
+    assert.ok(appRoot.innerHTML.indexOf("HOW IT WORKS") < appRoot.innerHTML.indexOf("OUR SERVICES"), "services follow the original process section");
     listeners["menu-click"]();
     assert.equal(attributes["aria-expanded"], "true", "mobile navigation opens accessibly");
     assert.ok(classes.has("site-nav--open"), "mobile navigation becomes visible");
     documentListeners.keydown({ key: "Escape" });
     assert.equal(attributes["aria-expanded"], "false", "Escape closes mobile navigation");
+  }
+
+  if (route.path === "/book-online/") {
+    assert.match(appRoot.innerHTML, /Car Approval Consultation/);
+    assert.doesNotMatch(appRoot.innerHTML, /consultation-request/);
+  }
+
+  if (route.path === "/housing-packages/") {
+    assert.match(appRoot.innerHTML, /30-45 Day/);
+    assert.match(appRoot.innerHTML, /Program Length/);
+    assert.match(appRoot.innerHTML, /You'll have approved and move into your next home\./);
+    assert.match(appRoot.innerHTML, /Let's create a plan that gets you in your next home\./);
+    assert.match(appRoot.innerHTML, /Gemini_Generated_Image_c8fmesc8fmesc8fm-removebg-preview\.png/);
+    assert.match(appRoot.innerHTML, /Gemini_Generated_Image_9efzbb9efzbb9efz-removebg-preview\.png/);
+    assert.match(appRoot.innerHTML, /View All FAQs ➜/);
+  }
+
+  if (route.path === "/cosigner/") {
+    assert.match(appRoot.innerHTML, /<h3>Get Approved<\/h3><p>Move into your new home with confidence\.<\/p>/);
+    assert.match(appRoot.innerHTML, /Two Names\. Stronger Results\./);
+    assert.match(appRoot.innerHTML, /An FAQ section can be used to quickly answer common questions about your business like/);
+  }
+
+  if (route.path === "/verified-income/") {
+    assert.match(appRoot.innerHTML, /Our Income Verification Service helps you properly document and verify your income so you can meet rental requirements and get approved with confidence\./);
+    assert.match(appRoot.innerHTML, /<h3>You Get Approved<\/h3><p>Use your verified income to meet requirements and secure your new home\.<\/p>/);
+    assert.match(appRoot.innerHTML, /The #1 payroll platform trusted by millions of businesses nationwide\./);
+  }
+
+  if (route.path === "/instant-approval/") {
+    assert.match(appRoot.innerHTML, /Our team secures the lease and meets all requirements on your behalf\./);
+    assert.match(appRoot.innerHTML, /<h3>Move In<\/h3><p>Receive your keys and move into your new home with confidence\.<\/p>/);
+    assert.match(appRoot.innerHTML, /<span>Apartments<\/span><strong>\$2,500<\/strong>/);
+    assert.match(appRoot.innerHTML, /<span>Houses<\/span><strong>\$2,800<\/strong>/);
+    assert.match(appRoot.innerHTML, /View All FAQs ➜/);
+  }
+
+  if (route.path === "/book-consultation/") {
+    assert.match(appRoot.innerHTML, /bea572_e0729025bef945508689df3184b9e11d/);
+    assert.match(appRoot.innerHTML, /10,000\+/);
+  }
+
+  if (route.path === "/book-online/") {
+    assert.match(appRoot.innerHTML, /Service Information/);
+    assert.match(appRoot.innerHTML, /Housing Approval Consultation/);
+    assert.match(appRoot.innerHTML, /Car Approval Consultation/);
+  }
+
+  if (route.path === "/request-consultation/") {
+    assert.match(appRoot.innerHTML, /id="consultation-request"/);
+  }
+
+  if (route.path === "/readiness/") {
+    assert.match(appRoot.innerHTML, /id="readiness-guide"/);
   }
 }
 
@@ -133,7 +202,7 @@ const readinessDocument = {
   addEventListener: () => {},
 };
 const readinessContext = {
-  window: { location: { pathname: "/" } },
+  window: { location: { pathname: "/readiness/" } },
   document: readinessDocument,
   HTMLAnchorElement: class HTMLAnchorElement {},
 };
@@ -161,12 +230,13 @@ assert.match(app, /decision is outside RentAgain's control/);
 assert.match(app, /info@vontagain\.org/);
 assert.match(app, /class="footer-socials" aria-hidden="true"/);
 assert.equal([...app.matchAll(/bea572_(?:37e807f014a94a59a0bcaa31302ae0c8|42e56c2aab1045e7b1d8a2f0fc6f4fcc|3c35867aae664e648a931e54c2370089|8c12aae5a0114da197dea3c2ea03c065)~mv2\.png/g)].length, 4, "all source footer social icons are retained");
-assert.match(app, /testimonialPreviews\.map/);
-assert.doesNotMatch(app, /successStories|SUCCESS STORIES/);
+assert.match(app, /successStories\.map/);
+assert.equal([...app.matchAll(/01ef68_[a-f0-9]+~mv2\.(?:jpg|png)/g)].length, 18, "all original success-story photos are retained");
 assert.doesNotMatch(app, /Approved in 48 Hours with Previous Eviction|Income Multiplier Requirement Met via ADP|Overcame 530 Credit Score/);
 assert.match(app, /challengeItems\.map/);
 assert.doesNotMatch(app, /standard scoring algorithms reject|strict 3x-rent thresholds|4-6 weeks of uncertain waiting/i);
-assert.match(app, /View All FAQs/);
+assert.match(app, /Car Approval Consultation/);
+assert.doesNotMatch(app, /Auto Approval Consultation/);
 assert.match(app, /faq\(housingFaqs, true\)/);
 assert.match(app, /faq\(coApplicantFaqs, true\)/);
 assert.match(app, /faq\(incomeFaqs, true\)/);

@@ -14,11 +14,13 @@ const routes = [
   { path: "/auto-approval/", title: "Auto Approval | RentAgain", description: "Learn about Rent Again's 30-day Auto Approval credit-building service and consultation options." },
   { path: "/book-consultation/", title: "Book Consultation | RentAgain", description: "Book a free consultation with Rent Again to discuss your situation and options." },
   { path: "/book-online/", title: "Book Online | RentAgain", description: "Select a date and time to book a Housing Approval or Car Approval consultation." },
+  { path: "/request-consultation/", title: "Request a Consultation | RentAgain", description: "Send Rent Again a consultation request. Requests are not confirmed calendar bookings." },
+  { path: "/readiness/", title: "Readiness Checklist | RentAgain", description: "Use a private checklist to organize your housing application next steps." },
   { path: "/account/", title: "Client Account | RentAgain", description: "Securely access your Rent Again consultation requests and client intake summaries." },
   { path: "/staff/", title: "Staff Console | RentAgain", description: "Authorized Rent Again staff can securely manage consultation requests." },
   { path: "/privacy/", title: "Privacy Notice | RentAgain", description: "Learn what the Rent Again redesigned website collects and how consultation information and client summaries are handled." },
   { path: "/booking-calendar/housing-approval-consultation/", title: "Schedule your service | RentAgain", description: "Check availability and book a Housing Approval consultation." },
-  { path: "/booking-calendar/car-approval-consultation/", title: "Schedule your service | RentAgain", description: "Check availability and book an Auto Approval consultation." },
+  { path: "/booking-calendar/car-approval-consultation/", title: "Schedule your service | RentAgain", description: "Check availability and book a Car Approval consultation." },
 ];
 
 if (!fs.existsSync(path.join(sourceDir, "index.html"))) {

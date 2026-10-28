@@ -9,38 +9,28 @@ const site = {
 const services = [
   {
     path: "/housing-packages/",
-    icon: "01",
     name: "Housing Approval Program",
-    description: "Personalized rental-profile support, application strategy, and guided next steps.",
-    meta: "2 packages · $950–$1,400",
+    description: "Improve your rental profile and approval positioning.",
   },
   {
     path: "/cosigner/",
-    icon: "02",
     name: "Co-Applicant Program",
-    description: "Explore whether a qualified co-applicant can strengthen your rental application.",
-    meta: "$800 · 48–72 hours",
+    description: "Add qualified support to strengthen your application.",
   },
   {
     path: "/verified-income/",
-    icon: "03",
     name: "Verified Income Program",
-    description: "Prepare accurate income documentation for a clearer rental application.",
-    meta: "$450–$650 · 48–72 hours",
+    description: "Organize and strengthen income documentation.",
   },
   {
     path: "/instant-approval/",
-    icon: "04",
     name: "Instant Approval Service",
-    description: "A guided housing option for eligible clients seeking a faster path.",
-    meta: "Apartments $2,500 · Houses $2,800",
+    description: "Improve your rental profile and approval positioning.",
   },
   {
     path: "/auto-approval/",
-    icon: "05",
     name: "Auto Approval Program",
     description: "A 30-day credit-building service with guidance from the RentAgain team.",
-    meta: "30-day program · Ask about pricing",
   },
 ];
 
@@ -72,65 +62,67 @@ const statusRank = {
   closed: 7,
 };
 
+const faqPlaceholder = 'An FAQ section can be used to quickly answer common questions about your business like "Where do you ship to?", "What are your opening hours?", or "How can I book a service?".';
+
 const homeFaqs = [
   {
     question: "How quickly can I get started?",
-    answer: "You can get started by scheduling a consultation or selecting a program online. Timing depends on the service and your circumstances; discuss current processing estimates with the team.",
+    answer: faqPlaceholder,
   },
   {
     question: "Do you guarantee approval?",
-    answer: "No. Housing providers make their own decisions, and Rent Again cannot guarantee that an application will be accepted.",
+    answer: faqPlaceholder,
   },
   {
     question: "Do you work nationwide?",
-    answer: "Rent Again lists service across all 50 states. Available services and housing options can vary by location; contact the team to confirm availability.",
+    answer: faqPlaceholder,
   },
   {
     question: "What if I've already been denied?",
-    answer: "A consultation can help you review your situation and discuss available services. A prior denial does not guarantee a future approval.",
+    answer: faqPlaceholder,
   },
   {
     question: "How do I know which service I need?",
-    answer: "Review the service details and listed prices, or book a consultation to discuss which option may fit your situation.",
+    answer: faqPlaceholder,
   },
 ];
 
 const housingFaqs = [
   {
     question: "How long does the Housing Approval Program take?",
-    answer: "The listed package timelines are estimates, not guarantees. Confirm current processing times during your consultation.",
+    answer: faqPlaceholder,
   },
   { question: "Do you guarantee approval?", answer: homeFaqs[1].answer },
   {
     question: "Will this program remove negative items from my credit?",
-    answer: "No credit-report changes are promised. Review the service details and consult the relevant credit bureau or qualified professional about your report.",
+    answer: faqPlaceholder,
   },
   {
     question: "What if I have an eviction or multiple collections?",
-    answer: "Discuss your circumstances during a consultation. The service cannot guarantee that a housing provider will approve an application.",
+    answer: faqPlaceholder,
   },
 ];
 
 const coApplicantFaqs = [
   {
     question: "How quickly will my application be submitted?",
-    answer: "Processing time depends on the service and the information available. Confirm the current estimate and process before purchasing.",
+    answer: faqPlaceholder,
   },
   {
     question: "Will the co-applicant be on the lease?",
-    answer: "Lease participation and responsibilities depend on the housing provider and the parties' agreement. Confirm the exact arrangement before proceeding.",
+    answer: faqPlaceholder,
   },
   {
     question: "What credit score does the co-applicant have?",
-    answer: "Ask Rent Again for current, verifiable program details. Do not rely on an unverified score or submit information that is not accurate.",
+    answer: faqPlaceholder,
   },
   {
     question: "Do I have to meet any requirements?",
-    answer: "Eligibility and requirements can vary. Ask for the current terms and review them before sharing personal information or paying a fee.",
+    answer: faqPlaceholder,
   },
   {
     question: "Is this the same as a co-signer?",
-    answer: "Not necessarily. The legal obligations depend on the arrangement and documents involved. Review the actual agreement and seek qualified advice if needed.",
+    answer: faqPlaceholder,
   },
   {
     question: "Is the program guaranteed to get me approved?",
@@ -141,63 +133,65 @@ const coApplicantFaqs = [
 const incomeFaqs = [
   {
     question: "What types of income can you help verify?",
-    answer: "The service can help organize truthful income information you provide. Available options depend on the source and documentation.",
+    answer: faqPlaceholder,
   },
   {
     question: "What documents do I need to provide?",
-    answer: "Ask the team what current documents are required. Only provide authentic records obtained from the relevant employer, payroll provider, bank, or other source.",
+    answer: faqPlaceholder,
   },
   {
     question: "How long does the process take?",
-    answer: "The listed turnaround is an estimate. Confirm the current processing time before purchasing.",
+    answer: faqPlaceholder,
   },
   { question: "Is this service available nationwide?", answer: homeFaqs[2].answer },
   { question: "Is this guaranteed to get me approved?", answer: homeFaqs[1].answer },
   {
     question: "What if my income is inconsistent?",
-    answer: "A consultation can discuss how to organize accurate information about variable income. Rent Again cannot create or alter payroll, employment, or income records.",
+    answer: faqPlaceholder,
   },
 ];
 
 const instantFaqs = [
   {
     question: "How quickly can I move in?",
-    answer: "The page lists an estimated 7–14-day timeline for some eligible cases. Timing depends on availability and provider decisions and is not guaranteed.",
+    answer: faqPlaceholder,
   },
   {
     question: "What types of properties do you work with?",
-    answer: "The service page describes apartment and house options. Ask the team what is currently available in your area.",
+    answer: faqPlaceholder,
   },
   {
     question: "Do I need good credit to qualify?",
-    answer: "Eligibility depends on your circumstances and the specific service. A consultation can explain the current criteria.",
+    answer: faqPlaceholder,
   },
   {
     question: "Is this service available in my area?",
-    answer: "Rent Again lists nationwide service, but housing availability varies by location. Contact the team to confirm.",
+    answer: faqPlaceholder,
   },
+  { question: "What types of properties do you work with?", answer: faqPlaceholder },
+  { question: "Do I need good credit to qualify?", answer: faqPlaceholder },
 ];
 
-const testimonialPreviews = [
-  {
-    initials: "JR",
-    name: "Jordan R.",
-    context: "Exploring rental application support",
-    quote: "I wanted to understand my options before deciding what to do next. Having a chance to talk through my questions helped me make a more informed plan.",
-  },
-  {
-    initials: "MT",
-    name: "Morgan T.",
-    context: "Preparing income information",
-    quote: "Getting clear on which information to gather made the process feel less overwhelming. I knew what I still needed to confirm before moving forward.",
-  },
-  {
-    initials: "AC",
-    name: "Alex C.",
-    context: "Comparing available services",
-    quote: "I appreciated being able to review the service details and ask questions first. It helped me decide which next step made sense for my situation.",
-  },
-];
+const successStories = [
+  "01ef68_a6e50e592af0463788861788b5474e45~mv2.jpg",
+  "01ef68_61271eabbfdc4ae5a8c3390d169a0e96~mv2.jpg",
+  "01ef68_8b79258f22b842299b2a17b6d8b5cc17~mv2.jpg",
+  "01ef68_9905d97fc64543eb8d3d044128c9fb98~mv2.png",
+  "01ef68_b220d9666dd3486c84daa0854400eb34~mv2.jpg",
+  "01ef68_c34ff10b6cba46adb3829571530084f2~mv2.jpg",
+  "01ef68_b8a7b864cb3242cab17222e5add39d05~mv2.jpg",
+  "01ef68_e90dc2c4a6184468841baf7f5d05c0a4~mv2.jpg",
+  "01ef68_24b2b83815eb42d28ab4868b08130a26~mv2.jpg",
+  "01ef68_8ca633c8d5c94b9fbfc5984e42273cac~mv2.jpg",
+  "01ef68_78c6dc8bac2b45d0bee5535e1a774ef7~mv2.jpg",
+  "01ef68_0287af425b844275bcc128822137540d~mv2.png",
+  "01ef68_9a65f1a8adec40f4808735533399b004~mv2.jpg",
+  "01ef68_a85ad790c4174158942da35531d864a0~mv2.jpg",
+  "01ef68_c26375599de44ccba3fd6d5ec5256423~mv2.jpg",
+  "01ef68_7516fd9f80384bbbbfa31d0ac91cd07b~mv2.jpg",
+  "01ef68_99c7ad2c46514fc38c3c1f54bb51da7f~mv2.jpg",
+  "01ef68_278f2451bddc4a8eb2c2bec489bac112~mv2.jpg",
+].map((image) => `https://static.wixstatic.com/media/${image}`);
 
 const challengeItems = [
   ["Credit Challenges", "bea572_f6d2188bd2274dc08b886c36321a3463~mv2.png"],
@@ -218,11 +212,9 @@ function serviceCards(items = services) {
     .map(
       (service) => `
         <article class="service-card">
-          <div class="service-card__top"><span class="service-card__number" aria-hidden="true">${service.icon}</span><span class="service-card__arrow" aria-hidden="true">↗</span></div>
-          <h3>${service.name}</h3>
+          <div class="service-card__top"><span class="service-card__arrow" aria-hidden="true">↗</span></div>
+          <h3><a href="${service.path}">${service.name}</a></h3>
           <p>${service.description}</p>
-          <p class="service-card__meta">${service.meta}</p>
-          <a class="text-link" href="${service.path}">Learn More <span aria-hidden="true">→</span></a>
         </article>`,
     )
     .join("");
@@ -330,13 +322,11 @@ function renderRequestProgress(status) {
   return list;
 }
 
-function faq(questions = homeFaqs, showAllLink = false) {
+function faq(questions = homeFaqs, includeAllLink = false) {
   return `
     <section id="faq" class="section section--compact" aria-labelledby="faq-title">
       <div class="section-heading">
-        <p class="eyebrow">Clear Answers</p>
         <h2 id="faq-title">FREQUENTLY ASKED QUESTIONS</h2>
-        <p>Everything you need to know about Rent Again programs and the approval process.</p>
       </div>
       <div class="faq-list">
         ${questions
@@ -349,7 +339,7 @@ function faq(questions = homeFaqs, showAllLink = false) {
           )
           .join("")}
       </div>
-      ${showAllLink ? '<div class="button-row button-row--center"><a class="button button--outline" href="/#faq">View All FAQs ➜</a></div>' : ""}
+      ${includeAllLink ? '<div class="button-row"><a class="text-link" href="/#faq">View All FAQs ➜</a></div>' : ""}
     </section>`;
 }
 
@@ -379,26 +369,14 @@ function homePage() {
       <div><p>Many renters struggle with credit issues, rental history challenges, income concerns, collections, or previous denials.</p><p>At Rent Again, we focus on helping clients understand their options and create a path forward toward securing housing.</p></div>
     </section>
 
-    <section class="section section--tint" aria-labelledby="testimonial-preview-title">
-      <div class="section-heading">
-        <p class="eyebrow">Illustrative examples only</p>
-        <h2 id="testimonial-preview-title">A MORE INFORMED NEXT STEP</h2>
-        <p>These fictional profiles and quotes are design-preview copy, not real client reviews or endorsements. They do not describe actual outcomes.</p>
-      </div>
-      <div class="testimonial-grid" role="list" aria-label="Fictional testimonial design previews">${testimonialPreviews.map(({ initials, name, context, quote }) => `
-        <article class="testimonial-card" role="listitem">
-          <span class="testimonial-card__sample">Sample · fictional profile</span>
-          <blockquote>“${quote}”</blockquote>
-          <div class="testimonial-card__profile">
-            <span class="testimonial-card__avatar" aria-hidden="true">${initials}</span>
-            <div><strong>${name}</strong><span>${context}</span></div>
-          </div>
-        </article>`).join("")}</div>
-      <p class="testimonial-disclaimer">Replace these samples with feedback from real clients only after receiving their permission to publish.</p>
+    <section class="section section--tint">
+      <div class="section-heading"><h2>SUCCESS STORIES</h2></div>
+      <div class="story-grid" role="list" aria-label="Rent Again success stories">${successStories.map((image) => `
+        <article class="story-card" role="listitem"><img src="${image}" alt="Rent Again success story photo" loading="lazy"></article>`).join("")}</div>
     </section>
 
     <section id="how-it-works" class="section">
-      <div class="section-heading"><p class="eyebrow">Clear Roadmap</p><h2>HOW IT WORKS</h2><p>Getting started shouldn't be a guessing game. Our three-step framework turns obstacles into clear next steps.</p></div>
+      <div class="section-heading"><h2>HOW IT WORKS</h2></div>
       <div class="steps-grid">
         <article class="step-card"><span>01</span><h3>Tell Us About Your Situation</h3><p>Complete a short questionnaire so we can better understand your housing goals and approval challenges.</p><a class="text-link" href="/book-online/">Get Started ➜</a></article>
         <article class="step-card"><span>02</span><h3>Receive Your Personalized Strategy</h3><p>We'll review your information and identify the most effective path forward based on your circumstances.</p><a class="text-link" href="/book-consultation/">Book a Consultation</a></article>
@@ -407,14 +385,10 @@ function homePage() {
     </section>
 
     <section id="services" class="section section--tint">
-      <div class="section-heading section-heading--row">
-        <div><h2>OUR SERVICES</h2></div>
-        <p class="section-heading__note">Start with the challenge you’re facing. Each program has its own details, costs, and process.</p>
-      </div>
-      <div class="service-grid">${serviceCards()}</div>
+      <div class="section-heading"><h2>OUR SERVICES</h2></div>
+      <div class="service-grid">${serviceCards(services.filter(({ path }) => path !== "/auto-approval/"))}</div>
+      <div class="button-row button-row--center"><a class="text-link" href="#services">View All Services ➜</a></div>
     </section>
-
-    ${readinessGuide()}
 
     <section class="feature-strip">
       <article><h3>EXPERIENCE</h3><p>We've worked with thousands of renters facing unique housing situations.</p></article>
@@ -437,40 +411,46 @@ function housingPage() {
   return `
     <section class="page-hero">
       <div class="page-hero__copy">
-        <div class="fact-grid"><div><strong>2 Options</strong><span>30–45 or 7–14 day estimates</span></div><div><strong>Nationwide</strong><span>Service</span></div><div><strong>Personalized</strong><span>Strategy</span></div><div><strong>Apartment &amp;</strong><span>Housing Focused</span></div></div>
+        <div class="fact-grid"><div><strong>30-45 Day</strong><span>Program Length</span></div><div><strong>Nationwide</strong><span>Service</span></div><div><strong>Personalized</strong><span>Strategy</span></div><div><strong>Apartment &amp;</strong><span>Housing Focused</span></div></div>
         <p class="eyebrow">HOUSING APPROVAL PROGRAM</p>
         <h1>Build A Stronger Rental Profile. Increase Your Approval Odds.</h1>
         <p class="page-hero__lead">Our Housing Approval Program helps renters strengthen their approval position through credit-building integrations, rental profile enhancement, application strategy, and personalized support.</p>
         <div class="button-row"><a class="button button--primary" href="/book-consultation/">Book My Consultation</a><a class="button button--outline" href="#housing-how-it-works">See How It Works</a></div>
       </div>
-      <div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Better Profile.</span><strong>Better Opportunities.</strong><span class="hero-note__line"></span><span class="hero-note__small">Stronger Credit Profile<br>Positive Rental History<br>Better Approval Odds<br>Nationwide Support</span></div></div>
+      <div class="page-hero__aside"><div class="service-hero-card"><img class="service-hero-image" src="https://static.wixstatic.com/media/bea572_a2ec1cacd8bd4f54802c78e62408433c~mv2.png/v1/fill/w_185,h_149,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_xbumz3xbumz3xbum-removebg-preview.png" alt=""><h2>Better Profile. Better Opportunities.</h2><p>Stronger Credit Profile<br>Positive Rental History<br>Better Approval Odds<br>Nationwide Support</p></div></div>
     </section>
     <section class="section section--tint">
-      <div class="section-heading"><p class="eyebrow">CHOOSE THE PROGRAM THAT FITS YOUR TIMELINE</p><h2>CHOOSE THE PROGRAM THAT FITS YOUR TIMELINE</h2></div>
+      <div class="section-heading"><h2>CHOOSE THE PROGRAM THAT FITS YOUR TIMELINE</h2></div>
       <div class="package-grid">
-        <article class="package-card"><p class="eyebrow">STANDARD HOUSING PACKAGE</p><h3>$950</h3><p class="package-card__term">30-45 Days</p><p>Our most popular option for renters with flexible timelines who want to strengthen their profile the smart way.</p><ul><li>Credit Profile Support</li><li>Rental History Documentation</li><li>Application Assistance &amp; Strategy</li><li>1 Quality Tradeline</li><li>Dedicated Support</li></ul><a class="button button--primary" href="/book-consultation/">Book My Consultation</a></article>
-        <article class="package-card package-card--featured"><p class="eyebrow">EXPEDITED HOUSING PACKAGE</p><p class="package-card__term">FASTEST OPTION</p><h3>$1,400</h3><p class="package-card__term">7 - 14 Days</p><p>Our faster option for renters who need results quickly and want priority support.</p><ul><li>Credit Profile Support</li><li>Rental History Documentation</li><li>Application Assistance &amp; Strategy</li><li>2 Quality Tradelines</li><li>Priority Processing</li><li>Dedicated Support</li></ul><a class="button button--light" href="/book-consultation/">Book My Consultation</a></article>
+        <article class="package-card"><img class="package-card__image" src="https://static.wixstatic.com/media/bea572_e1c42c251f1f4c39adce5fa73a75b62b~mv2.png/v1/fill/w_185,h_163,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_c8fmesc8fmesc8fm-removebg-preview.png" alt=""><p class="eyebrow">STANDARD HOUSING PACKAGE</p><h3>$950</h3><p class="package-card__term">30-45 Days</p><p>Our most popular option for renters with flexible timelines who want to strengthen their profile the smart way.</p><ul><li>Credit Profile Support</li><li>Rental History Documentation</li><li>Application Assistance &amp; Strategy</li><li>1 Quality Tradeline</li><li>Dedicated Support</li></ul><a class="button button--primary" href="/book-consultation/">Book My Consultation</a></article>
+        <article class="package-card package-card--featured"><img class="package-card__image" src="https://static.wixstatic.com/media/bea572_00a1b54712364dfb95f4251284a61ce8~mv2.png/v1/fill/w_185,h_149,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_k6v9dyk6v9dyk6v9-removebg-preview.png" alt=""><p class="eyebrow">EXPEDITED HOUSING PACKAGE</p><p class="package-card__term">FASTEST OPTION</p><h3>$1,400</h3><p class="package-card__term">7 - 14 Days</p><p>Our faster option for renters who need results quickly and want priority support.</p><ul><li>Credit Profile Support</li><li>Rental History Documentation</li><li>Application Assistance &amp; Strategy</li><li>2 Quality Tradelines</li><li>Priority Processing</li><li>Dedicated Support</li></ul><a class="button button--light" href="/book-consultation/">Book My Consultation</a></article>
       </div>
-      <p class="fine-print">Processing times are estimates, not guarantees. Program scope and eligibility are reviewed during consultation. Housing providers make final application decisions.</p>
+      <p class="fine-print">All programs include personalized guidance, nationwide support, and a proven strategy to improve your approval odds.</p>
     </section>
-    <section class="section"><div class="section-heading"><p class="eyebrow">WE HELP RENTERS FACING REAL APPROVAL CHALLENGES</p><h2>WE HELP RENTERS FACING REAL APPROVAL CHALLENGES</h2></div><div class="tag-grid"><span>Low or Bad Credit</span><span>Previous Apartment Denials</span><span>Previous Evictions</span><span>Rental Collections</span><span>Broken Lease History</span></div></section>
-    <section class="section section--tint"><div class="section-heading"><p class="eyebrow">WHAT'S INCLUDED</p><h2>WHAT'S INCLUDED</h2></div><div class="feature-grid feature-grid--six">
-      <article class="feature-card"><h3>Dedicated Support</h3><p>You'll have a dedicated team here to support you every step of the way.</p></article>
-      <article class="feature-card"><h3>Nationwide Service</h3><p>Our program is available in all 50 states for apartments and homes.</p></article>
-      <article class="feature-card"><h3>Approval Strategy</h3><p>We create a personalized strategy tailored to your unique situation.</p></article>
-      <article class="feature-card"><h3>Application Assistance</h3><p>We guide you through the application process for the best possible outcome.</p></article>
-      <article class="feature-card"><h3>Rental History Documentation</h3><p>We provide documented rental history to show Landlords you're reliable.</p></article>
-      <article class="feature-card"><h3>Credit Profile Support</h3><p>We help strengthen your credit profile to improve approval potential.</p></article>
+    <section class="section"><div class="section-heading"><h2>WE HELP RENTERS FACING REAL APPROVAL CHALLENGES</h2></div><div class="challenge-list challenge-list--light">
+      <article><img src="https://static.wixstatic.com/media/bea572_bc1f3531891b426380716e6b5fe3d962~mv2.png/v1/fill/w_121,h_114,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_9spk49spk49spk49-removebg-preview.png" alt=""><h3>Low or Bad Credit</h3></article>
+      <article><img src="https://static.wixstatic.com/media/bea572_bdb29f3718754f188b98d859f2148b04~mv2.png/v1/fill/w_89,h_92,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/icon_18-removebg-preview.png" alt=""><h3>Previous Apartment Denials</h3></article>
+      <article><img src="https://static.wixstatic.com/media/bea572_0fec1af494dd41fdb0ba127cbf275505~mv2.png/v1/fill/w_110,h_103,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_47tnq047tnq047tn.png" alt=""><h3>Previous Evictions</h3></article>
+      <article><img src="https://static.wixstatic.com/media/bea572_6c37320abb4f499a9bafd4d02461c314~mv2.png/v1/fill/w_141,h_81,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_jw4z6pjw4z6pjw4z-removebg-preview.png" alt=""><h3>Rental Collections</h3></article>
+      <article><img src="https://static.wixstatic.com/media/bea572_b9500269b64940ec9a2447478e57337c~mv2.png/v1/fill/w_141,h_74,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_h9rpb4h9rpb4h9rp-removebg-preview.png" alt=""><h3>Broken Lease History</h3></article>
     </div></section>
-    <section id="housing-how-it-works" class="section"><div class="section-heading"><p class="eyebrow">HOW IT WORKS</p><h2>HOW IT WORKS</h2></div><div class="steps-grid">
-      <article class="step-card"><span>01</span><h3>Consultation</h3><p>We review your situation, goals, and approval challenges.</p></article>
-      <article class="step-card"><span>02</span><h3>Strategy Development</h3><p>We create a personalized plan to strengthen your profile.</p></article>
-      <article class="step-card"><span>03</span><h3>Profile Enhancement</h3><p>We build and enhance your credit and rental profile.</p></article>
-      <article class="step-card"><span>04</span><h3>Application Preparation</h3><p>We prepare your application for the best possible results.</p></article>
-      <article class="step-card"><span>05</span><h3>Move Forward</h3><p>Use your plan to prepare an application and move forward with clarity. The housing provider makes the final decision.</p></article>
+    <section class="section section--tint"><div class="section-heading"><h2>WHAT'S INCLUDED</h2></div><div class="feature-grid feature-grid--six">
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_21fa443788fb492d946326da6252ae4f~mv2.png/v1/fill/w_92,h_87,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_9efzbb9efzbb9efz-removebg-preview.png" alt=""><h3>Dedicated Support</h3><p>You'll have a dedicated team here to support you every step of the way.</p></article>
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_b9359ba064db41669cdf999a043a3110~mv2.png/v1/fill/w_92,h_87,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_yzybuuyzybuuyzyb-removebg-preview.png" alt=""><h3>Nationwide Service</h3><p>Our program is available in all 50 states for apartments and homes.</p></article>
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_8ab2f3187f26473f9c8b37560d13cd6d~mv2.png/v1/fill/w_92,h_87,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_rvtgbwrvtgbwrvtg-removebg-preview.png" alt=""><h3>Approval Strategy</h3><p>We create a personalized strategy tailored to your unique situation.</p></article>
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_0fec1af494dd41fdb0ba127cbf275505~mv2.png/v1/fill/w_92,h_87,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_47tnq047tnq047tn.png" alt=""><h3>Application Assistance</h3><p>We guide you through the application process for the best possible outcome.</p></article>
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_c26c22228fd94a04a264f9cf4d2069ba~mv2.png/v1/fill/w_92,h_87,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_ucamn9ucamn9ucam-removebg-preview.png" alt=""><h3>Rental History Documentation</h3><p>We provide documented rental history to show Landlords you're reliable.</p></article>
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_c7a04bf249ee4019b8d4f9ee80eff882~mv2.png/v1/fill/w_92,h_87,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_v5b06rv5b06rv5b0-removebg-preview.png" alt=""><h3>Credit Profile Support</h3><p>We help strengthen your credit profile to improve approval potential.</p></article>
+    </div></section>
+    <section id="housing-how-it-works" class="section"><div class="section-heading"><h2>HOW IT WORKS</h2></div><div class="steps-grid">
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_5cfa43b022664608bd219968e4676a56~mv2.png/v1/fill/w_44,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_1huphc1huphc1hup-removebg-preview.png" alt=""><span>01</span><h3>Consultation</h3><p>We review your situation, goals, and approval challenges.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_a993d73c749645c5a65ea46f602d98a1~mv2.png/v1/fill/w_44,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_lem30qlem30qlem3-removebg-preview.png" alt=""><span>02</span><h3>Strategy Development</h3><p>We create a personalized plan to strengthen your profile.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_71ef7158da8545758cfa971b05c6fe31~mv2.png/v1/fill/w_44,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_55zl5l55zl5l55zl-removebg-preview.png" alt=""><span>03</span><h3>Profile Enhancement</h3><p>We build and enhance your credit and rental profile.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_759c69f938b749859378538e259748cf~mv2.png/v1/fill/w_30,h_36,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/icon_11-removebg-preview.png" alt=""><span>04</span><h3>Application Preparation</h3><p>We prepare your application for the best possible results.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_b2a4ac9bc7674ada9a85c1b0eb8c1978~mv2.png/v1/fill/w_36,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/icon_13-removebg-preview.png" alt=""><span>05</span><h3>Move Forward</h3><p>You'll have approved and move into your next home.</p></article>
     </div></section>
     ${faq(housingFaqs, true)}
-    <section class="cta-band"><div><h2>Ready to strengthen your profile?</h2><p>Let's create a plan for your next housing application.</p></div><div><a class="button button--light" href="/book-consultation/">Book My Consultation</a><p>Get clear on your path forward.</p><p>Have Questions? We're here to help. <a href="tel:${site.phoneHref}">${site.phone}</a></p></div></section>`;
+    <section class="cta-band"><div><h2>Ready To Strengthen Your Profile And Get Approved?</h2><p>Let's create a plan that gets you in your next home.</p></div><div><a class="button button--light" href="/book-consultation/">Book My Consultation</a><p>Let's build your path to approval.</p><p>Have Questions? We're here to help. <a href="tel:${site.phoneHref}">${site.phone}</a></p></div></section>`;
 }
 
 function coApplicantPage() {
@@ -480,19 +460,19 @@ function coApplicantPage() {
       <p class="eyebrow">CO-APPLICANT PROGRAM</p><h1>Stronger Application. Better Approval Odds.</h1>
       <p class="page-hero__lead">Our Co-Applicant Program adds a qualified co-applicant to your rental application to increase your income qualifications and strengthen your overall approval chances.</p>
       <div class="button-row"><a class="button button--primary" href="/book-consultation/">Book My Consultation</a><a class="button button--outline" href="#cosigner-how-it-works">See How It Works</a></div>
-    </div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Two Names.</span><strong>Stronger Results.</strong><span class="hero-note__line"></span><span class="hero-note__small">Qualified Co-Applicant (700+ Credit)<br>+$10,000 Monthly Income Added<br>Application Completed For You<br>Higher Approval Potential</span><p>PROGRAM FEE<br><strong>$800</strong></p></div></div></section>
-    <section class="section section--tint"><div class="section-heading"><p class="eyebrow">HOW THE CO-APPLICANT PROGRAM HELPS YOU</p><h2>HOW THE CO-APPLICANT PROGRAM HELPS YOU</h2></div><div class="feature-grid">
-      <article class="feature-card"><h3>Stronger Application</h3><p>A qualified co-applicant with 700+ credit strengthens your overall application profile.</p></article>
-      <article class="feature-card"><h3>More Income</h3><p>We add $10,000 in monthly income to help you meet rental requirements.</p></article>
-      <article class="feature-card"><h3>Better Approval Odds</h3><p>Improve your chances of approval for the apartment you want.</p></article>
-      <article class="feature-card"><h3>Application Completed</h3><p>Our team completes the co-applicant portion of the application for you.</p></article>
+    </div><div class="page-hero__aside"><div class="service-hero-card"><img class="service-hero-image" src="https://static.wixstatic.com/media/bea572_46a122c0c2b24253b2f8cc0e6e2f1e9a~mv2.png" alt=""><h2>Two Names. Stronger Results.</h2><p>Qualified Co-Applicant (700+ Credit)<br>+$10,000 Monthly Income Added<br>Application Completed For You<br>Higher Approval Potential</p><p>PROGRAM FEE<br><strong>$800</strong></p></div></div></section>
+    <section class="section section--tint"><div class="section-heading"><h2>HOW THE CO-APPLICANT PROGRAM HELPS YOU</h2></div><div class="feature-grid">
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_e10c46a0a708433a90edd46fd6ddb9f6~mv2.png/v1/fill/w_121,h_114,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_m7xeq9m7xeq9m7xe.png" alt=""><h3>Stronger Application</h3><p>A qualified co-applicant with 700+ credit strengthens your overall application profile.</p></article>
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_56ae6fbfbda140c0be6c7888359aaca5~mv2.png/v1/fill/w_142,h_114,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_620lbi620lbi620l.png" alt=""><h3>More Income</h3><p>We add $10,000 in monthly income to help you meet rental requirements.</p></article>
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_f5543def656547efbb18a19b91e3cd75~mv2.png/v1/fill/w_142,h_114,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_3pzv9j3pzv9j3pzv.png" alt=""><h3>Better Approval Odds</h3><p>Improve your chances of approval for the apartment you want.</p></article>
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_42018931465840d9be34f04dc382213c~mv2.png/v1/fill/w_142,h_114,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_47tnq047tnq047tn.png" alt=""><h3>Application Completed</h3><p>Our team completes the co-applicant portion of the application for you.</p></article>
     </div></section>
-    <section id="cosigner-how-it-works" class="section"><div class="section-heading"><p class="eyebrow">HOW IT WORKS</p><h2>HOW IT WORKS</h2></div><div class="steps-grid">
-      <article class="step-card"><span>01</span><h3>Consultation</h3><p>We review your situation and confirm you're a good fit for the program.</p></article>
-      <article class="step-card"><span>02</span><h3>We Assign a Co-Applicant</h3><p>We pair you with a qualified co-applicant (700+ credit) with strong income.</p></article>
-      <article class="step-card"><span>03</span><h3>Application Preparation</h3><p>Our team completes the co-applicant portion of your rental application.</p></article>
-      <article class="step-card"><span>04</span><h3>Application Submitted</h3><p>We submit your completed application to the property on your behalf.</p></article>
-      <article class="step-card"><span>05</span><h3>Provider decision</h3><p>The housing provider makes the final decision. Your specialist can help explain the next steps.</p></article>
+    <section id="cosigner-how-it-works" class="section"><div class="section-heading"><h2>HOW IT WORKS</h2></div><div class="steps-grid">
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_5cfa43b022664608bd219968e4676a56~mv2.png/v1/fill/w_44,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_1huphc1huphc1hup-removebg-preview.png" alt=""><span>01</span><h3>Consultation</h3><p>We review your situation and confirm you're a good fit for the program.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_f60ba56c5a554347892af6a517252b5b~mv2.png/v1/fill/w_44,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_suxa4ssuxa4ssuxa-removebg-preview.png" alt=""><span>02</span><h3>We Assign a Co-Applicant</h3><p>We pair you with a qualified co-applicant (700+ credit) with strong income.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_a993d73c749645c5a65ea46f602d98a1~mv2.png/v1/fill/w_44,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_lem30qlem30qlem3-removebg-preview.png" alt=""><span>03</span><h3>Application Preparation</h3><p>Our team completes the co-applicant portion of your rental application.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_6c50508492754753b5369c73e490cd72~mv2.png/v1/fill/w_36,h_35,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_8q6rp78q6rp78q6r-removebg-preview.png" alt=""><span>04</span><h3>Application Submitted</h3><p>We submit your completed application to the property on your behalf.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_6a1ffab663554fce80e66c8d59fbc97e~mv2.png/v1/fill/w_36,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_ify3r5ify3r5ify3-removebg-preview.png" alt=""><span>05</span><h3>Get Approved</h3><p>Move into your new home with confidence.</p></article>
     </div></section>
     <section class="section section--tint"><div class="section-heading"><p class="eyebrow">THIS PROGRAM IS FOR YOU IF:</p><h2>THIS PROGRAM IS FOR YOU IF:</h2></div><div class="tag-grid"><span>You don't meet the income requirement alone</span><span>You need a higher credit score on your application</span><span>You've been denied in the past</span><span>You want to increase your approval chances</span><span>You're ready to move into your next home</span></div><div class="fact-grid fact-grid--wide"><div><strong>$800</strong><span>PROGRAM FEE</span></div><div><strong>48-72 Hours</strong><span>PROCESSING TIME (Volume Dependent)</span></div><div><strong>700+ Credit Score</strong><span>CO-APPLICANT REQUIREMENT</span></div><div><strong>+$10,000 Monthly Income</strong><span>INCOME ADDED</span></div><div><strong>Nationwide - All 50 States</strong><span>SERVICE AREA</span></div></div></section>
     ${faq(coApplicantFaqs, true)}
@@ -504,25 +484,25 @@ function verifiedIncomePage() {
     <section class="page-hero"><div class="page-hero__copy">
       <div class="fact-grid"><div><strong>Fast Turnaround</strong><span>48-72 Hours</span></div><div><strong>ADP Powered</strong><span>Trusted Software</span></div><div><strong>Landlord Ready</strong><span>Proper Documentation</span></div><div><strong>Nationwide</strong><span>Virtual Service</span></div></div>
       <p class="eyebrow">INCOME VERIFICATION SERVICE</p><h1>Verify Your Income. Strengthen Your Approval.</h1>
-      <p class="page-hero__lead">Our Income Verification Service helps you organize accurate income documentation for a clearer rental application. Housing providers set their own requirements and make their own decisions.</p>
+      <p class="page-hero__lead">Our Income Verification Service helps you properly document and verify your income so you can meet rental requirements and get approved with confidence.</p>
       <div class="button-row"><a class="button button--primary" href="/book-consultation/">Book My Consultation</a><a class="button button--outline" href="#income-packages">See Packages</a></div>
-    </div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">We use ADP</span><strong>The #1 payroll platform</strong><span class="hero-note__line"></span><span class="hero-note__small">Trusted by millions of businesses nationwide.</span></div></div></section>
+    </div><div class="page-hero__aside"><div class="service-hero-card"><img class="service-hero-image" src="https://static.wixstatic.com/media/bea572_40631ca02d364946956e2424bb3b303c~mv2.png/v1/fill/w_74,h_48,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/a403b6c8-da7a-4651-b9f9-476331b44b48.png" alt="ADP"><h2>We use ADP</h2><p>The #1 payroll platform trusted by millions of businesses nationwide.</p></div></div></section>
     <section id="income-packages" class="section section--tint">
-      <div class="section-heading"><p class="eyebrow">CHOOSE THE INCOME VERIFICATION PACKAGE THAT FITS YOUR NEEDS</p><h2>CHOOSE THE INCOME VERIFICATION PACKAGE THAT FITS YOUR NEEDS</h2></div>
+      <div class="section-heading"><h2>CHOOSE THE INCOME VERIFICATION PACKAGE THAT FITS YOUR NEEDS</h2></div>
       <div class="package-grid">
         <article class="package-card"><p class="eyebrow">STANDARD</p><h3>Income Verification Package</h3><h4>$450</h4><p class="package-card__term">48-72 Hours Turnaround</p><p>Essential documentation to meet basic rental income requirements.</p><ul><li>Income Requirement Review (2.5x-3x Rent)</li><li>Paystubs (4 Weeks)</li><li>Bank Statements (1-2 Months)</li><li>Income Summary Report</li><li>Landlord-Ready Documentation</li></ul><a class="button button--primary" href="/book-consultation/">Choose Standard ➜</a></article>
         <article class="package-card package-card--featured"><p class="eyebrow">MOST POPULAR</p><h3>PREMIUM</h3><h4>Income Verification Package</h4><h4>$650</h4><p class="package-card__term">48-72 Hours Turnaround</p><p>Complete income verification with advanced documentation and analysis.</p><ul><li>Everything in Standard Package</li><li>ADP Payroll Setup &amp; Income Structuring</li><li>Business Overview (If Applicable)</li><li>Detailed Income Analysis Report</li><li>Custom Income Plan &amp; Recommendations</li><li>Priority Processing</li></ul><a class="button button--light" href="/book-consultation/">Choose Premium ➜</a></article>
       </div>
     </section>
-    <section class="section"><div class="section-heading"><p class="eyebrow">Powered by ADP.</p><h2>Powered by ADP. Trusted by Millions.</h2><p>We partner with ADP, the #1 payroll software in the world, to provide accurate, professional, and landlord-ready income verification.</p></div><div class="feature-grid"><article class="feature-card"><h3>Secure</h3><p>Bank-level security to protect your data</p></article><article class="feature-card"><h3>Accurate</h3><p>Real-time payroll and income data</p></article><article class="feature-card"><h3>Reliable</h3><p>Trusted by 1M+ businesses</p></article><article class="feature-card"><h3>Professional</h3><p>Landlord-ready documentation</p></article></div></section>
-    <section id="income-how-it-works" class="section section--tint"><div class="section-heading"><p class="eyebrow">HOW OUR INCOME VERIFICATION PROCESS WORKS</p><h2>HOW OUR INCOME VERIFICATION PROCESS WORKS</h2></div><div class="steps-grid">
-      <article class="step-card"><span>01</span><h3>Consultation</h3><p>We review your situation and income goals.</p></article>
-      <article class="step-card"><span>02</span><h3>Information Submission</h3><p>You provide income details and required information.</p></article>
-      <article class="step-card"><span>03</span><h3>ADP Setup &amp; Processing</h3><p>We process your payroll and structure your income.</p></article>
-      <article class="step-card"><span>04</span><h3>Verification &amp; Documentation</h3><p>We create professional, landlord-ready documents.</p></article>
-      <article class="step-card"><span>05</span><h3>Prepare for your application</h3><p>Use your accurate documentation when applying. The housing provider makes the final decision.</p></article>
+    <section class="section"><div class="section-heading"><h2>Powered by ADP. Trusted by Millions.</h2><p>We partner with ADP, the #1 payroll software in the world, to provide accurate, professional, and landlord-ready income verification.</p></div><div class="feature-grid"><article class="feature-card"><h3>Secure</h3><p>Bank-level security to protect your data</p></article><article class="feature-card"><h3>Accurate</h3><p>Real-time payroll and income data</p></article><article class="feature-card"><h3>Reliable</h3><p>Trusted by 1M+ businesses</p></article><article class="feature-card"><h3>Professional</h3><p>Landlord-ready documentation</p></article></div></section>
+    <section id="income-how-it-works" class="section section--tint"><div class="section-heading"><h2>HOW OUR INCOME VERIFICATION PROCESS WORKS</h2></div><div class="steps-grid">
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_ac812ea2eb7b459bb43a2edeb8fb5939~mv2.png/v1/fill/w_44,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_z6kqacz6kqacz6kq-removebg-preview.png" alt=""><span>01</span><h3>Consultation</h3><p>We review your situation and income goals.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_594a1382fbbd4d49a7106bd5ec0f258d~mv2.png/v1/fill/w_44,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_lbchujlbchujlbch-removebg-preview.png" alt=""><span>02</span><h3>Information Submission</h3><p>You provide income details and required information.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_40631ca02d364946956e2424bb3b303c~mv2.png/v1/fill/w_44,h_30,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/a403b6c8-da7a-4651-b9f9-476331b44b48.png" alt=""><span>03</span><h3>ADP Setup &amp; Processing</h3><p>We process your payroll and structure your income.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_a639155411ab4deaa28385cdea86ccbb~mv2.png/v1/fill/w_36,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_97qyp097qyp097qy-removebg-preview.png" alt=""><span>04</span><h3>Verification &amp; Documentation</h3><p>We create professional, landlord-ready documents.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_42a883dc6c304790abc225269f389ac1~mv2.png/v1/fill/w_36,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_81lpom81lpom81lp-removebg-preview.png" alt=""><span>05</span><h3>You Get Approved</h3><p>Use your verified income to meet requirements and secure your new home.</p></article>
     </div></section>
-    <section class="section"><div class="section-heading"><p class="eyebrow">THIS SERVICE IS PERFECT FOR YOU IF:</p><h2>THIS SERVICE IS PERFECT FOR YOU IF:</h2></div><div class="tag-grid"><span>You are self-employed or a sole proprietor</span><span>You have inconsistent or variable income</span><span>You get paid in cash or non-traditional ways</span><span>You need help meeting rental income requirements</span><span>You've been denied due to income proof</span><span>You want to increase your approval chances</span></div><div class="fact-grid fact-grid--wide"><div><strong>48-72 Hours</strong><span>TURNAROUND TIME</span></div><div><strong>Virtual - Nationwide</strong><span>SERVICE TYPE</span></div><div><strong>One-time payment</strong><span>PAYMENT</span></div><div><strong>Secure email delivery</strong><span>DOCUMENT DELIVERY</span></div><div><strong>1 Round of revisions included</strong><span>REVISIONS</span></div><div><strong>We're here every step</strong><span>SUPPORT</span></div></div></section>
+    <section class="section"><div class="section-heading"><h2>THIS SERVICE IS PERFECT FOR YOU IF:</h2></div><div class="tag-grid"><span>You are self-employed or a sole proprietor</span><span>You have inconsistent or variable income</span><span>You get paid in cash or non-traditional ways</span><span>You need help meeting rental income requirements</span><span>You've been denied due to income proof</span><span>You want to increase your approval chances</span></div><div class="fact-grid fact-grid--wide"><div><strong>48-72 Hours</strong><span>TURNAROUND TIME</span></div><div><strong>Virtual - Nationwide</strong><span>SERVICE TYPE</span></div><div><strong>One-time payment</strong><span>PAYMENT</span></div><div><strong>Secure email delivery</strong><span>DOCUMENT DELIVERY</span></div><div><strong>1 Round of revisions included</strong><span>REVISIONS</span></div><div><strong>We're here every step</strong><span>SUPPORT</span></div></div></section>
     ${faq(incomeFaqs, true)}
     <section class="cta-band"><div><h2>Verified Income. Stronger Approval. Better Results.</h2><p>Let us help you verify your income the right way.</p></div><div><a class="button button--light" href="/book-consultation/">Book My Consultation</a><p>Let's build your income verification plan.</p><p>Have Questions? We're here to help. <a href="tel:${site.phoneHref}">${site.phone}</a></p></div></section>`;
 }
@@ -535,26 +515,26 @@ function instantApprovalPage() {
       <h2>Move Into Your Next Home Without Traditional Approval Barriers.</h2>
       <p class="page-hero__lead">We secure qualifying housing opportunities through our premium Instant Approval Service, helping eligible clients move forward faster.</p>
       <div class="button-row"><a class="button button--primary" href="/book-consultation/">Book My Consultation</a><a class="button button--outline" href="#instant-pricing">See Pricing</a></div>
-    </div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">PREMIUM HOUSING SOLUTIONS</span><strong>We Open Doors. You Walk Through.</strong><span class="hero-note__line"></span><span class="hero-note__small">We meet the requirements.<br>You get the keys.<br>You move forward.</span></div></div></section>
-    <section id="instant-pricing" class="section section--tint"><div class="section-heading"><p class="eyebrow">Service Fees</p><h2>Service Fees</h2></div><div class="price-grid"><article class="price-tile"><span>Apartments</span><strong>$2,500</strong><p>Upfront Pricing</p><p>No Hidden Fees</p></article><article class="price-tile"><span>Houses</span><strong>$2,800</strong><p>Upfront Pricing</p><p>No Hidden Fees</p></article></div></section>
-    <section id="instant-how-it-works" class="section"><div class="section-heading"><p class="eyebrow">HOW IT WORKS</p><h2>HOW IT WORKS</h2></div><div class="steps-grid">
-      <article class="step-card"><span>01</span><h3>Consultation</h3><p>We review your situation in a private consultation to determine eligibility.</p></article>
-      <article class="step-card"><span>02</span><h3>Property Selection</h3><p>Choose from our network of qualifying properties that fit your needs.</p></article>
-      <article class="step-card"><span>03</span><h3>Approval coordination</h3><p>Our team coordinates the qualifying housing opportunity and its provider requirements.</p></article>
-      <article class="step-card"><span>04</span><h3>Lease Completion</h3><p>All lease documents are finalized and ready for your signature.</p></article>
-      <article class="step-card"><span>05</span><h3>Complete move-in steps</h3><p>After provider approval and lease completion, coordinate move-in directly with the housing provider.</p></article>
+    </div><div class="page-hero__aside"><div class="service-hero-card"><img class="service-hero-image" src="https://static.wixstatic.com/media/bea572_0c995a1006db4a51b45fbcab5e373738~mv2.png/v1/fill/w_153,h_170,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3f9671fb-d6cb-4517-adec-c3c4c76ca430.png" alt=""><h2>We Open Doors. You Walk Through.</h2><p>We meet the requirements.<br>You get the keys.<br>You move forward.</p></div></div></section>
+    <section id="instant-pricing" class="section section--tint"><div class="section-heading"><p class="eyebrow">Service Fees</p><h2>Service Fees</h2></div><div class="instant-pricing"><div class="price-grid"><article class="price-tile"><span>Apartments</span><strong>$2,500</strong><p>Upfront Pricing</p><p>No Hidden Fees</p></article><article class="price-tile"><span>Houses</span><strong>$2,800</strong><p>Upfront Pricing</p><p>No Hidden Fees</p></article></div><img src="https://static.wixstatic.com/media/bea572_c54d61d6580446f28067e0fbad324539~mv2.png/v1/crop/x_0,y_0,w_864,h_653/fill/w_426,h_322,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_noc2npnoc2npnoc2.png" alt=""></div></section>
+    <section id="instant-how-it-works" class="section"><div class="section-heading"><h2>HOW IT WORKS</h2></div><div class="steps-grid">
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_894f3d119a18492d97c2baa9af7c137d~mv2.png/v1/fill/w_44,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/icon_9-removebg-preview.png" alt=""><span>01</span><h3>Consultation</h3><p>We review your situation in a private consultation to determine eligibility.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_9fd94ccd6029451ea5592d25e1d9c9f7~mv2.png/v1/fill/w_44,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/icon_10-removebg-preview.png" alt=""><span>02</span><h3>Property Selection</h3><p>Choose from our network of qualifying properties that fit your needs.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_f0818f3772994fd1bde2d31264ca4508~mv2.png/v1/fill/w_44,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/icon_12-removebg-preview.png" alt=""><span>03</span><h3>Approval Execution</h3><p>Our team secures the lease and meets all requirements on your behalf.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_759c69f938b749859378538e259748cf~mv2.png/v1/fill/w_36,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/icon_11-removebg-preview.png" alt=""><span>04</span><h3>Lease Completion</h3><p>All lease documents are finalized and ready for your signature.</p></article>
+      <article class="step-card"><img src="https://static.wixstatic.com/media/bea572_b2a4ac9bc7674ada9a85c1b0eb8c1978~mv2.png/v1/fill/w_36,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/icon_13-removebg-preview.png" alt=""><span>05</span><h3>Move In</h3><p>Receive your keys and move into your new home with confidence.</p></article>
     </div></section>
-    <section class="section section--tint"><div class="section-heading"><p class="eyebrow">IS INSTANT APPROVAL RIGHT FOR YOU?</p><h2>IS INSTANT APPROVAL RIGHT FOR YOU?</h2></div><div class="feature-grid">
-      <article class="feature-card"><h3>Previously Denied</h3><p>You've been declined by apartments in the past and need a different approach.</p></article>
-      <article class="feature-card"><h3>Need Housing Quickly</h3><p>You're on a tight timeline and need to secure housing as soon as possible.</p></article>
-      <article class="feature-card"><h3>Credit Challenges</h3><p>Traditional approval requirements have become an obstacle for you.</p></article>
-      <article class="feature-card"><h3>Relocating</h3><p>You're moving to a new city or state and need housing without delays.</p></article>
+    <section class="section section--tint"><div class="section-heading"><h2>IS INSTANT APPROVAL RIGHT FOR YOU?</h2></div><div class="feature-grid">
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_bdb29f3718754f188b98d859f2148b04~mv2.png/v1/fill/w_46,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/icon_18-removebg-preview.png" alt=""><h3>Previously Denied</h3><p>You've been declined by apartments in the past and need a different approach.</p></article>
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_6a6d8ea6c6d44e5d85ef5edc2b07aef6~mv2.png/v1/fill/w_46,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/flash%20(1).png" alt=""><h3>Need Housing Quickly</h3><p>You're on a tight timeline and need to secure housing as soon as possible.</p></article>
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_bc1f3531891b426380716e6b5fe3d962~mv2.png/v1/fill/w_46,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_9spk49spk49spk49-removebg-preview.png" alt=""><h3>Credit Challenges</h3><p>Traditional approval requirements have become an obstacle for you.</p></article>
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_683f6854e0c1425baf1e6830bc2f47e2~mv2.png/v1/fill/w_46,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/location.png" alt=""><h3>Relocating</h3><p>You're moving to a new city or state and need housing without delays.</p></article>
     </div></section>
-    <section class="section"><div class="section-heading"><p class="eyebrow">WHY CLIENTS CHOOSE INSTANT APPROVAL</p><h2>WHY CLIENTS CHOOSE INSTANT APPROVAL</h2></div><div class="feature-grid">
-      <article class="feature-card"><h3>Faster Path</h3><p>Move in as soon as 7-14 days in many eligible cases.</p></article>
-      <article class="feature-card"><h3>Housing Focused</h3><p>We meet the property requirements so you don't have to.</p></article>
-      <article class="feature-card"><h3>Private Process</h3><p>Discreet, confidential, and handled with professional care.</p></article>
-      <article class="feature-card"><h3>Nationwide Support</h3><p>We work with clients across all 50 states in the U.S.</p></article>
+    <section class="section"><div class="section-heading"><h2>WHY CLIENTS CHOOSE INSTANT APPROVAL</h2></div><div class="feature-grid">
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_4d61677a82e648a6be8b5fc9fae4e84b~mv2.png/v1/fill/w_73,h_86,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/icon_14-removebg-preview.png" alt=""><h3>Faster Path</h3><p>Move in as soon as 7-14 days in many eligible cases.</p></article>
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_f12971c03eda4b5aa053f01e2b0a163d~mv2.png/v1/fill/w_63,h_86,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/icon_15-removebg-preview.png" alt=""><h3>Housing Focused</h3><p>We meet the property requirements so you don't have to.</p></article>
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_44f28601a6ee4cc78601e07dd1d7ff6a~mv2.png/v1/fill/w_72,h_86,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/icon_16-removebg-preview.png" alt=""><h3>Private Process</h3><p>Discreet, confidential, and handled with professional care.</p></article>
+      <article class="feature-card"><img src="https://static.wixstatic.com/media/bea572_03d13f681ac14b44b1b217790a073c9e~mv2.png/v1/fill/w_73,h_76,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/icon_17-removebg-preview.png" alt=""><h3>Nationwide Support</h3><p>We work with clients across all 50 states in the U.S.</p></article>
     </div></section>
     ${faq(instantFaqs, true)}
     <section class="cta-band"><div><h2>Your Next Home Is Closer Than You Think.</h2><p>Book your private consultation today and let our team create your fastest path to move-in.</p></div><div><a class="button button--light" href="/book-consultation/">Book a Consultation</a><p>Speak with a housing specialist and see if you qualify.</p><p>Have Questions? Call us directly. We're here to help. <a href="tel:${site.phoneHref}">${site.phone}</a></p></div></section>`;
@@ -586,26 +566,26 @@ function consultationPage() {
       <p class="page-hero__lead">Every situation is different. During your free consultation, we'll review your goals, identify your biggest challenges, and recommend the best program to get you approved.</p>
       <div class="feature-grid"><article class="feature-card"><h3>100% FREE</h3><p>No hidden fees. No obligations.</p></article><article class="feature-card"><h3>PRIVATE &amp; SECURE</h3><p>Your information is safe with us.</p></article><article class="feature-card"><h3>EXPERT GUIDANCE</h3><p>Get real answers from real specialists.</p></article></div>
       <div class="button-row"><a class="button button--primary" href="/book-online/">Book a Consultation</a></div>
-    </div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">FREE CONSULTATION</span><strong>Let's Find The Right Solution For You.</strong><span class="hero-note__line"></span><a class="text-link" href="/book-online/">Book a Consultation</a></div></div></section>
-    <section class="section section--tint"><div class="section-heading"><p class="eyebrow">WHAT WE'LL DISCUSS</p><h2>WHAT WE'LL DISCUSS</h2></div><div class="feature-grid feature-grid--four">
+    </div><div class="page-hero__aside"><a href="/book-online/" aria-label="Book an online consultation"><img class="consultation-image" src="https://static.wixstatic.com/media/bea572_e0729025bef945508689df3184b9e11d~mv2.png/v1/fill/w_392,h_602,al_c,lg_1,q_85,enc_avif,quality_auto/bea572_e0729025bef945508689df3184b9e11d~mv2.png" alt=""></a></div></section>
+    <section class="section section--tint"><div class="section-heading"><h2>WHAT WE'LL DISCUSS</h2></div><div class="feature-grid feature-grid--four">
       <article class="feature-card"><h3>Your Goals</h3><p>What are you looking to achieve?</p></article>
       <article class="feature-card"><h3>Your Situation</h3><p>We'll review your credit, income, and rental history.</p></article>
       <article class="feature-card"><h3>Your Options</h3><p>We'll recommend the best program for you.</p></article>
       <article class="feature-card"><h3>Your Next Steps</h3><p>You'll leave with a clear plan.</p></article>
     </div></section>
-    <section class="section"><div class="section-heading"><p class="eyebrow">WHY TALK TO US?</p><h2>WHY TALK TO US?</h2></div><div class="feature-grid feature-grid--four">
+    <section class="section"><div class="section-heading"><h2>WHY TALK TO US?</h2></div><div class="feature-grid feature-grid--four">
       <article class="feature-card"><p>We specialize in getting real people approved.</p></article>
       <article class="feature-card"><p>We've helped thousands of renters across the country.</p></article>
       <article class="feature-card"><p>We create custom strategies for your unique situation.</p></article>
       <article class="feature-card"><p>We're here to make the process simple and stress-free.</p></article>
     </div></section>
-    <section class="section section--tint"><div class="section-heading"><p class="eyebrow">WHAT TO EXPECT</p><h2>WHAT TO EXPECT</h2></div><div class="feature-grid feature-grid--four">
+    <section class="section section--tint"><div class="section-heading"><h2>WHAT TO EXPECT</h2></div><div class="feature-grid feature-grid--four">
       <article class="feature-card"><h3>1 ON 1 CONVERSATION</h3><p>We'll listen to your situation and answer all your questions.</p></article>
       <article class="feature-card"><h3>EXPERT EVALUATION</h3><p>We'll evaluate your profile and identify opportunities.</p></article>
       <article class="feature-card"><h3>CUSTOM RECOMMENDATION</h3><p>We'll recommend the program that gives you the best results.</p></article>
       <article class="feature-card"><h3>CLEAR ROADMAP</h3><p>You'll get a step-by-step plan to reach your goal.</p></article>
     </div></section>
-    <section class="section"><div class="section-heading"><p class="eyebrow">TRUSTED BY RENTERS ACROSS THE COUNTRY</p><h2>TRUSTED BY RENTERS ACROSS THE COUNTRY</h2></div><div class="fact-grid"><div><strong>4.9/5</strong><span>Average Rating</span></div><div><strong>10,000+</strong><span>Happy Clients</span></div><div><strong>100%</strong><span>Satisfaction Focused</span></div></div></section>
+    <section class="section"><div class="section-heading"><h2>TRUSTED BY RENTERS ACROSS THE COUNTRY</h2></div><div class="fact-grid"><div><strong>4.9/5</strong><span>Average Rating</span></div><div><strong>10,000+</strong><span>Happy Clients</span></div><div><strong>100%</strong><span>Satisfaction Focused</span></div></div></section>
     <section class="cta-band"><div><h2>Ready to take the next step? We're here to help.</h2><p>Book your free consultation now and get one step closer to your new home.</p></div><div><a class="button button--light" href="/book-online/">Book My Free Consultation</a><p>No fees. No obligations. Just real help.</p></div></section>`;
 }
 
@@ -613,17 +593,26 @@ function bookingPage() {
   const housingUrl = `${site.bookingRoot}/booking-calendar/housing-approval-consultation`;
   const carUrl = `${site.bookingRoot}/booking-calendar/car-approval-consultation`;
   return `
-    <section class="page-hero"><div class="page-hero__copy"><p class="eyebrow">Direct Calendar</p><h1>BOOK A CONSULTATION</h1><p class="page-hero__lead">Speak with an expert to review your rental approval options and find the service that fits your needs.</p></div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Select a Date &amp; Time</span><strong>Choose a consultation</strong><span class="hero-note__line"></span><span class="hero-note__small">Choose a service below to open its live calendar.</span></div></div></section>
-    <section class="section section--tint"><div class="booking-breadcrumb"><a href="/">Home</a><span>Services</span><span>Service Information</span></div><div class="section-heading"><p class="eyebrow">Select a Date &amp; Time</p><h2>Select a Date &amp; Time</h2></div><div class="booking-grid">
-      <article class="booking-card"><span class="booking-card__icon" aria-hidden="true">⌂</span><h3>Housing Approval Consultation</h3><div class="booking-card__meta"><span>15 min</span></div><a class="button button--primary" href="${housingUrl}" target="_blank" rel="noopener noreferrer">Book Now</a></article>
-      <article class="booking-card"><span class="booking-card__icon booking-card__icon--gold" aria-hidden="true">✳</span><h3>Auto Approval Consultation</h3><div class="booking-card__meta"><span>15 min</span></div><a class="button button--primary" href="${carUrl}" target="_blank" rel="noopener noreferrer">Book Now</a></article>
-    </div></section>
-    <section class="section"><div class="section-heading"><p class="eyebrow">Need help choosing?</p><h2>Request a consultation</h2><p>This sends a request to Rent Again; it does not reserve a calendar time. Use one of the live calendars above to book a confirmed appointment.</p></div>${consultationRequestForm()}</section>`;
+    <section class="page-hero page-hero--single"><div class="page-hero__copy"><h1>BOOK A CONSULTATION</h1><p class="page-hero__lead">Speak with an expert to review your rental approval options and find the service that fits your needs.</p></div></section>
+    <section class="section section--tint"><div class="section-heading"><h2>Select a Date &amp; Time</h2></div><nav class="booking-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>Services</span><span>Service Information</span></nav><div class="booking-grid">
+      <article class="booking-card"><img class="booking-card__image" src="https://static.wixstatic.com/media/01ef68_e7c718fe10334ae0abc8fb9292467ed5~mv2.avif" alt=""><h3>Housing Approval Consultation</h3><div class="booking-card__meta"><span>15 min</span></div><a class="button button--primary" href="${housingUrl}">Book Now</a></article>
+      <article class="booking-card"><img class="booking-card__image" src="https://static.wixstatic.com/media/01ef68_de344156cb2b4019a6b8cedadc5d8c2c~mv2.avif" alt=""><h3>Car Approval Consultation</h3><div class="booking-card__meta"><span>15 min</span></div><a class="button button--primary" href="${carUrl}">Book Now</a></article>
+    </div></section>`;
+}
+
+function requestConsultationPage() {
+  return `
+    <section class="page-hero"><div class="page-hero__copy"><p class="eyebrow">Private consultation request</p><h1>Request a consultation</h1><p class="page-hero__lead">This sends a request to Rent Again; it does not reserve a calendar time. Use the live calendars on the booking page to book a confirmed appointment.</p></div></section>
+    <section class="section">${consultationRequestForm()}</section>`;
+}
+
+function readinessPage() {
+  return readinessGuide();
 }
 
 function consultationRequestForm() {
   return `
-    <form class="intake-form" id="consultation-request" method="post" action="/book-online/" novalidate>
+    <form class="intake-form" id="consultation-request" method="post" action="/request-consultation/" novalidate>
       <div class="intake-form__grid">
         <label>Full name<input name="full_name" autocomplete="name" maxlength="120" required></label>
         <label>Email address<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
@@ -743,7 +732,7 @@ function calendarPage(kind) {
     ? "Our Auto Approval Program is a 30-day credit-building service. Talk with us to start your service"
     : "Housing/APT Approval package Or Instant Approval Service";
   return `
-    <section class="page-hero"><div class="page-hero__copy"><p class="eyebrow">Schedule your service</p><h1>Schedule your service</h1><p class="page-hero__lead">${serviceDescription}</p><p>Check out our availability and book the date and time that works for you</p><div class="button-row"><a class="button button--primary" href="${fullUrl}" target="_blank" rel="noopener noreferrer">Book Now</a></div></div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Schedule your service</span><strong>${isCar ? "Auto Approval Consultation" : "Housing Approval Consultation"}</strong><span class="hero-note__line"></span><span class="hero-note__small">Filter by:<br>Staff Member (All)</span></div></div></section>
+    <section class="page-hero"><div class="page-hero__copy"><p class="eyebrow">Schedule your service</p><h1>Schedule your service</h1><p class="page-hero__lead">${serviceDescription}</p><p>Check out our availability and book the date and time that works for you</p><div class="button-row"><a class="button button--primary" href="${fullUrl}" target="_blank" rel="noopener noreferrer">Book Now</a></div></div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Schedule your service</span><strong>${isCar ? "Car Approval Consultation" : "Housing Approval Consultation"}</strong><span class="hero-note__line"></span><span class="hero-note__small">Filter by:<br>Staff Member (All)</span></div></div></section>
     <section class="section section--tint"><div class="booking-bridge"><div><p class="eyebrow">Schedule your service</p><h2>Check out our availability and book the date and time that works for you</h2><a class="button button--primary" href="${fullUrl}" target="_blank" rel="noopener noreferrer">Continue to booking</a></div><div class="booking-bridge__note"><span aria-hidden="true">↗</span><p>Filter by: Staff Member (All)</p></div></div></section>`;
 }
 
@@ -761,6 +750,8 @@ const routes = {
   "/auto-approval": { title: "Auto Approval | RentAgain", render: autoApprovalPage },
   "/book-consultation": { title: "Book Consultation | RentAgain", render: consultationPage },
   "/book-online": { title: "Book Online | RentAgain", render: bookingPage },
+  "/request-consultation": { title: "Request a Consultation | RentAgain", render: requestConsultationPage },
+  "/readiness": { title: "Readiness Checklist | RentAgain", render: readinessPage },
   "/account": { title: "Client Account | RentAgain", render: accountPage },
   "/staff": { title: "Staff Console | RentAgain", render: staffPage },
   "/privacy": { title: "Privacy Notice | RentAgain", render: privacyPage },
@@ -780,10 +771,9 @@ function normalizedPath(pathname) {
 
 function navigation(currentPath) {
   const links = [
+    { path: "/account/", label: "Log In" },
     { path: "/", label: "Home" },
     { path: "/#how-it-works", label: "How It Works" },
-    { path: "/#faq", label: "FAQ" },
-    { path: "/book-online/", label: "Book Online" },
   ];
   return `
     <header class="site-header">
@@ -791,10 +781,11 @@ function navigation(currentPath) {
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span class="visually-hidden">Menu</span></button>
       <nav class="site-nav" id="primary-nav" aria-label="Main navigation">
         ${links.map(({ path, label }) => `<a href="${path}"${normalizedPath(path) === currentPath ? ' aria-current="page"' : ""}>${label}</a>`).join("")}
-        <details class="nav-dropdown"><summary>Services</summary><div class="nav-dropdown__menu"><a href="/instant-approval/">Instant Approval</a><a href="/cosigner/">Co-Applicant Program</a><a href="/book-consultation/">Book Consultation</a><a href="/verified-income/">Verified Income</a><a href="/housing-packages/">Housing Packages</a><a href="/auto-approval/">Auto Approval</a></div></details>
-        <a class="site-nav__mobile-login" href="/account/">Client Login</a>
+        <details class="nav-dropdown"><summary>Services</summary><div class="nav-dropdown__menu"><a href="/instant-approval/">Instant Approval</a><a href="/cosigner/">Cosigner</a><a href="/book-consultation/">Book Consultation</a><a href="/verified-income/">Verified Income</a><a href="/housing-packages/">Housing Packages</a></div></details>
+        <a href="/#faq">FAQ</a>
+        <a href="/book-online/">Book Online</a>
       </nav>
-      <div class="site-header__actions"><a class="site-header__login" href="/account/">Client Login</a><a class="button button--small button--outline" href="/book-consultation/">Book a Consultation</a><a class="button button--small button--primary site-header__cta" href="/book-online/">Get Started ➜</a></div>
+      <div class="site-header__actions"><a class="button button--small button--outline" href="/book-consultation/">Book a Consultation</a><a class="button button--small button--primary" href="/book-online/">Get Started ➜</a></div>
     </header>`;
 }
 
@@ -804,7 +795,7 @@ function footer() {
       <div class="site-footer__main">
         <div><a class="brand brand--footer" href="/"><span class="brand__symbol" aria-hidden="true">R</span><span>RENT AGAIN<small>NEW CHAPTER NEW HOME.</small></span></a></div>
         <div class="site-footer__links">
-          <div><p class="footer-label">QUICK LINKS</p><a href="/">Home</a><a href="/#how-it-works">How It's Works</a><a href="/housing-packages/">Housing Approval Program</a><a href="/cosigner/">Co-Applicant Program</a><a href="/verified-income/">Verified Income Program</a><a href="/instant-approval/">Instant Approval Service</a><a href="/#faq">FAQ</a><a href="/book-consultation/">Book a Consultation</a><a href="/account/">Client Login</a><a href="/staff/">Staff Console</a><a href="/privacy/">Privacy</a></div>
+          <div><p class="footer-label">QUICK LINKS</p><a href="/">Home</a><a href="/#how-it-works">How It's Works</a><a href="/housing-packages/">Housing Approval Program</a><a href="/cosigner/">Co-Applicant Program</a><a href="/verified-income/">Verified Income Program</a><a href="/instant-approval/">Instant Approval Service</a><a href="/#faq">FAQ</a><a href="/book-consultation/">Book a Consultation</a></div>
           <div><p class="footer-label">CONTACT</p><a href="tel:${site.phoneHref}">${site.phone}</a><a href="mailto:${site.email}">${site.email}</a><span>${site.coverage}</span><p class="footer-label">FOLLOW US</p><span class="footer-socials" aria-hidden="true"><img src="https://static.wixstatic.com/media/bea572_37e807f014a94a59a0bcaa31302ae0c8~mv2.png" alt=""><img src="https://static.wixstatic.com/media/bea572_42e56c2aab1045e7b1d8a2f0fc6f4fcc~mv2.png" alt=""><img src="https://static.wixstatic.com/media/bea572_3c35867aae664e648a931e54c2370089~mv2.png" alt=""><img src="https://static.wixstatic.com/media/bea572_8c12aae5a0114da197dea3c2ea03c065~mv2.png" alt=""></span></div>
         </div>
       </div>
