@@ -54,10 +54,6 @@ const homeFaqs = [
     question: "How do I know which service I need?",
     answer: "Review the service details and listed prices, or book a consultation to discuss which option may fit your situation.",
   },
-  {
-    question: "Are payments secure and upfront?",
-    answer: "Review the current service price and payment terms with Rent Again before purchasing. This redesigned site does not process payments.",
-  },
 ];
 
 const housingFaqs = [
@@ -144,38 +140,37 @@ const instantFaqs = [
 ];
 
 const successStories = [
-  ["01ef68_a6e50e592af0463788861788b5474e45~mv2.jpg", "Luxury 2-Bedroom Approved", "Atlanta, GA", "Approved in 48 Hours with Previous Eviction", "Housing Approval Program"],
-  ["01ef68_61271eabbfdc4ae5a8c3390d169a0e96~mv2.jpg", "Townhouse Lease Approved", "Dallas, TX", "Income Multiplier Requirement Met via ADP", "Verified Income Program"],
-  ["01ef68_8b79258f22b842299b2a17b6d8b5cc17~mv2.jpg", "Gated Community Approved", "Orlando, FL", "Overcame 530 Credit Score with Co-Applicant", "Co-Applicant Program"],
-  ["01ef68_9905d97fc64543eb8d3d044128c9fb98~mv2.png", "High-Rise Apartment Lease Signed", "Charlotte, NC", "Expedited Housing Package in 9 Days", "Expedited Housing"],
-  ["01ef68_b220d9666dd3486c84daa0854400eb34~mv2.jpg", "Single Family Home Rental", "Phoenix, AZ", "Instant Approval Client with Rental Collections", "Instant Approval"],
-  ["01ef68_c34ff10b6cba46adb3829571530084f2~mv2.jpg", "Modern Apartment Approved", "Denver, CO", "Prior Denial Overturned with Full Verification", "Verified Income"],
-  ["01ef68_b8a7b864cb3242cab17222e5add39d05~mv2.jpg", "Downtown Loft Secured", "Chicago, IL", "Fast Move-In under Strict Relocation Deadline", "Co-Applicant Program"],
-  ["01ef68_e90dc2c4a6184468841baf7f5d05c0a4~mv2.jpg", "Suburban 3-Bedroom Home", "Columbus, OH", "Broken Lease Record Resolved & Approved", "Housing Approval"],
-  ["01ef68_24b2b83815eb42d28ab4868b08130a26~mv2.jpg", "Garden Style Community", "Tampa, FL", "Self-Employed 1099 Contractor Approved", "Verified Income"],
-  ["01ef68_8ca633c8d5c94b9fbfc5984e42273cac~mv2.jpg", "Family Apartment Complex", "Nashville, TN", "Co-Applicant 740 Credit Added to Application", "Co-Applicant Program"],
-  ["01ef68_78c6dc8bac2b45d0bee5535e1a774ef7~mv2.jpg", "New Construction Lease", "Las Vegas, NV", "Keys in Hand in 11 Days", "Instant Approval"],
-  ["01ef68_0287af425b844275bcc128822137540d~mv2.png", "Verified Landlord Approval Letter", "Indianapolis, IN", "Official Lease Approval Notification", "Housing Approval Program"],
-].map(([image, title, city, outcome, program]) => ({
-  image: `https://static.wixstatic.com/media/${image}`,
-  title,
-  city,
-  outcome,
-  program,
-}));
+  "01ef68_a6e50e592af0463788861788b5474e45~mv2.jpg",
+  "01ef68_61271eabbfdc4ae5a8c3390d169a0e96~mv2.jpg",
+  "01ef68_8b79258f22b842299b2a17b6d8b5cc17~mv2.jpg",
+  "01ef68_9905d97fc64543eb8d3d044128c9fb98~mv2.png",
+  "01ef68_b220d9666dd3486c84daa0854400eb34~mv2.jpg",
+  "01ef68_c34ff10b6cba46adb3829571530084f2~mv2.jpg",
+  "01ef68_b8a7b864cb3242cab17222e5add39d05~mv2.jpg",
+  "01ef68_e90dc2c4a6184468841baf7f5d05c0a4~mv2.jpg",
+  "01ef68_24b2b83815eb42d28ab4868b08130a26~mv2.jpg",
+  "01ef68_8ca633c8d5c94b9fbfc5984e42273cac~mv2.jpg",
+  "01ef68_78c6dc8bac2b45d0bee5535e1a774ef7~mv2.jpg",
+  "01ef68_0287af425b844275bcc128822137540d~mv2.png",
+  "01ef68_9a65f1a8adec40f4808735533399b004~mv2.jpg",
+  "01ef68_a85ad790c4174158942da35531d864a0~mv2.jpg",
+  "01ef68_c26375599de44ccba3fd6d5ec5256423~mv2.jpg",
+  "01ef68_7516fd9f80384bbbbfa31d0ac91cd07b~mv2.jpg",
+  "01ef68_99c7ad2c46514fc38c3c1f54bb51da7f~mv2.jpg",
+  "01ef68_278f2451bddc4a8eb2c2bec489bac112~mv2.jpg",
+].map((image) => `https://static.wixstatic.com/media/${image}`);
 
 const challengeItems = [
-  ["Credit Challenges", "Low credit scores, lack of credit history, charge-offs, or past bankruptcies making standard scoring algorithms reject your application.", "bea572_f6d2188bd2274dc08b886c36321a3463~mv2.png"],
-  ["Limited Rental History", "First-time renters, younger tenants, or individuals transitioning from home ownership who lack verifiable property management records.", "bea572_d5d0e72343604fc7904d948c9357f88a~mv2.png"],
-  ["Rental Collections", "Unpaid balance claims, utility collections, or damages from former landlords that show up on tenant screening databases.", "bea572_3561f69e3fff4f62abb3c0b93d8ffa48~mv2.png"],
-  ["Self-Employment Income", "1099 contractors, gig workers, freelancers, and small business owners who struggle to produce traditional W-2 paystubs.", "bea572_67a98bee745f4cd390a307e9d482fcef~mv2.png"],
-  ["Previous Denials", "Application denials from large corporate property management companies that trigger automatic rejections at sister properties.", "bea572_36e952ce457546aebb359ff5e5ab611a~mv2.png"],
-  ["Relocation Situations", "Moving to a new city or state for work before starting your new position, creating temporary income verification gaps.", "bea572_7ded28a5e42f4fd497232501392490bf~mv2.png"],
-  ["Income Documentation", "Cash earnings, tip income, bonuses, or fluctuating monthly commissions that fall just short of strict 3x-rent thresholds.", "bea572_7c4a191cbe444af5a29a57a2e295e23c~mv2.png"],
-  ["Time-Sensitive Moves", "Current lease ending rapidly or sudden life changes where you cannot afford 4-6 weeks of uncertain waiting and repeated denials.", "bea572_cd37c1a668504a45b0c7fb5107ee9798~mv2.png"],
-].map(([label, description, image]) => ({
+  ["Credit Challenges", "bea572_f6d2188bd2274dc08b886c36321a3463~mv2.png"],
+  ["Limited Rental History", "bea572_d5d0e72343604fc7904d948c9357f88a~mv2.png"],
+  ["Rental Collections", "bea572_3561f69e3fff4f62abb3c0b93d8ffa48~mv2.png"],
+  ["Self-Employment Income", "bea572_67a98bee745f4cd390a307e9d482fcef~mv2.png"],
+  ["Previous Denials", "bea572_36e952ce457546aebb359ff5e5ab611a~mv2.png"],
+  ["Relocation Situations", "bea572_7ded28a5e42f4fd497232501392490bf~mv2.png"],
+  ["Income Documentation", "bea572_7c4a191cbe444af5a29a57a2e295e23c~mv2.png"],
+  ["Time-Sensitive Moves", "bea572_cd37c1a668504a45b0c7fb5107ee9798~mv2.png"],
+].map(([label, image]) => ({
   label,
-  description,
   image: `https://static.wixstatic.com/media/${image}`,
 }));
 
@@ -193,7 +188,7 @@ function serviceCards(items = services) {
     .join("");
 }
 
-function faq(questions = homeFaqs) {
+function faq(questions = homeFaqs, showAllLink = false) {
   return `
     <section id="faq" class="section section--compact" aria-labelledby="faq-title">
       <div class="section-heading">
@@ -212,6 +207,7 @@ function faq(questions = homeFaqs) {
           )
           .join("")}
       </div>
+      ${showAllLink ? '<div class="button-row button-row--center"><a class="button button--outline" href="/#faq">View All FAQs ➜</a></div>' : ""}
     </section>`;
 }
 
@@ -238,22 +234,13 @@ function homePage() {
 
     <section class="intro-strip intro-strip--statement">
       <div><p class="eyebrow">WE BELIEVE EVERYONE DESERVES A SECOND CHANCE</p><h2>A Rental Denial Doesn't Have To Be The End Of The Story.</h2></div>
-      <div><p>Many renters struggle with credit issues, rental history challenges, income concerns, collections, or previous denials.</p><p>At Rent Again, we focus on helping clients understand their options and create a clear path forward toward securing housing.</p></div>
+      <div><p>Many renters struggle with credit issues, rental history challenges, income concerns, collections, or previous denials.</p><p>At Rent Again, we focus on helping clients understand their options and create a path forward toward securing housing.</p></div>
     </section>
 
     <section class="section section--tint">
       <div class="section-heading"><h2>SUCCESS STORIES</h2></div>
-      <p class="section-intro">Real renters, real approvals. Browse documented approval letters and lease confirmations from clients who were previously denied.</p>
-      <div class="story-grid">${successStories.map((story) => `
-        <article class="story-card">
-          <img src="${story.image}" alt="${story.title}" loading="lazy">
-          <div class="story-card__copy">
-            <p class="eyebrow">${story.program}</p>
-            <h3>${story.title}</h3>
-            <p>${story.city}</p>
-            <strong>${story.outcome}</strong>
-          </div>
-        </article>`).join("")}</div>
+      <div class="story-grid" role="list" aria-label="Rent Again success stories">${successStories.map((image) => `
+        <article class="story-card" role="listitem"><img src="${image}" alt="Rent Again success story photo" loading="lazy"></article>`).join("")}</div>
     </section>
 
     <section id="how-it-works" class="section">
@@ -280,8 +267,8 @@ function homePage() {
     </section>
 
     <section class="challenge-section">
-      <div class="challenge-section__intro"><h2>COMMON CHALLENGES WE HELP WITH</h2><p>Regardless of what is on your record or screening report, we have a solution mapped out.</p></div>
-      <div class="challenge-list">${challengeItems.map(({ label, description, image }) => `<article><img src="${image}" alt="" loading="lazy"><div><h3>${label}</h3><p>${description}</p></div></article>`).join("")}</div>
+      <div class="challenge-section__intro"><h2>COMMON CHALLENGES WE HELP WITH</h2></div>
+      <div class="challenge-list">${challengeItems.map(({ label, image }) => `<article><img src="${image}" alt="" loading="lazy"><h3>${label}</h3></article>`).join("")}</div>
     </section>
     ${faq(homeFaqs)}
     <section class="cta-band">
@@ -326,7 +313,7 @@ function housingPage() {
       <article class="step-card"><span>04</span><h3>Application Preparation</h3><p>We prepare your application for the best possible results.</p></article>
       <article class="step-card"><span>05</span><h3>Move Forward</h3><p>You'll have approved and move into your next home.</p></article>
     </div></section>
-    ${faq(housingFaqs)}
+    ${faq(housingFaqs, true)}
     <section class="cta-band"><div><h2>Ready To Strengthen Your Profile And Get Approved?</h2><p>Let's create a plan that gets you in your next home.</p></div><div><a class="button button--light" href="/book-consultation/">Book My Consultation</a><p>Let's build your path to approval.</p><p>Have Questions? We're here to help. <a href="tel:${site.phoneHref}">${site.phone}</a></p></div></section>`;
 }
 
@@ -352,7 +339,7 @@ function coApplicantPage() {
       <article class="step-card"><span>05</span><h3>Get Approved</h3><p>Move into your new home with confidence.</p></article>
     </div></section>
     <section class="section section--tint"><div class="section-heading"><p class="eyebrow">THIS PROGRAM IS FOR YOU IF:</p><h2>THIS PROGRAM IS FOR YOU IF:</h2></div><div class="tag-grid"><span>You don't meet the income requirement alone</span><span>You need a higher credit score on your application</span><span>You've been denied in the past</span><span>You want to increase your approval chances</span><span>You're ready to move into your next home</span></div><div class="fact-grid fact-grid--wide"><div><strong>$800</strong><span>PROGRAM FEE</span></div><div><strong>48-72 Hours</strong><span>PROCESSING TIME (Volume Dependent)</span></div><div><strong>700+ Credit Score</strong><span>CO-APPLICANT REQUIREMENT</span></div><div><strong>+$10,000 Monthly Income</strong><span>INCOME ADDED</span></div><div><strong>Nationwide - All 50 States</strong><span>SERVICE AREA</span></div></div></section>
-    ${faq(coApplicantFaqs)}
+    ${faq(coApplicantFaqs, true)}
     <section class="cta-band"><div><h2>Stronger Application. Better Approval Odds.</h2><p>Take the next step toward getting approved.</p></div><div><a class="button button--light" href="/book-consultation/">Book My Consultation</a><p>Let's find the best solution for you.</p><p>Have Questions? We're here to help. <a href="tel:${site.phoneHref}">${site.phone}</a></p></div></section>`;
 }
 
@@ -380,7 +367,7 @@ function verifiedIncomePage() {
       <article class="step-card"><span>05</span><h3>You Get Approved</h3><p>Use your verified income to meet requirements and secure your new home.</p></article>
     </div></section>
     <section class="section"><div class="section-heading"><p class="eyebrow">THIS SERVICE IS PERFECT FOR YOU IF:</p><h2>THIS SERVICE IS PERFECT FOR YOU IF:</h2></div><div class="tag-grid"><span>You are self-employed or a sole proprietor</span><span>You have inconsistent or variable income</span><span>You get paid in cash or non-traditional ways</span><span>You need help meeting rental income requirements</span><span>You've been denied due to income proof</span><span>You want to increase your approval chances</span></div><div class="fact-grid fact-grid--wide"><div><strong>48-72 Hours</strong><span>TURNAROUND TIME</span></div><div><strong>Virtual - Nationwide</strong><span>SERVICE TYPE</span></div><div><strong>One-time payment</strong><span>PAYMENT</span></div><div><strong>Secure email delivery</strong><span>DOCUMENT DELIVERY</span></div><div><strong>1 Round of revisions included</strong><span>REVISIONS</span></div><div><strong>We're here every step</strong><span>SUPPORT</span></div></div></section>
-    ${faq(incomeFaqs)}
+    ${faq(incomeFaqs, true)}
     <section class="cta-band"><div><h2>Verified Income. Stronger Approval. Better Results.</h2><p>Let us help you verify your income the right way.</p></div><div><a class="button button--light" href="/book-consultation/">Book My Consultation</a><p>Let's build your income verification plan.</p><p>Have Questions? We're here to help. <a href="tel:${site.phoneHref}">${site.phone}</a></p></div></section>`;
 }
 
@@ -413,7 +400,7 @@ function instantApprovalPage() {
       <article class="feature-card"><h3>Private Process</h3><p>Discreet, confidential, and handled with professional care.</p></article>
       <article class="feature-card"><h3>Nationwide Support</h3><p>We work with clients across all 50 states in the U.S.</p></article>
     </div></section>
-    ${faq(instantFaqs)}
+    ${faq(instantFaqs, true)}
     <section class="cta-band"><div><h2>Your Next Home Is Closer Than You Think.</h2><p>Book your private consultation today and let our team create your fastest path to move-in.</p></div><div><a class="button button--light" href="/book-consultation/">Book a Consultation</a><p>Speak with a housing specialist and see if you qualify.</p><p>Have Questions? Call us directly. We're here to help. <a href="tel:${site.phoneHref}">${site.phone}</a></p></div></section>`;
 }
 
