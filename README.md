@@ -4,11 +4,10 @@ A responsive static website for Rent Again, designed for Cloudflare Pages. The f
 
 ## What works in this redesign
 
-- Responsive pages for the main Rent Again services, consultations, calendars, client account, and privacy notice.
+- Public marketing pages, navigation, service-card copy, package details, booking content, process outcomes, FAQ wording, and original imagery are aligned with the live Rent Again visitor experience. The client account, staff console, privacy notice, readiness checklist, and intake form remain available on direct routes and are not added to public navigation.
 - Existing housing and auto appointment calendars remain available on `www.rentagain.org`. Opening a calendar books through that existing provider; a form on this site is only a request and does not reserve a time.
-- Consultation request intake stores only contact details and non-sensitive service/location/timing preferences. Cloudflare Turnstile verification is required before a request is accepted.
-- A private, self-guided readiness checklist organizes next steps without scoring applicants or predicting a provider decision. Checklist answers stay in the browser and are not submitted or saved.
-- The homepage testimonial-style cards are explicitly labeled fictional design previews, not real client reviews or endorsements. Replace them only with feedback from clients who have given permission to publish.
+- Consultation request intake at `/request-consultation/` stores only contact details and non-sensitive service/location/timing preferences. Cloudflare Turnstile verification is required before a request is accepted.
+- A private, self-guided readiness checklist at `/readiness/` organizes next steps without scoring applicants or predicting a provider decision. Checklist answers stay in the browser and are not submitted or saved.
 - Passwordless Supabase Auth gives clients access to requests submitted while signed in.
 - A restricted staff console lets provisioned staff review the 100 most recent requests and update progress. Clients can see the latest progress step and update time in their account. Housing providers make all final application decisions.
 - Clients can delete their signed-in account, linked consultation requests, and private summaries from the account page.
