@@ -11,6 +11,7 @@ const routes = [
   { path: "/cosigner/", title: "Cosigner | RentAgain", description: "Learn about the Rent Again Co-Applicant Program and how to get started." },
   { path: "/verified-income/", title: "Verified Income | RentAgain", description: "Learn about Rent Again's income verification service and consultation options." },
   { path: "/instant-approval/", title: "Instant Approval | RentAgain", description: "Explore Rent Again's Instant Approval Service, service fees, and consultation options." },
+  { path: "/auto-approval/", title: "Auto Approval | RentAgain", description: "Learn about Rent Again's 30-day Auto Approval credit-building service and consultation options." },
   { path: "/book-consultation/", title: "Book Consultation | RentAgain", description: "Book a free consultation with Rent Again to discuss your situation and options." },
   { path: "/book-online/", title: "Book Online | RentAgain", description: "Select a date and time to book a Housing Approval or Car Approval consultation." },
   { path: "/account/", title: "Client Account | RentAgain", description: "Securely access your Rent Again consultation requests and client intake summaries." },

@@ -7,7 +7,19 @@ import {
 } from "../_shared/http.ts";
 
 const requestIdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-const allowedStatuses = new Set(["new", "contacted", "closed"]);
+const allowedStatuses = new Set([
+  "new",
+  "contacted",
+  "reviewing",
+  "needs_information",
+  "plan_ready",
+  "application_prepared",
+  "submitted_to_provider",
+  "waiting_on_provider",
+  "provider_approved",
+  "provider_not_approved",
+  "closed",
+]);
 
 Deno.serve(async (request) => {
   if (request.method === "OPTIONS") return preflightResponse(request);
@@ -73,9 +85,9 @@ Deno.serve(async (request) => {
       }
       const { data: updated, error: updateError } = await admin
         .from("consultation_requests")
-        .update({ status: payload.status })
+        .update({ status: payload.status, status_updated_at: new Date().toISOString() })
         .eq("id", payload.id)
-        .select("id, status")
+        .select("id, status, status_updated_at")
         .maybeSingle();
       if (updateError) {
         console.error("Could not update consultation request status:", updateError);
@@ -90,7 +102,7 @@ Deno.serve(async (request) => {
     }
     const { data: requests, error: requestsError } = await admin
       .from("consultation_requests")
-      .select("id, full_name, email, phone, service, property_type, target_city, target_state, move_timeline, status, created_at")
+      .select("id, full_name, email, phone, service, property_type, target_city, target_state, move_timeline, status, status_updated_at, created_at")
       .order("created_at", { ascending: false })
       .limit(100);
     if (requestsError) {
