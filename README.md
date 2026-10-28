@@ -17,6 +17,24 @@ A responsive static website for Rent Again, designed for Cloudflare Pages. The f
 
 The public calendar handoff remains in place until the business supplies an appointment system, availability, timezone, and booking rules. This preserves current booking access rather than pretending a consultation request is a confirmed appointment.
 
+## Service and launch readiness
+
+The service pages and booking handoff were checked against the public source pages on 2026-10-28. This confirms copy parity with what the source site publishes, not that prices, turnaround times, eligibility, or service capacity are still the business's current offer.
+
+| Service or route | Source check | Remaining confirmation |
+| --- | --- | --- |
+| Housing Approval | Public package page is available; package copy and amounts are covered by site tests. | Confirm package prices, durations, tradeline offering, and capacity before accepting new customers. |
+| Co-Applicant | Public page is available; qualifications, price, process, and timeline are covered by site tests. | Confirm current co-applicant availability, qualification criteria, price, and processing expectations. |
+| Verified Income | Public page is available; package copy, amounts, and deliverables are covered by site tests. | Confirm ADP workflow, document handling, pricing, turnaround, and the actual scope of income verification. |
+| Instant Approval | Public page is available; service fees, stated timeline, process, and eligibility copy are covered by site tests. | Confirm current availability, fees, qualification, and what the service can promise before relying on these claims. |
+| Auto Approval | The source detail route returned 404; the source car-calendar page describes a 30-day credit-building program. | The redesigned detail page is not a full copy of an available source page. Confirm the current offer, costs, and supported outcomes with the business. |
+| Booking | The source site provides housing and car calendars; this site links directly to those calendars. | Keep the calendars available, or supply the replacement provider, appointment types, availability, timezone, and booking rules before changing the handoff. |
+| FAQ and policy routes | The source FAQ, privacy, and contact routes returned 404 during this check. | FAQ copy shown on the source service pages is mirrored; maintain this site's own accurate privacy notice for its separate data collection. |
+
+At the live `rentagain.pages.dev` deployment checked on 2026-10-28, the browser Supabase configuration reported backend features disabled, with no public Supabase URL or Turnstile site key. Consequently, online requests, client sign-in, and staff account features are not operational there; the current live calendars and phone contact remain the available paths. Enable those features only after configuring the Cloudflare Pages variables and Supabase Auth email/Turnstile settings described below, then test a guest request, signed-in request, staff status update, and client status view in production.
+
+Staff currently have to check the console manually: there are no lead email notifications or response-time promise. Before adding notifications, choose the approved recipient and delivery provider. Conversion analytics are not currently collected; choose an analytics and privacy approach before adding tracking. Neither lead alerts nor analytics can be safely enabled from a code-only change without those business decisions and production configuration.
+
 ## Build and test
 
 The static build uses Node.js built-ins:
