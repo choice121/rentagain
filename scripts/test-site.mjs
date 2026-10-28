@@ -117,13 +117,18 @@ for (const route of renderedRoutes) {
     assert.match(appRoot.innerHTML, /You'll have approved and move into your next home\./);
     assert.match(appRoot.innerHTML, /Let's create a plan that gets you in your next home\./);
     assert.match(appRoot.innerHTML, /Gemini_Generated_Image_c8fmesc8fmesc8fm-removebg-preview\.png/);
-    assert.match(appRoot.innerHTML, /Gemini_Generated_Image_9efzbb9efzbb9efz-removebg-preview\.png/);
-    assert.match(appRoot.innerHTML, /View All FAQs ➜/);
+    assert.match(appRoot.innerHTML, /WHAT'S INCLUDED<\/h2><\/div><\/section>\s*<section id="housing-how-it-works"/);
+    assert.doesNotMatch(appRoot.innerHTML, /You'll have a dedicated team here to support you every step of the way\./);
+    assert.doesNotMatch(appRoot.innerHTML, /Our program is available in all 50 states for apartments and homes\./);
+    assert.doesNotMatch(appRoot.innerHTML, /View All FAQs ➜/);
+    assert.doesNotMatch(appRoot.innerHTML, /See How It Works/);
   }
 
   if (route.path === "/cosigner/") {
     assert.match(appRoot.innerHTML, /<h3>Get Approved<\/h3><p>Move into your new home with confidence\.<\/p>/);
     assert.match(appRoot.innerHTML, /Two Names\. Stronger Results\./);
+    assert.match(appRoot.innerHTML, /<strong>48-72 Hours \(Volume Dependent\)<\/strong><span>PROCESSING TIME<\/span>/);
+    assert.equal((appRoot.innerHTML.match(/THIS PROGRAM IS FOR YOU IF:/g) ?? []).length, 1);
     assert.match(appRoot.innerHTML, /An FAQ section can be used to quickly answer common questions about your business like/);
   }
 
@@ -131,6 +136,7 @@ for (const route of renderedRoutes) {
     assert.match(appRoot.innerHTML, /Our Income Verification Service helps you properly document and verify your income so you can meet rental requirements and get approved with confidence\./);
     assert.match(appRoot.innerHTML, /<h3>You Get Approved<\/h3><p>Use your verified income to meet requirements and secure your new home\.<\/p>/);
     assert.match(appRoot.innerHTML, /The #1 payroll platform trusted by millions of businesses nationwide\./);
+    assert.match(appRoot.innerHTML, /<strong>We're here to help every step of the way<\/strong><span>SUPPORT<\/span>/);
   }
 
   if (route.path === "/instant-approval/") {
@@ -138,12 +144,17 @@ for (const route of renderedRoutes) {
     assert.match(appRoot.innerHTML, /<h3>Move In<\/h3><p>Receive your keys and move into your new home with confidence\.<\/p>/);
     assert.match(appRoot.innerHTML, /<span>Apartments<\/span><strong>\$2,500<\/strong>/);
     assert.match(appRoot.innerHTML, /<span>Houses<\/span><strong>\$2,800<\/strong>/);
-    assert.match(appRoot.innerHTML, /View All FAQs ➜/);
+    assert.match(appRoot.innerHTML, /<strong>Pricing<\/strong>/);
+    assert.equal((appRoot.innerHTML.match(/Service Fees/g) ?? []).length, 1);
+    assert.doesNotMatch(appRoot.innerHTML, /View All FAQs ➜/);
+    assert.doesNotMatch(appRoot.innerHTML, /See Pricing/);
   }
 
   if (route.path === "/book-consultation/") {
     assert.match(appRoot.innerHTML, /bea572_e0729025bef945508689df3184b9e11d/);
     assert.match(appRoot.innerHTML, /10,000\+/);
+    assert.match(appRoot.innerHTML, /Book your free consultation now and get one step closer to your new home\./);
+    assert.doesNotMatch(appRoot.innerHTML, /Book My Free Consultation|No fees\. No obligations\. Just real help\./);
   }
 
   if (route.path === "/book-online/") {
@@ -237,10 +248,10 @@ assert.match(app, /challengeItems\.map/);
 assert.doesNotMatch(app, /standard scoring algorithms reject|strict 3x-rent thresholds|4-6 weeks of uncertain waiting/i);
 assert.match(app, /Car Approval Consultation/);
 assert.doesNotMatch(app, /Auto Approval Consultation/);
-assert.match(app, /faq\(housingFaqs, true\)/);
-assert.match(app, /faq\(coApplicantFaqs, true\)/);
-assert.match(app, /faq\(incomeFaqs, true\)/);
-assert.match(app, /faq\(instantFaqs, true\)/);
+assert.match(app, /faq\(housingFaqs\)/);
+assert.match(app, /faq\(coApplicantFaqs\)/);
+assert.match(app, /faq\(incomeFaqs\)/);
+assert.match(app, /faq\(instantFaqs\)/);
 assert.match(app, /company_website/);
 assert.match(app, /client\.functions\.invoke\("submit-consultation"/);
 assert.match(app, /client\.functions\.invoke\("generate-client-intake-summary"/);
