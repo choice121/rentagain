@@ -114,6 +114,11 @@ for (const route of renderedRoutes) {
   if (route.path === "/housing-packages/") {
     assert.match(appRoot.innerHTML, /30-45 Day/);
     assert.match(appRoot.innerHTML, /Program Length/);
+    assert.match(appRoot.innerHTML, /STANDARD HOUSING PACKAGE<\/p><h3>\$950<\/h3><p class="package-card__term">30-45 Days<\/p>/);
+    assert.match(appRoot.innerHTML, /1 Quality Tradeline/);
+    assert.match(appRoot.innerHTML, /EXPEDITED HOUSING PACKAGE/);
+    assert.match(appRoot.innerHTML, /<h3>\$1,400<\/h3><p class="package-card__term">7 - 14 Days<\/p>/);
+    assert.match(appRoot.innerHTML, /2 Quality Tradelines/);
     assert.match(appRoot.innerHTML, /You'll have approved and move into your next home\./);
     assert.match(appRoot.innerHTML, /Let's create a plan that gets you in your next home\./);
     assert.match(appRoot.innerHTML, /Gemini_Generated_Image_c8fmesc8fmesc8fm-removebg-preview\.png/);
@@ -127,16 +132,25 @@ for (const route of renderedRoutes) {
   if (route.path === "/cosigner/") {
     assert.match(appRoot.innerHTML, /<h3>Get Approved<\/h3><p>Move into your new home with confidence\.<\/p>/);
     assert.match(appRoot.innerHTML, /Two Names\. Stronger Results\./);
+    assert.match(appRoot.innerHTML, /PROGRAM FEE<br><strong>\$800<\/strong>/);
+    assert.match(appRoot.innerHTML, /We add \$10,000 in monthly income to help you meet rental requirements\./);
     assert.match(appRoot.innerHTML, /<strong>48-72 Hours \(Volume Dependent\)<\/strong><span>PROCESSING TIME<\/span>/);
     assert.equal((appRoot.innerHTML.match(/THIS PROGRAM IS FOR YOU IF:/g) ?? []).length, 1);
+    assert.match(appRoot.innerHTML, /We Assign a Co-Applicant/);
+    assert.match(appRoot.innerHTML, /Application Submitted/);
     assert.match(appRoot.innerHTML, /An FAQ section can be used to quickly answer common questions about your business like/);
   }
 
   if (route.path === "/verified-income/") {
     assert.match(appRoot.innerHTML, /Our Income Verification Service helps you properly document and verify your income so you can meet rental requirements and get approved with confidence\./);
+    assert.match(appRoot.innerHTML, /<h4>\$450<\/h4>/);
+    assert.match(appRoot.innerHTML, /<h4>\$650<\/h4>/);
+    assert.match(appRoot.innerHTML, /Income Requirement Review \(2\.5x-3x Rent\)/);
+    assert.match(appRoot.innerHTML, /ADP Payroll Setup &amp; Income Structuring/);
     assert.match(appRoot.innerHTML, /<h3>You Get Approved<\/h3><p>Use your verified income to meet requirements and secure your new home\.<\/p>/);
     assert.match(appRoot.innerHTML, /The #1 payroll platform trusted by millions of businesses nationwide\./);
     assert.match(appRoot.innerHTML, /<strong>We're here to help every step of the way<\/strong><span>SUPPORT<\/span>/);
+    assert.match(appRoot.innerHTML, /<strong>1 Round of revisions included<\/strong><span>REVISIONS<\/span>/);
   }
 
   if (route.path === "/instant-approval/") {
@@ -146,12 +160,18 @@ for (const route of renderedRoutes) {
     assert.match(appRoot.innerHTML, /<span>Houses<\/span><strong>\$2,800<\/strong>/);
     assert.match(appRoot.innerHTML, /<strong>Pricing<\/strong>/);
     assert.equal((appRoot.innerHTML.match(/Service Fees/g) ?? []).length, 1);
+    assert.match(appRoot.innerHTML, /<h3>Approval Execution<\/h3>/);
+    assert.match(appRoot.innerHTML, /<h3>Previously Denied<\/h3>/);
+    assert.match(appRoot.innerHTML, /<h3>Nationwide Support<\/h3>/);
     assert.doesNotMatch(appRoot.innerHTML, /View All FAQs ➜/);
     assert.doesNotMatch(appRoot.innerHTML, /See Pricing/);
   }
 
   if (route.path === "/book-consultation/") {
     assert.match(appRoot.innerHTML, /bea572_e0729025bef945508689df3184b9e11d/);
+    assert.match(appRoot.innerHTML, /Every situation is different\. During your free consultation, we'll review your goals, identify your biggest challenges, and recommend the best program to get you approved\./);
+    assert.match(appRoot.innerHTML, /Your Situation<\/h3><p>We'll review your credit, income, and rental history\./);
+    assert.match(appRoot.innerHTML, /CLEAR ROADMAP/);
     assert.match(appRoot.innerHTML, /10,000\+/);
     assert.match(appRoot.innerHTML, /Book your free consultation now and get one step closer to your new home\./);
     assert.doesNotMatch(appRoot.innerHTML, /Book My Free Consultation|No fees\. No obligations\. Just real help\./);
@@ -159,12 +179,27 @@ for (const route of renderedRoutes) {
 
   if (route.path === "/book-online/") {
     assert.match(appRoot.innerHTML, /Service Information/);
-    assert.match(appRoot.innerHTML, /Housing Approval Consultation/);
-    assert.match(appRoot.innerHTML, /Car Approval Consultation/);
+    assert.match(appRoot.innerHTML, /<h3>Housing Approval Consultation<\/h3><div class="booking-card__meta"><span>15 min<\/span><\/div><a class="button button--primary" href="https:\/\/www\.rentagain\.org\/booking-calendar\/housing-approval-consultation">Book Now<\/a>/);
+    assert.match(appRoot.innerHTML, /<h3>Car Approval Consultation<\/h3><div class="booking-card__meta"><span>15 min<\/span><\/div><a class="button button--primary" href="https:\/\/www\.rentagain\.org\/booking-calendar\/car-approval-consultation">Book Now<\/a>/);
   }
 
   if (route.path === "/request-consultation/") {
     assert.match(appRoot.innerHTML, /id="consultation-request"/);
+    for (const serviceValue of ["housing", "co_applicant", "income_verification", "instant_approval", "auto_approval"]) {
+      assert.match(appRoot.innerHTML, new RegExp(`<option value="${serviceValue}">`), `${serviceValue} is selectable for an intake request`);
+    }
+    assert.match(appRoot.innerHTML, /this is a consultation request, not a confirmed booking/);
+    assert.match(appRoot.innerHTML, /Please do not submit Social Security numbers, bank or payroll records, credit reports, or other sensitive documents/);
+  }
+
+  if (route.path === "/booking-calendar/housing-approval-consultation/") {
+    assert.match(appRoot.innerHTML, /Housing\/APT Approval package Or Instant Approval Service/);
+    assert.match(appRoot.innerHTML, /href="https:\/\/www\.rentagain\.org\/booking-calendar\/housing-approval-consultation"/);
+  }
+
+  if (route.path === "/booking-calendar/car-approval-consultation/") {
+    assert.match(appRoot.innerHTML, /Our Auto Approval Program is a 30-day credit-building service/);
+    assert.match(appRoot.innerHTML, /href="https:\/\/www\.rentagain\.org\/booking-calendar\/car-approval-consultation"/);
   }
 
   if (route.path === "/readiness/") {
