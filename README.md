@@ -40,24 +40,22 @@ The publishable/anon key and Turnstile site key are public browser values. `SUPA
 
 ## Supabase setup
 
-Use a **dedicated Supabase project for Rent Again**. Do not point this site at Choice Properties' shared Supabase project; client intake and document data must remain isolated.
+Use the dedicated Rent Again Supabase project (`moavkqlqvyfwnvfqevrg`). Do not point this site at Choice Properties' shared Supabase project; client intake and document data must remain isolated. The project is created, linked, migrated, and has all four Edge Functions deployed. Its Auth site URL and redirect allowlist are configured for the preview and production domains.
 
-1. Create a Supabase project and configure passwordless email sign-in with a production SMTP provider.
-2. Link this repository to that project with the Supabase CLI and apply the migration:
+Before enabling the browser features:
+
+1. Configure passwordless email sign-in with a production SMTP provider in Supabase Auth. Test delivery; Gmail/Google Workspace SMTP requires an app password if the account's security policy allows it.
+2. Create a Cloudflare Turnstile widget for the preview and production domains. Configure its site key in Cloudflare Pages as `TURNSTILE_SITE_KEY`, and its secret in Supabase Edge Function secrets as `TURNSTILE_SECRET_KEY`.
+3. If setting up a fresh checkout, link it to the dedicated project and apply the migration:
 
    ```bash
-   supabase link --project-ref <rentagain-project-ref>
+   supabase link --project-ref moavkqlqvyfwnvfqevrg
    supabase db push
    ```
 
-3. Create a Cloudflare Turnstile widget for the production Rent Again domains. Configure its site key in Cloudflare Pages as `TURNSTILE_SITE_KEY`.
-4. Configure Edge Function secrets in Supabase. Supabase supplies `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` to Edge Functions; set the remaining values:
+4. Supabase supplies `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` to Edge Functions; do not try to set those reserved variables as custom secrets. The allowed origins are already configured. Never place `TURNSTILE_SECRET_KEY` or a Supabase service-role key in Cloudflare Pages variables or browser assets.
 
-   ```bash
-   supabase secrets set SUPABASE_ANON_KEY=<publishable-or-anon-key> TURNSTILE_SECRET_KEY=<turnstile-secret> SITE_ORIGINS=https://rentagain.pages.dev,https://www.rentagain.org,https://rentagain.org
-   ```
-
-5. Deploy the functions:
+5. To redeploy functions after a code change:
 
    ```bash
    supabase functions deploy submit-consultation --no-verify-jwt
@@ -66,8 +64,8 @@ Use a **dedicated Supabase project for Rent Again**. Do not point this site at C
    supabase functions deploy staff-consultation-requests
    ```
 
-6. In Supabase Auth, allow redirects to the `/account/` and `/staff/` URLs on the preview and production domains. Review SMTP delivery and test sign-in links.
-7. Set Cloudflare Pages build variables `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `TURNSTILE_SITE_KEY`, and `RENTAGAIN_BACKEND_ENABLED=true`; then rebuild and deploy.
+6. In Cloudflare Pages, set build variables `SUPABASE_URL=https://moavkqlqvyfwnvfqevrg.supabase.co`, `SUPABASE_ANON_KEY=<public-anon-or-publishable-key>`, and `TURNSTILE_SITE_KEY=<public-turnstile-site-key>`. Set `RENTAGAIN_BACKEND_ENABLED=true` only after SMTP and Turnstile are configured, then trigger a new Pages deployment so the build picks up the variables.
+7. Test a magic-link sign-in and consultation submission before accepting real client data.
 8. Provision staff only after the staff member has signed in once. In the Supabase SQL editor, grant access to the matching Auth user ID, for example:
 
    ```sql
@@ -78,7 +76,7 @@ Use a **dedicated Supabase project for Rent Again**. Do not point this site at C
    Do not grant staff access based only on a user-controlled email submitted in the browser. Remove access by deleting the corresponding staff-membership row.
 9. Submit test requests as a guest and as an authenticated client. Confirm guests cannot read requests, clients can only read their own records, unprovisioned users cannot access the staff console, provisioned staff can update statuses, generated PDFs stay private, signed links expire, and the original calendar links still open.
 
-Do not set `RENTAGAIN_BACKEND_ENABLED=true` until the dedicated project, migration, functions, Turnstile, Auth redirect allowlist, and SMTP have been configured and tested. The business should also review the privacy notice and choose a documented retention/deletion process before accepting real client data.
+The backend is intentionally disabled in the current Cloudflare build until SMTP, Turnstile, and the public Pages variables are configured. The business should also review the privacy notice and choose a documented retention/deletion process before accepting real client data.
 
 ## Data and document safeguards
 
