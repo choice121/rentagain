@@ -33,77 +33,149 @@ const services = [
   },
 ];
 
-const faqAnswer =
-  'An FAQ section can be used to quickly answer common questions about your business like "Where do you ship to?", "What are your opening hours?", or "How can I book a service?".';
-
 const homeFaqs = [
-  "How quickly can I get started?",
-  "Do you guarantee approval?",
-  "Do you work nationwide?",
-  "What if I've already been denied?",
-  "How do I know which service I need?",
+  {
+    question: "How quickly can I get started?",
+    answer: "You can get started by scheduling a consultation or selecting a program online. Timing depends on the service and your circumstances; discuss current processing estimates with the team.",
+  },
+  {
+    question: "Do you guarantee approval?",
+    answer: "No. Housing providers make their own decisions, and Rent Again cannot guarantee that an application will be accepted.",
+  },
+  {
+    question: "Do you work nationwide?",
+    answer: "Rent Again lists service across all 50 states. Available services and housing options can vary by location; contact the team to confirm availability.",
+  },
+  {
+    question: "What if I've already been denied?",
+    answer: "A consultation can help you review your situation and discuss available services. A prior denial does not guarantee a future approval.",
+  },
+  {
+    question: "How do I know which service I need?",
+    answer: "Review the service details and listed prices, or book a consultation to discuss which option may fit your situation.",
+  },
+  {
+    question: "Are payments secure and upfront?",
+    answer: "Review the current service price and payment terms with Rent Again before purchasing. This redesigned site does not process payments.",
+  },
 ];
 
 const housingFaqs = [
-  "How long does the Housing Approval Program take?",
-  "Do you guarantee approval?",
-  "Will this program remove negative items from my credit?",
-  "What if I have an eviction or multiple collections?",
+  {
+    question: "How long does the Housing Approval Program take?",
+    answer: "The listed package timelines are estimates, not guarantees. Confirm current processing times during your consultation.",
+  },
+  { question: "Do you guarantee approval?", answer: homeFaqs[1].answer },
+  {
+    question: "Will this program remove negative items from my credit?",
+    answer: "No credit-report changes are promised. Review the service details and consult the relevant credit bureau or qualified professional about your report.",
+  },
+  {
+    question: "What if I have an eviction or multiple collections?",
+    answer: "Discuss your circumstances during a consultation. The service cannot guarantee that a housing provider will approve an application.",
+  },
 ];
 
 const coApplicantFaqs = [
-  "How quickly will my application be submitted?",
-  "Will the co-applicant be on the lease?",
-  "What credit score does the co-applicant have?",
-  "Do I have to meet any requirements?",
-  "Is this the same as a co-signer?",
-  "Is the program guaranteed to get me approved?",
+  {
+    question: "How quickly will my application be submitted?",
+    answer: "Processing time depends on the service and the information available. Confirm the current estimate and process before purchasing.",
+  },
+  {
+    question: "Will the co-applicant be on the lease?",
+    answer: "Lease participation and responsibilities depend on the housing provider and the parties' agreement. Confirm the exact arrangement before proceeding.",
+  },
+  {
+    question: "What credit score does the co-applicant have?",
+    answer: "Ask Rent Again for current, verifiable program details. Do not rely on an unverified score or submit information that is not accurate.",
+  },
+  {
+    question: "Do I have to meet any requirements?",
+    answer: "Eligibility and requirements can vary. Ask for the current terms and review them before sharing personal information or paying a fee.",
+  },
+  {
+    question: "Is this the same as a co-signer?",
+    answer: "Not necessarily. The legal obligations depend on the arrangement and documents involved. Review the actual agreement and seek qualified advice if needed.",
+  },
+  {
+    question: "Is the program guaranteed to get me approved?",
+    answer: homeFaqs[1].answer,
+  },
 ];
 
 const incomeFaqs = [
-  "What types of income can you help verify?",
-  "What documents do I need to provide?",
-  "How long does the process take?",
-  "Is this service available nationwide?",
-  "Is this guaranteed to get me approved?",
-  "What if my income is inconsistent?",
+  {
+    question: "What types of income can you help verify?",
+    answer: "The service can help organize truthful income information you provide. Available options depend on the source and documentation.",
+  },
+  {
+    question: "What documents do I need to provide?",
+    answer: "Ask the team what current documents are required. Only provide authentic records obtained from the relevant employer, payroll provider, bank, or other source.",
+  },
+  {
+    question: "How long does the process take?",
+    answer: "The listed turnaround is an estimate. Confirm the current processing time before purchasing.",
+  },
+  { question: "Is this service available nationwide?", answer: homeFaqs[2].answer },
+  { question: "Is this guaranteed to get me approved?", answer: homeFaqs[1].answer },
+  {
+    question: "What if my income is inconsistent?",
+    answer: "A consultation can discuss how to organize accurate information about variable income. Rent Again cannot create or alter payroll, employment, or income records.",
+  },
 ];
 
 const instantFaqs = [
-  "How quickly can I move in?",
-  "What types of properties do you work with?",
-  "Do I need good credit to qualify?",
-  "Is this service available in my area?",
-  "What types of properties do you work with?",
-  "Do I need good credit to qualify?",
+  {
+    question: "How quickly can I move in?",
+    answer: "The page lists an estimated 7–14-day timeline for some eligible cases. Timing depends on availability and provider decisions and is not guaranteed.",
+  },
+  {
+    question: "What types of properties do you work with?",
+    answer: "The service page describes apartment and house options. Ask the team what is currently available in your area.",
+  },
+  {
+    question: "Do I need good credit to qualify?",
+    answer: "Eligibility depends on your circumstances and the specific service. A consultation can explain the current criteria.",
+  },
+  {
+    question: "Is this service available in my area?",
+    answer: "Rent Again lists nationwide service, but housing availability varies by location. Contact the team to confirm.",
+  },
 ];
 
-const successImages = [
-  "01ef68_a6e50e592af0463788861788b5474e45~mv2.jpg",
-  "01ef68_61271eabbfdc4ae5a8c3390d169a0e96~mv2.jpg",
-  "01ef68_8b79258f22b842299b2a17b6d8b5cc17~mv2.jpg",
-  "01ef68_9905d97fc64543eb8d3d044128c9fb98~mv2.png",
-  "01ef68_b220d9666dd3486c84daa0854400eb34~mv2.jpg",
-  "01ef68_c34ff10b6cba46adb3829571530084f2~mv2.jpg",
-  "01ef68_b8a7b864cb3242cab17222e5add39d05~mv2.jpg",
-  "01ef68_e90dc2c4a6184468841baf7f5d05c0a4~mv2.jpg",
-  "01ef68_24b2b83815eb42d28ab4868b08130a26~mv2.jpg",
-  "01ef68_8ca633c8d5c94b9fbfc5984e42273cac~mv2.jpg",
-  "01ef68_78c6dc8bac2b45d0bee5535e1a774ef7~mv2.jpg",
-  "01ef68_0287af425b844275bcc128822137540d~mv2.png",
-].map((image) => `https://static.wixstatic.com/media/${image}`);
+const successStories = [
+  ["01ef68_a6e50e592af0463788861788b5474e45~mv2.jpg", "Luxury 2-Bedroom Approved", "Atlanta, GA", "Approved in 48 Hours with Previous Eviction", "Housing Approval Program"],
+  ["01ef68_61271eabbfdc4ae5a8c3390d169a0e96~mv2.jpg", "Townhouse Lease Approved", "Dallas, TX", "Income Multiplier Requirement Met via ADP", "Verified Income Program"],
+  ["01ef68_8b79258f22b842299b2a17b6d8b5cc17~mv2.jpg", "Gated Community Approved", "Orlando, FL", "Overcame 530 Credit Score with Co-Applicant", "Co-Applicant Program"],
+  ["01ef68_9905d97fc64543eb8d3d044128c9fb98~mv2.png", "High-Rise Apartment Lease Signed", "Charlotte, NC", "Expedited Housing Package in 9 Days", "Expedited Housing"],
+  ["01ef68_b220d9666dd3486c84daa0854400eb34~mv2.jpg", "Single Family Home Rental", "Phoenix, AZ", "Instant Approval Client with Rental Collections", "Instant Approval"],
+  ["01ef68_c34ff10b6cba46adb3829571530084f2~mv2.jpg", "Modern Apartment Approved", "Denver, CO", "Prior Denial Overturned with Full Verification", "Verified Income"],
+  ["01ef68_b8a7b864cb3242cab17222e5add39d05~mv2.jpg", "Downtown Loft Secured", "Chicago, IL", "Fast Move-In under Strict Relocation Deadline", "Co-Applicant Program"],
+  ["01ef68_e90dc2c4a6184468841baf7f5d05c0a4~mv2.jpg", "Suburban 3-Bedroom Home", "Columbus, OH", "Broken Lease Record Resolved & Approved", "Housing Approval"],
+  ["01ef68_24b2b83815eb42d28ab4868b08130a26~mv2.jpg", "Garden Style Community", "Tampa, FL", "Self-Employed 1099 Contractor Approved", "Verified Income"],
+  ["01ef68_8ca633c8d5c94b9fbfc5984e42273cac~mv2.jpg", "Family Apartment Complex", "Nashville, TN", "Co-Applicant 740 Credit Added to Application", "Co-Applicant Program"],
+  ["01ef68_78c6dc8bac2b45d0bee5535e1a774ef7~mv2.jpg", "New Construction Lease", "Las Vegas, NV", "Keys in Hand in 11 Days", "Instant Approval"],
+  ["01ef68_0287af425b844275bcc128822137540d~mv2.png", "Verified Landlord Approval Letter", "Indianapolis, IN", "Official Lease Approval Notification", "Housing Approval Program"],
+].map(([image, title, city, outcome, program]) => ({
+  image: `https://static.wixstatic.com/media/${image}`,
+  title,
+  city,
+  outcome,
+  program,
+}));
 
 const challengeItems = [
-  ["Credit Challenges", "bea572_f6d2188bd2274dc08b886c36321a3463~mv2.png"],
-  ["Limited Rental History", "bea572_d5d0e72343604fc7904d948c9357f88a~mv2.png"],
-  ["Rental Collections", "bea572_3561f69e3fff4f62abb3c0b93d8ffa48~mv2.png"],
-  ["Self-Employment Income", "bea572_67a98bee745f4cd390a307e9d482fcef~mv2.png"],
-  ["Previous Denials", "bea572_36e952ce457546aebb359ff5e5ab611a~mv2.png"],
-  ["Relocation Situations", "bea572_7ded28a5e42f4fd497232501392490bf~mv2.png"],
-  ["Income Documentation", "bea572_7c4a191cbe444af5a29a57a2e295e23c~mv2.png"],
-  ["Time-Sensitive Moves", "bea572_cd37c1a668504a45b0c7fb5107ee9798~mv2.png"],
-].map(([label, image]) => ({
+  ["Credit Challenges", "Low credit scores, lack of credit history, charge-offs, or past bankruptcies making standard scoring algorithms reject your application.", "bea572_f6d2188bd2274dc08b886c36321a3463~mv2.png"],
+  ["Limited Rental History", "First-time renters, younger tenants, or individuals transitioning from home ownership who lack verifiable property management records.", "bea572_d5d0e72343604fc7904d948c9357f88a~mv2.png"],
+  ["Rental Collections", "Unpaid balance claims, utility collections, or damages from former landlords that show up on tenant screening databases.", "bea572_3561f69e3fff4f62abb3c0b93d8ffa48~mv2.png"],
+  ["Self-Employment Income", "1099 contractors, gig workers, freelancers, and small business owners who struggle to produce traditional W-2 paystubs.", "bea572_67a98bee745f4cd390a307e9d482fcef~mv2.png"],
+  ["Previous Denials", "Application denials from large corporate property management companies that trigger automatic rejections at sister properties.", "bea572_36e952ce457546aebb359ff5e5ab611a~mv2.png"],
+  ["Relocation Situations", "Moving to a new city or state for work before starting your new position, creating temporary income verification gaps.", "bea572_7ded28a5e42f4fd497232501392490bf~mv2.png"],
+  ["Income Documentation", "Cash earnings, tip income, bonuses, or fluctuating monthly commissions that fall just short of strict 3x-rent thresholds.", "bea572_7c4a191cbe444af5a29a57a2e295e23c~mv2.png"],
+  ["Time-Sensitive Moves", "Current lease ending rapidly or sudden life changes where you cannot afford 4-6 weeks of uncertain waiting and repeated denials.", "bea572_cd37c1a668504a45b0c7fb5107ee9798~mv2.png"],
+].map(([label, description, image]) => ({
   label,
+  description,
   image: `https://static.wixstatic.com/media/${image}`,
 }));
 
@@ -125,16 +197,17 @@ function faq(questions = homeFaqs) {
   return `
     <section id="faq" class="section section--compact" aria-labelledby="faq-title">
       <div class="section-heading">
-        <p class="eyebrow">FREQUENTLY ASKED QUESTIONS</p>
+        <p class="eyebrow">Clear Answers</p>
         <h2 id="faq-title">FREQUENTLY ASKED QUESTIONS</h2>
+        <p>Everything you need to know about Rent Again programs and the approval process.</p>
       </div>
       <div class="faq-list">
         ${questions
           .map(
-            (question) => `
+            ({ question, answer }) => `
               <details class="faq-item">
                 <summary>${question}<span aria-hidden="true"></span></summary>
-                <p>${faqAnswer}</p>
+                <p>${answer}</p>
               </details>`,
           )
           .join("")}
@@ -170,7 +243,17 @@ function homePage() {
 
     <section class="section section--tint">
       <div class="section-heading"><h2>SUCCESS STORIES</h2></div>
-      <div class="story-grid">${successImages.map((src) => `<img src="${src}" alt="" loading="lazy">`).join("")}</div>
+      <p class="section-intro">Real renters, real approvals. Browse documented approval letters and lease confirmations from clients who were previously denied.</p>
+      <div class="story-grid">${successStories.map((story) => `
+        <article class="story-card">
+          <img src="${story.image}" alt="${story.title}" loading="lazy">
+          <div class="story-card__copy">
+            <p class="eyebrow">${story.program}</p>
+            <h3>${story.title}</h3>
+            <p>${story.city}</p>
+            <strong>${story.outcome}</strong>
+          </div>
+        </article>`).join("")}</div>
     </section>
 
     <section id="how-it-works" class="section">
@@ -197,8 +280,8 @@ function homePage() {
     </section>
 
     <section class="challenge-section">
-      <div class="challenge-section__intro"><h2>COMMON CHALLENGES WE HELP WITH</h2></div>
-      <div class="challenge-list">${challengeItems.map(({ label, image }) => `<div><img src="${image}" alt="" loading="lazy"><strong>${label}</strong></div>`).join("")}</div>
+      <div class="challenge-section__intro"><h2>COMMON CHALLENGES WE HELP WITH</h2><p>Regardless of what is on your record or screening report, we have a solution mapped out.</p></div>
+      <div class="challenge-list">${challengeItems.map(({ label, description, image }) => `<article><img src="${image}" alt="" loading="lazy"><div><h3>${label}</h3><p>${description}</p></div></article>`).join("")}</div>
     </section>
     ${faq(homeFaqs)}
     <section class="cta-band">
@@ -368,10 +451,122 @@ function bookingPage() {
   const housingUrl = `${site.bookingRoot}/booking-calendar/housing-approval-consultation`;
   const carUrl = `${site.bookingRoot}/booking-calendar/car-approval-consultation`;
   return `
-    <section class="page-hero"><div class="page-hero__copy"><p class="eyebrow">BOOK A CONSULTATION</p><h1>BOOK A CONSULTATION</h1><p class="page-hero__lead">Speak with an expert to review your rental approval options and find the service that fits your needs.</p></div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Select a Date &amp; Time</span><strong>Select a Date &amp; Time</strong><span class="hero-note__line"></span><a class="text-link" href="${housingUrl}" target="_blank" rel="noopener noreferrer">Book Now</a></div></div></section>
+    <section class="page-hero"><div class="page-hero__copy"><p class="eyebrow">Direct Calendar</p><h1>BOOK A CONSULTATION</h1><p class="page-hero__lead">Speak with an expert to review your rental approval options and find the service that fits your needs.</p></div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Select a Date &amp; Time</span><strong>Choose a consultation</strong><span class="hero-note__line"></span><span class="hero-note__small">Choose a service below to open its live calendar.</span></div></div></section>
     <section class="section section--tint"><div class="booking-breadcrumb"><a href="/">Home</a><span>Services</span><span>Service Information</span></div><div class="section-heading"><p class="eyebrow">Select a Date &amp; Time</p><h2>Select a Date &amp; Time</h2></div><div class="booking-grid">
-      <article class="booking-card"><span class="booking-card__icon" aria-hidden="true">⌂</span><h3>Housing Approval Consultation</h3><div class="booking-card__meta"><span>15 min</span></div><a class="button button--primary" href="/booking-calendar/housing-approval-consultation/">Book Now</a></article>
-      <article class="booking-card"><span class="booking-card__icon booking-card__icon--gold" aria-hidden="true">✳</span><h3>Car Approval Consultation</h3><div class="booking-card__meta"><span>15 min</span></div><a class="button button--primary" href="/booking-calendar/car-approval-consultation/">Book Now</a></article>
+      <article class="booking-card"><span class="booking-card__icon" aria-hidden="true">⌂</span><h3>Housing Approval Consultation</h3><div class="booking-card__meta"><span>15 min</span></div><a class="button button--primary" href="${housingUrl}" target="_blank" rel="noopener noreferrer">Book Now</a></article>
+      <article class="booking-card"><span class="booking-card__icon booking-card__icon--gold" aria-hidden="true">✳</span><h3>Car Approval Consultation</h3><div class="booking-card__meta"><span>15 min</span></div><a class="button button--primary" href="${carUrl}" target="_blank" rel="noopener noreferrer">Book Now</a></article>
+    </div></section>
+    <section class="section"><div class="section-heading"><p class="eyebrow">Need help choosing?</p><h2>Request a consultation</h2><p>This sends a request to Rent Again; it does not reserve a calendar time. Use one of the live calendars above to book a confirmed appointment.</p></div>${consultationRequestForm()}</section>`;
+}
+
+function consultationRequestForm() {
+  return `
+    <form class="intake-form" id="consultation-request" method="post" action="/book-online/" novalidate>
+      <div class="intake-form__grid">
+        <label>Full name<input name="full_name" autocomplete="name" maxlength="120" required></label>
+        <label>Email address<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
+        <label>Phone number<input name="phone" type="tel" autocomplete="tel" maxlength="40" required></label>
+        <label>Service you are interested in<select name="service" required>
+          <option value="">Select a service</option>
+          <option value="housing">Housing Approval Program</option>
+          <option value="co_applicant">Co-Applicant Program</option>
+          <option value="income_verification">Verified Income Program</option>
+          <option value="instant_approval">Instant Approval Service</option>
+          <option value="auto_approval">Auto Approval Program</option>
+          <option value="not_sure">Not sure yet</option>
+        </select></label>
+        <label>Property type<select name="property_type" required>
+          <option value="">Select a property type</option>
+          <option value="apartment">Apartment</option>
+          <option value="house">House</option>
+          <option value="townhouse">Townhouse / condo</option>
+          <option value="other">Other / not sure</option>
+        </select></label>
+        <label>Target city<input name="target_city" maxlength="100" autocomplete="address-level2" required></label>
+        <label>Target state<select name="target_state" autocomplete="address-level1" required>
+          <option value="">Select a state</option>
+          <option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="DC">District of Columbia</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+        </select></label>
+        <label>When are you hoping to move?<select name="move_timeline" required>
+          <option value="">Select a timeline</option>
+          <option value="asap">As soon as possible</option>
+          <option value="within_30_days">Within 30 days</option>
+          <option value="within_60_days">Within 60 days</option>
+          <option value="more_than_60_days">More than 60 days</option>
+          <option value="not_sure">Not sure yet</option>
+        </select></label>
+      </div>
+      <label class="intake-form__consent"><input name="consent" type="checkbox" required><span>I agree that Rent Again may contact me about this request. I understand this is a consultation request, not a confirmed booking.</span></label>
+      <label class="intake-form__trap" aria-hidden="true">Leave this field empty<input name="company_website" tabindex="-1" autocomplete="off"></label>
+      <p class="intake-form__notice">Please do not submit Social Security numbers, bank or payroll records, credit reports, or other sensitive documents through this form. A consultation request is not an approval or guarantee. <a href="/privacy/">Read the privacy notice.</a></p>
+      <div id="turnstile-widget" aria-label="Spam protection"></div>
+      <button class="button button--primary" type="submit" disabled>Send consultation request</button>
+      <p class="intake-form__status" id="consultation-request-status" role="status" aria-live="polite"></p>
+      <p class="intake-form__account-note">Sign in before submitting if you want to view this request and generate a self-reported intake summary from your account.</p>
+    </form>`;
+}
+
+function accountPage() {
+  return `
+    <section class="page-hero"><div class="page-hero__copy"><p class="eyebrow">Client account</p><h1>YOUR RENT AGAIN ACCOUNT</h1><p class="page-hero__lead">Sign in with a secure email link to see consultation requests you submitted while signed in and create a factual intake summary.</p></div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Private access</span><strong>Your information, for you.</strong><span class="hero-note__line"></span><span class="hero-note__small">Only consultation requests linked to your signed-in account appear here.</span></div></div></section>
+    <section class="section"><div class="account-panel">
+      <p id="account-config-status" class="intake-form__status" role="status" aria-live="polite"></p>
+      <form class="intake-form" id="account-login" method="post" action="/account/">
+        <label>Email address<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
+        <button class="button button--primary" type="submit" disabled>Email me a sign-in link</button>
+        <p id="account-login-status" class="intake-form__status" role="status" aria-live="polite"></p>
+      </form>
+      <section id="account-session" hidden aria-labelledby="account-session-title">
+        <h2 id="account-session-title">Your requests</h2>
+        <p id="account-user-email"></p>
+        <button class="button button--outline" id="account-sign-out" type="button">Sign out</button>
+        <p id="account-requests-status" class="intake-form__status" role="status" aria-live="polite"></p>
+        <div id="account-requests"></div>
+        <div class="account-delete">
+          <h3>Delete your account and signed-in requests</h3>
+          <p>This permanently deletes your account, requests linked to it, and generated summaries. Guest requests submitted while signed out are not included.</p>
+          <button class="button button--outline" id="account-delete" type="button">Delete account and data</button>
+          <p id="account-delete-status" class="intake-form__status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+    </div></section>`;
+}
+
+function staffPage() {
+  return `
+    <section class="page-hero"><div class="page-hero__copy"><p class="eyebrow">Authorized staff</p><h1>STAFF CONSOLE</h1><p class="page-hero__lead">Sign in with an authorized staff account to review consultation requests and update their status.</p></div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Restricted access</span><strong>For the Rent Again team.</strong><span class="hero-note__line"></span><span class="hero-note__small">Only accounts provisioned by a project administrator can access request details.</span></div></div></section>
+    <section class="section"><div class="account-panel">
+      <p id="staff-config-status" class="intake-form__status" role="status" aria-live="polite"></p>
+      <form class="intake-form" id="staff-login" method="post" action="/staff/">
+        <label>Staff email address<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
+        <button class="button button--primary" type="submit" disabled>Email me a sign-in link</button>
+        <p id="staff-login-status" class="intake-form__status" role="status" aria-live="polite"></p>
+      </form>
+      <section id="staff-session" hidden aria-labelledby="staff-session-title">
+        <h2 id="staff-session-title">Consultation requests</h2>
+        <p id="staff-user-email"></p>
+        <div class="button-row"><button class="button button--outline" id="staff-refresh" type="button">Refresh requests</button><button class="button button--outline" id="staff-sign-out" type="button">Sign out</button></div>
+        <p id="staff-requests-status" class="intake-form__status" role="status" aria-live="polite"></p>
+        <div id="staff-requests"></div>
+      </section>
+    </div></section>`;
+}
+
+function privacyPage() {
+  return `
+    <section class="page-hero"><div class="page-hero__copy"><p class="eyebrow">Privacy</p><h1>PRIVACY NOTICE</h1><p class="page-hero__lead">This notice explains what the Rent Again redesign collects when you submit a consultation request or use a client account.</p></div></section>
+    <section class="section"><div class="privacy-content">
+      <h2>Information you submit</h2>
+      <p>The consultation form collects your name, email address, phone number, service of interest, property type, target city and state, move timeline, and consent to be contacted. Please do not submit Social Security numbers, credit reports, bank statements, payroll records, or other sensitive documents through the form.</p>
+      <h2>How information is used and stored</h2>
+      <p>Once the online request feature is enabled, consultation details will be stored in a dedicated Rent Again Supabase project so the team can respond. Requests submitted while signed in are associated with that account and can be viewed in the client account. Requests submitted while signed out are not linked to an account.</p>
+      <p>Authorized Rent Again staff provisioned in the project can review consultation requests and update their status through the staff console.</p>
+      <p>Client intake summaries are generated only from a request linked to the signed-in account. The PDF is stored in a private Supabase Storage bucket and its download link expires after five minutes. It repeats information submitted by the client; it is not independent verification or proof of income, identity, rental history, landlord approval, or eligibility.</p>
+      <h2>Retention and your choices</h2>
+      <p>When the backend is enabled, requests and documents remain stored until deleted; this build does not automatically delete records. Signed-in clients can delete their account and linked requests from the account page. Guest requests are not linked to an account; contact <a href="mailto:${site.email}">${site.email}</a> to ask about access, correction, or deletion of a guest request.</p>
+      <h2>External services</h2>
+      <p>Sign-in and request processing use Supabase. Cloudflare Turnstile is used for spam protection. The Supabase JavaScript client and Google Fonts are loaded from their respective providers. Appointment calendars open on the existing Rent Again website. This site does not process payments.</p>
+      <p class="intake-form__notice">This is an operational privacy notice for the redesigned site, not legal advice. Rent Again should review it, its retention practices, applicable state privacy obligations, and its service-provider agreements before enabling backend features in production.</p>
     </div></section>`;
 }
 
@@ -402,6 +597,9 @@ const routes = {
   "/instant-approval": { title: "Instant Approval | RentAgain", render: instantApprovalPage },
   "/book-consultation": { title: "Book Consultation | RentAgain", render: consultationPage },
   "/book-online": { title: "Book Online | RentAgain", render: bookingPage },
+  "/account": { title: "Client Account | RentAgain", render: accountPage },
+  "/staff": { title: "Staff Console | RentAgain", render: staffPage },
+  "/privacy": { title: "Privacy Notice | RentAgain", render: privacyPage },
   "/booking-calendar/housing-approval-consultation": {
     title: "Schedule your service | RentAgain",
     render: () => calendarPage("housing"),
@@ -430,9 +628,9 @@ function navigation(currentPath) {
       <nav class="site-nav" id="primary-nav" aria-label="Main navigation">
         ${links.map(({ path, label }) => `<a href="${path}"${normalizedPath(path) === currentPath ? ' aria-current="page"' : ""}>${label}</a>`).join("")}
         <details class="nav-dropdown"><summary>Services</summary><div class="nav-dropdown__menu"><a href="/instant-approval/">Instant Approval</a><a href="/cosigner/">Cosigner</a><a href="/book-consultation/">Book Consultation</a><a href="/verified-income/">Verified Income</a><a href="/housing-packages/">Housing Packages</a></div></details>
-        <a class="site-nav__mobile-login" href="https://www.rentagain.org" target="_blank" rel="noopener noreferrer">Log In</a>
+        <a class="site-nav__mobile-login" href="/account/">Client Login</a>
       </nav>
-      <div class="site-header__actions"><a class="site-header__login" href="https://www.rentagain.org" target="_blank" rel="noopener noreferrer">Log In</a><a class="button button--small button--outline" href="/book-consultation/">Book a Consultation</a><a class="button button--small button--primary site-header__cta" href="/book-online/">Get Started ➜</a></div>
+      <div class="site-header__actions"><a class="site-header__login" href="/account/">Client Login</a><a class="button button--small button--outline" href="/book-consultation/">Book a Consultation</a><a class="button button--small button--primary site-header__cta" href="/book-online/">Get Started ➜</a></div>
     </header>`;
 }
 
@@ -441,7 +639,7 @@ function footer() {
     <footer class="site-footer">
       <div class="site-footer__main">
         <div><a class="brand brand--footer" href="/"><span class="brand__symbol" aria-hidden="true">R</span><span>RENT AGAIN<small>NEW CHAPTER NEW HOME.</small></span></a></div>
-        <div class="site-footer__links"><div><p class="footer-label">QUICK LINKS</p><a href="/">Home</a><a href="/#how-it-works">How It's Works</a><a href="/housing-packages/">Housing Approval Program</a><a href="/cosigner/">Co-Applicant Program</a><a href="/verified-income/">Verified Income Program</a><a href="/instant-approval/">Instant Approval Service</a><a href="/#faq">FAQ</a><a href="/book-consultation/">Book a Consultation</a></div><div><p class="footer-label">CONTACT</p><a href="tel:${site.phoneHref}">${site.phone}</a><a href="mailto:${site.email}">${site.email}</a><span>${site.coverage}</span><p class="footer-label">FOLLOW US</p></div></div>
+        <div class="site-footer__links"><div><p class="footer-label">QUICK LINKS</p><a href="/">Home</a><a href="/#how-it-works">How It's Works</a><a href="/housing-packages/">Housing Approval Program</a><a href="/cosigner/">Co-Applicant Program</a><a href="/verified-income/">Verified Income Program</a><a href="/instant-approval/">Instant Approval Service</a><a href="/#faq">FAQ</a><a href="/book-consultation/">Book a Consultation</a><a href="/account/">Client Login</a><a href="/staff/">Staff Console</a><a href="/privacy/">Privacy</a></div><div><p class="footer-label">CONTACT</p><a href="tel:${site.phoneHref}">${site.phone}</a><a href="mailto:${site.email}">${site.email}</a><span>${site.coverage}</span><p class="footer-label">FOLLOW US</p></div></div>
       </div>
       <div class="site-footer__bottom"><span>© ${new Date().getFullYear()} RENT AGAIN</span><a href="/book-online/">Book Online</a></div>
     </footer>`;
@@ -473,3 +671,403 @@ document.addEventListener("keydown", (event) => {
     nav?.classList.remove("site-nav--open");
   }
 });
+
+function initializeSupabaseFeatures() {
+  const config = window.RENTAGAIN_SUPABASE;
+  const sdk = window.supabase;
+  const requestForm = document.querySelector("#consultation-request");
+  const accountConfigStatus = document.querySelector("#account-config-status");
+  const requestStatus = document.querySelector("#consultation-request-status");
+  const loginForm = document.querySelector("#account-login");
+  const staffLoginForm = document.querySelector("#staff-login");
+  const loginStatus = document.querySelector("#account-login-status");
+  const staffLoginStatus = document.querySelector("#staff-login-status");
+  const staffConfigStatus = document.querySelector("#staff-config-status");
+  let turnstileToken = "";
+  let turnstileWidgetId;
+  if (!config?.enabled || !config?.url || !config?.anonKey || !sdk?.createClient) {
+    const message = "Online requests and account features are not configured yet. Please use the live booking calendars or call Rent Again.";
+    if (requestStatus) requestStatus.textContent = message;
+    if (accountConfigStatus) accountConfigStatus.textContent = message;
+    if (staffConfigStatus) staffConfigStatus.textContent = message;
+    return;
+  }
+
+  const client = sdk.createClient(config.url, config.anonKey, {
+    auth: { flowType: "pkce", persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+  });
+  const requestButton = requestForm?.querySelector('button[type="submit"]');
+  loginForm?.querySelector('button[type="submit"]')?.removeAttribute("disabled");
+  staffLoginForm?.querySelector('button[type="submit"]')?.removeAttribute("disabled");
+  if (requestForm && requestButton) {
+    if (!config.turnstileSiteKey) {
+      if (requestStatus) requestStatus.textContent = "Secure spam protection is not configured. Please use a live calendar or call Rent Again.";
+    } else {
+      const renderChallenge = () => {
+        if (!window.turnstile) {
+          if (requestStatus) requestStatus.textContent = "Spam protection could not load. Please use a live calendar or call Rent Again.";
+          return;
+        }
+        try {
+          turnstileWidgetId = window.turnstile.render("#turnstile-widget", {
+            sitekey: config.turnstileSiteKey,
+            action: "consultation-intake",
+            callback: (token) => {
+              turnstileToken = token;
+              requestButton.disabled = false;
+            },
+            "expired-callback": () => {
+              turnstileToken = "";
+              requestButton.disabled = true;
+            },
+            "error-callback": () => {
+              turnstileToken = "";
+              requestButton.disabled = true;
+              if (requestStatus) requestStatus.textContent = "Spam protection failed to load. Please try again or use a live calendar.";
+            },
+          });
+        } catch (error) {
+          console.error("Could not render Turnstile challenge:", error);
+          if (requestStatus) requestStatus.textContent = "Spam protection failed to load. Please use a live calendar or call Rent Again.";
+        }
+      };
+      if (window.turnstile) {
+        renderChallenge();
+      } else {
+        const script = document.createElement("script");
+        script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+        script.async = true;
+        script.defer = true;
+        script.onload = renderChallenge;
+        script.onerror = () => {
+          if (requestStatus) requestStatus.textContent = "Spam protection could not load. Please use a live calendar or call Rent Again.";
+        };
+        document.head.append(script);
+      }
+    }
+  }
+
+  requestForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!requestForm.reportValidity()) return;
+    if (!turnstileToken) {
+      requestStatus.textContent = "Complete the spam protection check before sending your request.";
+      return;
+    }
+    const formData = new FormData(requestForm);
+    requestButton.disabled = true;
+    requestStatus.textContent = "Sending your request…";
+    let error;
+    try {
+      ({ error } = await client.functions.invoke("submit-consultation", {
+        body: {
+          full_name: formData.get("full_name"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          service: formData.get("service"),
+          property_type: formData.get("property_type"),
+          target_city: formData.get("target_city"),
+          target_state: formData.get("target_state"),
+          move_timeline: formData.get("move_timeline"),
+          consent: formData.get("consent") === "on",
+          company_website: formData.get("company_website"),
+          turnstile_token: turnstileToken,
+        },
+      }));
+    } catch (requestError) {
+      console.error("Consultation request submission failed:", requestError);
+      error = requestError;
+    }
+    turnstileToken = "";
+    if (window.turnstile && turnstileWidgetId) window.turnstile.reset(turnstileWidgetId);
+    if (error) {
+      console.error("Consultation request submission failed:", error);
+      requestStatus.textContent = "We could not submit your request. Please try again or call Rent Again.";
+      return;
+    }
+    requestForm.reset();
+    requestStatus.textContent = "Your consultation request was sent. This is not a confirmed appointment; use a live calendar above to reserve a time.";
+  });
+
+  const activeLoginForm = loginForm ?? staffLoginForm;
+  const activeLoginStatus = loginStatus ?? staffLoginStatus;
+  activeLoginForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!activeLoginForm.reportValidity()) return;
+    const email = new FormData(activeLoginForm).get("email");
+    let error;
+    try {
+      ({ error } = await client.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: `${window.location.origin}${window.location.pathname}` },
+      }));
+    } catch (requestError) {
+      console.error("Email sign-in request failed:", requestError);
+      error = requestError;
+    }
+    if (error) {
+      console.error("Email sign-in request failed:", error);
+      activeLoginStatus.textContent = "We could not send a sign-in link. Please try again later.";
+      return;
+    }
+    activeLoginStatus.textContent = "If the address can receive sign-in links, one is on its way. Check your email.";
+  });
+
+  document.querySelector("#account-sign-out, #staff-sign-out")?.addEventListener("click", async () => {
+    let error;
+    try {
+      ({ error } = await client.auth.signOut());
+    } catch (requestError) {
+      console.error("Client sign-out failed:", requestError);
+      error = requestError;
+    }
+    if (error) {
+      console.error("Client sign-out failed:", error);
+      const status = document.querySelector("#account-requests-status, #staff-requests-status");
+      if (status) status.textContent = "Sign out failed. Please close this browser window and try again.";
+    }
+  });
+
+  document.querySelector("#account-delete")?.addEventListener("click", async (event) => {
+    if (!window.confirm("Permanently delete this account and all consultation requests linked to it? This cannot be undone.")) return;
+    const button = event.currentTarget;
+    const status = document.querySelector("#account-delete-status");
+    button.disabled = true;
+    status.textContent = "Deleting your account and linked data…";
+    let error;
+    try {
+      ({ error } = await client.functions.invoke("delete-client-account", { body: {} }));
+    } catch (requestError) {
+      console.error("Client account deletion request failed:", requestError);
+      error = requestError;
+    }
+    if (error) {
+      console.error("Client account deletion request failed:", error);
+      status.textContent = "We could not confirm complete deletion. Contact Rent Again for assistance.";
+      button.disabled = false;
+      return;
+    }
+    const { error: signOutError } = await client.auth.signOut({ scope: "local" });
+    if (signOutError) console.error("Deleted client could not be signed out locally:", signOutError);
+    window.location.assign("/");
+  });
+
+  document.querySelector("#staff-refresh")?.addEventListener("click", () => loadStaffRequests(client));
+  client.auth.onAuthStateChange((_event, session) => {
+    window.setTimeout(() => renderAccountSession(client, session), 0);
+  });
+  client.auth.getSession()
+    .then(({ data, error }) => {
+      if (error) console.error("Could not read client session:", error);
+      renderAccountSession(client, data?.session ?? null);
+    })
+    .catch((error) => {
+      console.error("Could not initialize client session:", error);
+      const status = document.querySelector("#account-login-status");
+      if (status) status.textContent = "Your account could not be loaded. Please reload and try again.";
+    });
+}
+
+async function renderAccountSession(client, session) {
+  if (document.querySelector("#staff-session")) {
+    await renderStaffSession(client, session);
+    return;
+  }
+  const loginForm = document.querySelector("#account-login");
+  const sessionPanel = document.querySelector("#account-session");
+  if (!loginForm || !sessionPanel) return;
+  loginForm.hidden = Boolean(session);
+  sessionPanel.hidden = !session;
+  if (!session) return;
+
+  document.querySelector("#account-user-email").textContent = session.user.email ?? "";
+  const list = document.querySelector("#account-requests");
+  const status = document.querySelector("#account-requests-status");
+  list.replaceChildren();
+  status.textContent = "Loading your requests…";
+
+  let requests;
+  let error;
+  try {
+    ({ data: requests, error } = await client
+      .from("consultation_requests")
+      .select("id, service, created_at, status")
+      .order("created_at", { ascending: false }));
+  } catch (requestError) {
+    console.error("Could not load client requests:", requestError);
+    status.textContent = "Your requests could not be loaded. Please try again later.";
+    return;
+  }
+  if (error) {
+    console.error("Could not load client requests:", error);
+    status.textContent = "Your requests could not be loaded. Please try again later.";
+    return;
+  }
+  const clientRequests = requests ?? [];
+  status.textContent = clientRequests.length ? "" : "No signed-in consultation requests were found.";
+  for (const request of clientRequests) {
+    const card = document.createElement("article");
+    card.className = "account-request";
+    const heading = document.createElement("h3");
+    heading.textContent = request.service.replaceAll("_", " ");
+    const date = document.createElement("p");
+    date.textContent = new Date(request.created_at).toLocaleString();
+    const state = document.createElement("p");
+    state.textContent = `Request status: ${request.status}`;
+    const button = document.createElement("button");
+    button.className = "button button--outline";
+    button.type = "button";
+    button.textContent = "Generate intake summary";
+    button.addEventListener("click", () => generateIntakeSummary(client, request.id, card, status));
+    card.append(heading, date, state, button);
+    list.append(card);
+  }
+}
+
+async function renderStaffSession(client, session) {
+  const loginForm = document.querySelector("#staff-login");
+  const sessionPanel = document.querySelector("#staff-session");
+  if (!loginForm || !sessionPanel) return;
+  loginForm.hidden = Boolean(session);
+  sessionPanel.hidden = !session;
+  if (!session) return;
+  document.querySelector("#staff-user-email").textContent = session.user.email ?? "";
+  await loadStaffRequests(client);
+}
+
+async function loadStaffRequests(client) {
+  const list = document.querySelector("#staff-requests");
+  const status = document.querySelector("#staff-requests-status");
+  if (!list || !status) return;
+  list.replaceChildren();
+  status.textContent = "Loading consultation requests…";
+
+  let data;
+  let error;
+  try {
+    ({ data, error } = await client.functions.invoke("staff-consultation-requests", {
+      body: { action: "list" },
+    }));
+  } catch (requestError) {
+    console.error("Could not load staff consultation requests:", requestError);
+    status.textContent = "Requests could not be loaded. Please try again.";
+    return;
+  }
+  if (error || !Array.isArray(data?.requests)) {
+    console.error("Could not load staff consultation requests:", error);
+    status.textContent = data?.error ?? "Requests could not be loaded. Please try again.";
+    return;
+  }
+  if (!data.requests.length) {
+    status.textContent = "No consultation requests have been submitted.";
+    return;
+  }
+  status.textContent = "Showing the 100 most recent requests.";
+  for (const request of data.requests) {
+    const card = document.createElement("article");
+    card.className = "account-request";
+    const heading = document.createElement("h3");
+    heading.textContent = request.full_name;
+    const contact = document.createElement("p");
+    const email = document.createElement("a");
+    email.href = `mailto:${request.email}`;
+    email.textContent = request.email;
+    contact.append(email, document.createTextNode(` · ${request.phone}`));
+    const details = document.createElement("p");
+    details.textContent = [
+      request.service.replaceAll("_", " "),
+      request.property_type.replaceAll("_", " "),
+      `${request.target_city}, ${request.target_state}`,
+      request.move_timeline.replaceAll("_", " "),
+      new Date(request.created_at).toLocaleString(),
+    ].join(" · ");
+    const statusLabel = document.createElement("label");
+    statusLabel.textContent = "Request status";
+    const statusSelect = document.createElement("select");
+    for (const value of ["new", "contacted", "closed"]) {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = value[0].toUpperCase() + value.slice(1);
+      option.selected = request.status === value;
+      statusSelect.append(option);
+    }
+    statusLabel.append(statusSelect);
+    statusSelect.addEventListener("change", async () => {
+      statusSelect.disabled = true;
+      status.textContent = "Updating request status…";
+      let updateData;
+      let updateError;
+      try {
+        ({ data: updateData, error: updateError } = await client.functions.invoke("staff-consultation-requests", {
+          body: { action: "update_status", id: request.id, status: statusSelect.value },
+        }));
+      } catch (requestError) {
+        console.error("Could not update staff consultation request:", requestError);
+        updateError = requestError;
+      }
+      if (updateError || updateData?.request?.status !== statusSelect.value) {
+        console.error("Could not update staff consultation request:", updateError);
+        status.textContent = updateData?.error ?? "The request status could not be updated.";
+        statusSelect.value = request.status;
+      } else {
+        request.status = updateData.request.status;
+        status.textContent = "Request status updated.";
+      }
+      statusSelect.disabled = false;
+    });
+    card.append(heading, contact, details, statusLabel);
+    list.append(card);
+  }
+}
+
+async function generateIntakeSummary(client, requestId, container, status) {
+  const button = container.querySelector("button");
+  button.disabled = true;
+  status.textContent = "Preparing your intake summary…";
+  let data;
+  let error;
+  try {
+    ({ data, error } = await client.functions.invoke("generate-client-intake-summary", {
+      body: { consultation_request_id: requestId },
+    }));
+  } catch (requestError) {
+    console.error("Client intake summary generation failed:", requestError);
+    button.disabled = false;
+    status.textContent = "We could not create your document. Please try again later.";
+    return;
+  }
+  button.disabled = false;
+  if (error || !data?.signed_url) {
+    console.error("Client intake summary generation failed:", error);
+    status.textContent = "We could not create your document. Please try again later.";
+    return;
+  }
+  let signedUrl;
+  try {
+    signedUrl = new URL(data.signed_url);
+  } catch (error) {
+    console.error("Client intake summary returned an invalid download URL:", error);
+    status.textContent = "We could not verify the document link. Please try again later.";
+    return;
+  }
+  const backendUrl = new URL(window.RENTAGAIN_SUPABASE.url);
+  if (
+    signedUrl.protocol !== "https:"
+    || signedUrl.origin !== backendUrl.origin
+    || !signedUrl.pathname.includes("/storage/v1/object/sign/client-documents/")
+  ) {
+    console.error("Client intake summary returned an unexpected download URL.");
+    status.textContent = "We could not verify the document link. Please try again later.";
+    return;
+  }
+  const link = document.createElement("a");
+  link.className = "text-link";
+  link.href = signedUrl.href;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = "Open your private intake summary";
+  container.append(link);
+  status.textContent = "Your summary is ready. It contains information you submitted and is not independent verification.";
+}
+
+initializeSupabaseFeatures();

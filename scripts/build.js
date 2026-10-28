@@ -13,6 +13,9 @@ const routes = [
   { path: "/instant-approval/", title: "Instant Approval | RentAgain", description: "Explore Rent Again's Instant Approval Service, service fees, and consultation options." },
   { path: "/book-consultation/", title: "Book Consultation | RentAgain", description: "Book a free consultation with Rent Again to discuss your situation and options." },
   { path: "/book-online/", title: "Book Online | RentAgain", description: "Select a date and time to book a Housing Approval or Car Approval consultation." },
+  { path: "/account/", title: "Client Account | RentAgain", description: "Securely access your Rent Again consultation requests and client intake summaries." },
+  { path: "/staff/", title: "Staff Console | RentAgain", description: "Authorized Rent Again staff can securely manage consultation requests." },
+  { path: "/privacy/", title: "Privacy Notice | RentAgain", description: "Learn what the Rent Again redesigned website collects and how consultation information and client summaries are handled." },
   { path: "/booking-calendar/housing-approval-consultation/", title: "Schedule your service | RentAgain", description: "Check availability and book a Housing Approval consultation." },
   { path: "/booking-calendar/car-approval-consultation/", title: "Schedule your service | RentAgain", description: "Check availability and book an Auto Approval consultation." },
 ];
@@ -25,6 +28,15 @@ fs.rmSync(distDir, { recursive: true, force: true });
 fs.mkdirSync(path.join(distDir, "assets"), { recursive: true });
 fs.copyFileSync(path.join(sourceDir, "app.js"), path.join(distDir, "assets", "app.js"));
 fs.copyFileSync(path.join(sourceDir, "styles.css"), path.join(distDir, "assets", "styles.css"));
+fs.writeFileSync(
+  path.join(distDir, "assets", "supabase-config.js"),
+  `window.RENTAGAIN_SUPABASE = ${JSON.stringify({
+    url: process.env.SUPABASE_URL ?? "",
+    anonKey: process.env.SUPABASE_ANON_KEY ?? "",
+    turnstileSiteKey: process.env.TURNSTILE_SITE_KEY ?? "",
+    enabled: process.env.RENTAGAIN_BACKEND_ENABLED === "true",
+  })};\n`,
+);
 
 const template = fs.readFileSync(path.join(sourceDir, "index.html"), "utf8");
 for (const route of routes) {
