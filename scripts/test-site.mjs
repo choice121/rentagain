@@ -12,6 +12,7 @@ const routeFiles = [
   "cosigner/index.html",
   "verified-income/index.html",
   "instant-approval/index.html",
+  "auto-approval/index.html",
   "book-consultation/index.html",
   "book-online/index.html",
   "account/index.html",
@@ -37,6 +38,7 @@ const renderedRoutes = [
   { path: "/cosigner/", heading: "Stronger Application. Better Approval Odds." },
   { path: "/verified-income/", heading: "Verify Your Income. Strengthen Your Approval." },
   { path: "/instant-approval/", heading: "INSTANT APPROVAL SERVICE" },
+  { path: "/auto-approval/", heading: "A clearer path toward your auto goals." },
   { path: "/book-consultation/", heading: "Let's Find The Right Solution For You." },
   { path: "/book-online/", heading: "BOOK A CONSULTATION" },
   { path: "/account/", heading: "YOUR RENT AGAIN ACCOUNT" },
@@ -86,9 +88,73 @@ for (const route of renderedRoutes) {
     assert.equal(attributes["aria-expanded"], "false", "Escape closes mobile navigation");
   }
 }
+
+class MockElement {
+  constructor(tagName) {
+    this.tagName = tagName;
+    this.children = [];
+    this.attributes = {};
+    this.classNames = new Set();
+    this.classList = { add: (name) => this.classNames.add(name) };
+    this.hidden = false;
+  }
+  append(...children) { this.children.push(...children); }
+  replaceChildren(...children) { this.children = [...children]; }
+  setAttribute(name, value) { this.attributes[name] = value; }
+  scrollIntoView() {}
+}
+
+let readinessSubmit;
+const readinessTopic = { value: "income" };
+const checkedReadinessInput = { closest: () => ({ querySelector: () => ({ textContent: "I know my target rent." }) }) };
+const uncheckedReadinessInput = { closest: () => ({ querySelector: () => ({ textContent: "I can describe my rental history accurately." }) }) };
+const readinessForm = {
+  addEventListener: (event, callback) => { if (event === "submit") readinessSubmit = callback; },
+  reportValidity: () => true,
+  querySelector: () => readinessTopic,
+  querySelectorAll: (selector) => {
+    if (selector.includes(":checked")) return [checkedReadinessInput];
+    if (selector.includes(":not(:checked)")) return [uncheckedReadinessInput];
+    return [checkedReadinessInput, uncheckedReadinessInput];
+  },
+};
+const readinessResults = new MockElement("div");
+const appRoot = new MockElement("div");
+const readinessDocument = {
+  getElementById: (id) => id === "app" ? appRoot : null,
+  querySelector: (selector) => ({
+    "#readiness-guide": readinessForm,
+    "#readiness-results": readinessResults,
+  })[selector] ?? null,
+  createElement: (tagName) => new MockElement(tagName),
+  addEventListener: () => {},
+};
+const readinessContext = {
+  window: { location: { pathname: "/" } },
+  document: readinessDocument,
+  HTMLAnchorElement: class HTMLAnchorElement {},
+};
+runInNewContext(app, readinessContext);
+assert.equal(typeof readinessSubmit, "function", "the readiness guide handles submissions");
+readinessSubmit({ preventDefault() {} });
+assert.equal(readinessResults.hidden, false, "the readiness guide reveals its next-step result");
+assert.ok(readinessResults.children.some((element) => element.textContent?.includes("This is a checklist, not an approval score")));
+assert.ok(readinessResults.children.some((element) => element.href === "/verified-income/"));
+assert.ok(readinessResults.children.some((element) => element.tagName === "ul"), "the readiness guide lists unchecked planning items");
+const waitingProgress = readinessContext.renderRequestProgress("waiting_on_provider");
+assert.ok(waitingProgress.children.some((row) => row.attributes["aria-current"] === "step"), "provider waiting appears as the current progress stage");
+const declinedProgress = readinessContext.renderRequestProgress("provider_not_approved");
+assert.ok(declinedProgress.children.some((row) => row.attributes["aria-current"] === "step"), "a recorded provider decision appears as the current progress stage");
+
 assert.match(app, /bookingRoot: "https:\/\/www\.rentagain\.org"/);
 assert.match(app, /\/booking-calendar\/housing-approval-consultation/);
 assert.match(app, /\/booking-calendar\/car-approval-consultation/);
+assert.match(app, /id="readiness-guide"/);
+assert.match(app, /Your selections stay in this browser and are not sent to RentAgain/);
+assert.match(app, /This is a checklist, not an approval score or eligibility decision/);
+assert.match(app, /status_updated_at/);
+assert.match(app, /provider_not_approved/);
+assert.match(app, /decision is outside RentAgain's control/);
 assert.match(app, /info@vontagain\.org/);
 assert.match(app, /class="footer-socials" aria-hidden="true"/);
 assert.equal([...app.matchAll(/bea572_(?:37e807f014a94a59a0bcaa31302ae0c8|42e56c2aab1045e7b1d8a2f0fc6f4fcc|3c35867aae664e648a931e54c2370089|8c12aae5a0114da197dea3c2ea03c065)~mv2\.png/g)].length, 4, "all source footer social icons are retained");
@@ -128,6 +194,10 @@ assert.match(migration, /rentagain_staff_members/);
 assert.match(migration, /Staff can view only their own membership/);
 assert.match(migration, /revoke all on function public\.consume_intake_rate_limit\(text\) from public, anon, authenticated/i);
 assert.match(migration, /consume_document_generation_limit/);
+const progressMigration = fs.readFileSync(path.join(root, "supabase", "migrations", "20261028000001_consultation_progress_statuses.sql"), "utf8");
+assert.match(progressMigration, /status_updated_at timestamptz not null default now\(\)/i);
+assert.match(progressMigration, /provider_approved/);
+assert.match(progressMigration, /provider_not_approved/);
 
 const documentFunction = fs.readFileSync(path.join(root, "supabase", "functions", "generate-client-intake-summary", "index.ts"), "utf8");
 assert.match(documentFunction, /This summary reproduces information supplied by the client/);
@@ -139,10 +209,12 @@ assert.match(intakeFunction, /siteverify/);
 assert.match(intakeFunction, /consume_intake_rate_limit/);
 assert.match(intakeFunction, /importKey\([\s\S]*HMAC/);
 assert.match(intakeFunction, /token !== anonKey/);
+const staffFunction = fs.readFileSync(path.join(root, "supabase", "functions", "staff-consultation-requests", "index.ts"), "utf8");
+assert.match(staffFunction, /needs_information/);
+assert.match(staffFunction, /status_updated_at: new Date\(\)\.toISOString\(\)/);
 const deletionFunction = fs.readFileSync(path.join(root, "supabase", "functions", "delete-client-account", "index.ts"), "utf8");
 assert.match(deletionFunction, /auth\.admin\.deleteUser\(userId\)/);
 assert.match(deletionFunction, /storage[\s\S]*from\("client-documents"\)[\s\S]*remove\(paths\.slice/);
-const staffFunction = fs.readFileSync(path.join(root, "supabase", "functions", "staff-consultation-requests", "index.ts"), "utf8");
 assert.match(staffFunction, /rentagain_staff_members/);
 assert.match(staffFunction, /authClient\.auth\.getUser\(token\)/);
 assert.match(staffFunction, /allowedStatuses/);

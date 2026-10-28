@@ -11,27 +11,66 @@ const services = [
     path: "/housing-packages/",
     icon: "01",
     name: "Housing Approval Program",
-    description: "Improve your rental profile and approval positioning.",
+    description: "Personalized rental-profile support, application strategy, and guided next steps.",
+    meta: "2 packages · $950–$1,400",
   },
   {
     path: "/cosigner/",
     icon: "02",
     name: "Co-Applicant Program",
-    description: "Add qualified support to strengthen your application.",
+    description: "Explore whether a qualified co-applicant can strengthen your rental application.",
+    meta: "$800 · 48–72 hours",
   },
   {
     path: "/verified-income/",
     icon: "03",
     name: "Verified Income Program",
-    description: "Organize and strengthen income documentation.",
+    description: "Prepare accurate income documentation for a clearer rental application.",
+    meta: "$450–$650 · 48–72 hours",
   },
   {
     path: "/instant-approval/",
     icon: "04",
     name: "Instant Approval Service",
-    description: "Improve your rental profile and approval positioning.",
+    description: "A guided housing option for eligible clients seeking a faster path.",
+    meta: "Apartments $2,500 · Houses $2,800",
+  },
+  {
+    path: "/auto-approval/",
+    icon: "05",
+    name: "Auto Approval Program",
+    description: "A 30-day credit-building service with guidance from the RentAgain team.",
+    meta: "30-day program · Ask about pricing",
   },
 ];
+
+const requestStatuses = [
+  { value: "new", label: "Request received", description: "Your consultation request is in the RentAgain queue." },
+  { value: "contacted", label: "Specialist contacted", description: "A RentAgain specialist has reached out about your request." },
+  { value: "reviewing", label: "Review in progress", description: "The team is reviewing the information you shared." },
+  { value: "needs_information", label: "More information needed", description: "Please contact your specialist to confirm what is needed next." },
+  { value: "plan_ready", label: "Plan ready", description: "Your specialist has prepared the recommended next steps." },
+  { value: "application_prepared", label: "Application prepared", description: "Application preparation is marked complete by the RentAgain team." },
+  { value: "submitted_to_provider", label: "Submitted to housing provider", description: "The team has recorded that your application was submitted to a housing provider." },
+  { value: "waiting_on_provider", label: "Waiting on provider", description: "The housing provider is reviewing the application. Its decision is outside RentAgain's control." },
+  { value: "provider_approved", label: "Provider reported approval", description: "A provider decision was recorded. Confirm final terms directly with the housing provider." },
+  { value: "provider_not_approved", label: "Provider did not approve", description: "A provider decision was recorded. Contact your specialist to discuss options." },
+  { value: "closed", label: "Request closed", description: "This request is marked closed. Contact RentAgain if you need help." },
+];
+
+const statusRank = {
+  new: 0,
+  contacted: 1,
+  reviewing: 2,
+  needs_information: 2,
+  plan_ready: 3,
+  application_prepared: 4,
+  submitted_to_provider: 5,
+  waiting_on_provider: 5,
+  provider_approved: 6,
+  provider_not_approved: 6,
+  closed: 7,
+};
 
 const homeFaqs = [
   {
@@ -182,10 +221,113 @@ function serviceCards(items = services) {
           <div class="service-card__top"><span class="service-card__number" aria-hidden="true">${service.icon}</span><span class="service-card__arrow" aria-hidden="true">↗</span></div>
           <h3>${service.name}</h3>
           <p>${service.description}</p>
+          <p class="service-card__meta">${service.meta}</p>
           <a class="text-link" href="${service.path}">Learn More <span aria-hidden="true">→</span></a>
         </article>`,
     )
     .join("");
+}
+
+function readinessGuide() {
+  return `
+    <section class="section readiness-section">
+      <div class="section-heading">
+        <p class="eyebrow">A useful first step</p>
+        <h2>Know where you stand before you apply.</h2>
+        <p class="section-heading__note">Use this private checklist to organize your next steps. It does not score you, verify documents, determine eligibility, or predict a housing provider's decision.</p>
+      </div>
+      <div class="readiness-panel">
+        <form id="readiness-guide">
+          <fieldset class="readiness-fieldset">
+            <legend>What are you working through?</legend>
+            <div class="readiness-options">
+              <label><input type="radio" name="readiness-topic" value="housing" required><span>Credit or rental-history challenges</span></label>
+              <label><input type="radio" name="readiness-topic" value="income"><span>Income documentation</span></label>
+              <label><input type="radio" name="readiness-topic" value="coapplicant"><span>Considering a co-applicant</span></label>
+              <label><input type="radio" name="readiness-topic" value="time"><span>Looking for a faster housing option</span></label>
+              <label><input type="radio" name="readiness-topic" value="auto"><span>Auto credit-building support</span></label>
+              <label><input type="radio" name="readiness-topic" value="unsure"><span>I'm not sure yet</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="readiness-fieldset">
+            <legend>Check off what you already know</legend>
+            <div class="readiness-checklist">
+              <label><input type="checkbox" name="readiness-check" value="area"><span>I have a target area and a rough move timeline.</span></label>
+              <label><input type="checkbox" name="readiness-check" value="budget"><span>I know my target rent and the costs I need to ask about.</span></label>
+              <label><input type="checkbox" name="readiness-check" value="documents"><span>I know where to obtain my accurate, original income records.</span></label>
+              <label><input type="checkbox" name="readiness-check" value="history"><span>I can describe my rental history accurately.</span></label>
+              <label><input type="checkbox" name="readiness-check" value="provider"><span>I understand the housing provider makes the final decision.</span></label>
+            </div>
+          </fieldset>
+          <button class="button button--primary" type="submit">Show my next steps</button>
+          <p class="readiness-privacy">Your selections stay in this browser and are not sent to RentAgain.</p>
+        </form>
+        <div id="readiness-results" class="readiness-results" role="status" aria-live="polite" hidden></div>
+      </div>
+    </section>`;
+}
+
+function renderRequestProgress(status) {
+  const current = requestStatuses.find((item) => item.value === status);
+  const rank = statusRank[status] ?? 0;
+  const list = document.createElement("ol");
+  list.className = "progress-list";
+  list.setAttribute("aria-label", "Consultation progress");
+  if (status === "closed") {
+    const notice = document.createElement("li");
+    notice.className = "progress-list__notice";
+    notice.textContent = current.description;
+    list.append(notice);
+    return list;
+  }
+  const milestones = [
+    { value: "new", label: "Request received", description: "Your consultation request is in the RentAgain queue.", rank: 0 },
+    { value: "contacted", label: "Specialist contacted", description: "A RentAgain specialist has reached out about your request.", rank: 1 },
+    { value: "reviewing", label: "Review and plan", description: "The team reviews your information and prepares next steps.", rank: 2 },
+    { value: "plan_ready", label: "Plan delivered", description: "Your specialist has prepared the recommended next steps.", rank: 3 },
+    { value: "application_prepared", label: "Application prepared", description: "Application preparation is marked complete by the RentAgain team.", rank: 4 },
+    { value: "submitted_to_provider", label: "Provider review", description: "The housing provider reviews the application. Its decision is outside RentAgain's control.", rank: 5 },
+    { value: "provider_approved", label: "Provider decision", description: current?.value === "provider_approved"
+      ? "A provider decision was recorded. Confirm final terms directly with the housing provider."
+      : current?.value === "provider_not_approved"
+        ? "A provider decision was recorded. Contact your specialist to discuss options."
+        : "A housing provider's decision has not yet been recorded.", rank: 6 },
+  ];
+  for (const item of milestones) {
+    const row = document.createElement("li");
+    row.className = "progress-list__item";
+    if (item.rank < rank || item.value === status || (item.value === "reviewing" && ["needs_information", "plan_ready"].includes(status))) {
+      row.classList.add("progress-list__item--complete");
+    }
+    if (
+      item.value === status
+      || (item.value === "reviewing" && status === "needs_information")
+      || (item.value === "submitted_to_provider" && status === "waiting_on_provider")
+      || (item.value === "provider_approved" && ["provider_approved", "provider_not_approved"].includes(status))
+    ) {
+      row.classList.add("progress-list__item--current");
+      row.setAttribute("aria-current", "step");
+    }
+    const marker = document.createElement("span");
+    marker.className = "progress-list__marker";
+    marker.setAttribute("aria-hidden", "true");
+    const copy = document.createElement("span");
+    copy.className = "progress-list__copy";
+    const title = document.createElement("strong");
+    title.textContent = item.label;
+    const description = document.createElement("span");
+    description.textContent = item.description;
+    copy.append(title, description);
+    row.append(marker, copy);
+    list.append(row);
+  }
+  if (!current || status === "needs_information" || status === "closed") {
+    const fallback = document.createElement("p");
+    fallback.className = "progress-list__notice";
+    fallback.textContent = current?.description ?? "Your request is being handled by the RentAgain team.";
+    list.append(fallback);
+  }
+  return list;
 }
 
 function faq(questions = homeFaqs, showAllLink = false) {
@@ -244,7 +386,7 @@ function homePage() {
     </section>
 
     <section id="how-it-works" class="section">
-      <div class="section-heading"><p class="eyebrow">Clear Roadmap</p><h2>HOW IT WORKS</h2><p>Getting approved shouldn't be a guessing game. Our three-step framework turns obstacles into approvals.</p></div>
+      <div class="section-heading"><p class="eyebrow">Clear Roadmap</p><h2>HOW IT WORKS</h2><p>Getting started shouldn't be a guessing game. Our three-step framework turns obstacles into clear next steps.</p></div>
       <div class="steps-grid">
         <article class="step-card"><span>01</span><h3>Tell Us About Your Situation</h3><p>Complete a short questionnaire so we can better understand your housing goals and approval challenges.</p><a class="text-link" href="/book-online/">Get Started ➜</a></article>
         <article class="step-card"><span>02</span><h3>Receive Your Personalized Strategy</h3><p>We'll review your information and identify the most effective path forward based on your circumstances.</p><a class="text-link" href="/book-consultation/">Book a Consultation</a></article>
@@ -255,10 +397,12 @@ function homePage() {
     <section id="services" class="section section--tint">
       <div class="section-heading section-heading--row">
         <div><h2>OUR SERVICES</h2></div>
-        <a class="text-link" href="#services">View All Services ➜</a>
+        <p class="section-heading__note">Start with the challenge you’re facing. Each program has its own details, costs, and process.</p>
       </div>
       <div class="service-grid">${serviceCards()}</div>
     </section>
+
+    ${readinessGuide()}
 
     <section class="feature-strip">
       <article><h3>EXPERIENCE</h3><p>We've worked with thousands of renters facing unique housing situations.</p></article>
@@ -281,7 +425,7 @@ function housingPage() {
   return `
     <section class="page-hero">
       <div class="page-hero__copy">
-        <div class="fact-grid"><div><strong>30-45 Day</strong><span>Program Length</span></div><div><strong>Nationwide</strong><span>Service</span></div><div><strong>Personalized</strong><span>Strategy</span></div><div><strong>Apartment &amp;</strong><span>Housing Focused</span></div></div>
+        <div class="fact-grid"><div><strong>2 Options</strong><span>30–45 or 7–14 day estimates</span></div><div><strong>Nationwide</strong><span>Service</span></div><div><strong>Personalized</strong><span>Strategy</span></div><div><strong>Apartment &amp;</strong><span>Housing Focused</span></div></div>
         <p class="eyebrow">HOUSING APPROVAL PROGRAM</p>
         <h1>Build A Stronger Rental Profile. Increase Your Approval Odds.</h1>
         <p class="page-hero__lead">Our Housing Approval Program helps renters strengthen their approval position through credit-building integrations, rental profile enhancement, application strategy, and personalized support.</p>
@@ -295,7 +439,7 @@ function housingPage() {
         <article class="package-card"><p class="eyebrow">STANDARD HOUSING PACKAGE</p><h3>$950</h3><p class="package-card__term">30-45 Days</p><p>Our most popular option for renters with flexible timelines who want to strengthen their profile the smart way.</p><ul><li>Credit Profile Support</li><li>Rental History Documentation</li><li>Application Assistance &amp; Strategy</li><li>1 Quality Tradeline</li><li>Dedicated Support</li></ul><a class="button button--primary" href="/book-consultation/">Book My Consultation</a></article>
         <article class="package-card package-card--featured"><p class="eyebrow">EXPEDITED HOUSING PACKAGE</p><p class="package-card__term">FASTEST OPTION</p><h3>$1,400</h3><p class="package-card__term">7 - 14 Days</p><p>Our faster option for renters who need results quickly and want priority support.</p><ul><li>Credit Profile Support</li><li>Rental History Documentation</li><li>Application Assistance &amp; Strategy</li><li>2 Quality Tradelines</li><li>Priority Processing</li><li>Dedicated Support</li></ul><a class="button button--light" href="/book-consultation/">Book My Consultation</a></article>
       </div>
-      <p class="fine-print">All programs include personalized guidance, nationwide support, and a proven strategy to improve your approval odds.</p>
+      <p class="fine-print">Processing times are estimates, not guarantees. Program scope and eligibility are reviewed during consultation. Housing providers make final application decisions.</p>
     </section>
     <section class="section"><div class="section-heading"><p class="eyebrow">WE HELP RENTERS FACING REAL APPROVAL CHALLENGES</p><h2>WE HELP RENTERS FACING REAL APPROVAL CHALLENGES</h2></div><div class="tag-grid"><span>Low or Bad Credit</span><span>Previous Apartment Denials</span><span>Previous Evictions</span><span>Rental Collections</span><span>Broken Lease History</span></div></section>
     <section class="section section--tint"><div class="section-heading"><p class="eyebrow">WHAT'S INCLUDED</p><h2>WHAT'S INCLUDED</h2></div><div class="feature-grid feature-grid--six">
@@ -311,10 +455,10 @@ function housingPage() {
       <article class="step-card"><span>02</span><h3>Strategy Development</h3><p>We create a personalized plan to strengthen your profile.</p></article>
       <article class="step-card"><span>03</span><h3>Profile Enhancement</h3><p>We build and enhance your credit and rental profile.</p></article>
       <article class="step-card"><span>04</span><h3>Application Preparation</h3><p>We prepare your application for the best possible results.</p></article>
-      <article class="step-card"><span>05</span><h3>Move Forward</h3><p>You'll have approved and move into your next home.</p></article>
+      <article class="step-card"><span>05</span><h3>Move Forward</h3><p>Use your plan to prepare an application and move forward with clarity. The housing provider makes the final decision.</p></article>
     </div></section>
     ${faq(housingFaqs, true)}
-    <section class="cta-band"><div><h2>Ready To Strengthen Your Profile And Get Approved?</h2><p>Let's create a plan that gets you in your next home.</p></div><div><a class="button button--light" href="/book-consultation/">Book My Consultation</a><p>Let's build your path to approval.</p><p>Have Questions? We're here to help. <a href="tel:${site.phoneHref}">${site.phone}</a></p></div></section>`;
+    <section class="cta-band"><div><h2>Ready to strengthen your profile?</h2><p>Let's create a plan for your next housing application.</p></div><div><a class="button button--light" href="/book-consultation/">Book My Consultation</a><p>Get clear on your path forward.</p><p>Have Questions? We're here to help. <a href="tel:${site.phoneHref}">${site.phone}</a></p></div></section>`;
 }
 
 function coApplicantPage() {
@@ -336,7 +480,7 @@ function coApplicantPage() {
       <article class="step-card"><span>02</span><h3>We Assign a Co-Applicant</h3><p>We pair you with a qualified co-applicant (700+ credit) with strong income.</p></article>
       <article class="step-card"><span>03</span><h3>Application Preparation</h3><p>Our team completes the co-applicant portion of your rental application.</p></article>
       <article class="step-card"><span>04</span><h3>Application Submitted</h3><p>We submit your completed application to the property on your behalf.</p></article>
-      <article class="step-card"><span>05</span><h3>Get Approved</h3><p>Move into your new home with confidence.</p></article>
+      <article class="step-card"><span>05</span><h3>Provider decision</h3><p>The housing provider makes the final decision. Your specialist can help explain the next steps.</p></article>
     </div></section>
     <section class="section section--tint"><div class="section-heading"><p class="eyebrow">THIS PROGRAM IS FOR YOU IF:</p><h2>THIS PROGRAM IS FOR YOU IF:</h2></div><div class="tag-grid"><span>You don't meet the income requirement alone</span><span>You need a higher credit score on your application</span><span>You've been denied in the past</span><span>You want to increase your approval chances</span><span>You're ready to move into your next home</span></div><div class="fact-grid fact-grid--wide"><div><strong>$800</strong><span>PROGRAM FEE</span></div><div><strong>48-72 Hours</strong><span>PROCESSING TIME (Volume Dependent)</span></div><div><strong>700+ Credit Score</strong><span>CO-APPLICANT REQUIREMENT</span></div><div><strong>+$10,000 Monthly Income</strong><span>INCOME ADDED</span></div><div><strong>Nationwide - All 50 States</strong><span>SERVICE AREA</span></div></div></section>
     ${faq(coApplicantFaqs, true)}
@@ -348,7 +492,7 @@ function verifiedIncomePage() {
     <section class="page-hero"><div class="page-hero__copy">
       <div class="fact-grid"><div><strong>Fast Turnaround</strong><span>48-72 Hours</span></div><div><strong>ADP Powered</strong><span>Trusted Software</span></div><div><strong>Landlord Ready</strong><span>Proper Documentation</span></div><div><strong>Nationwide</strong><span>Virtual Service</span></div></div>
       <p class="eyebrow">INCOME VERIFICATION SERVICE</p><h1>Verify Your Income. Strengthen Your Approval.</h1>
-      <p class="page-hero__lead">Our Income Verification Service helps you properly document and verify your income so you can meet rental requirements and get approved with confidence.</p>
+      <p class="page-hero__lead">Our Income Verification Service helps you organize accurate income documentation for a clearer rental application. Housing providers set their own requirements and make their own decisions.</p>
       <div class="button-row"><a class="button button--primary" href="/book-consultation/">Book My Consultation</a><a class="button button--outline" href="#income-packages">See Packages</a></div>
     </div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">We use ADP</span><strong>The #1 payroll platform</strong><span class="hero-note__line"></span><span class="hero-note__small">Trusted by millions of businesses nationwide.</span></div></div></section>
     <section id="income-packages" class="section section--tint">
@@ -364,7 +508,7 @@ function verifiedIncomePage() {
       <article class="step-card"><span>02</span><h3>Information Submission</h3><p>You provide income details and required information.</p></article>
       <article class="step-card"><span>03</span><h3>ADP Setup &amp; Processing</h3><p>We process your payroll and structure your income.</p></article>
       <article class="step-card"><span>04</span><h3>Verification &amp; Documentation</h3><p>We create professional, landlord-ready documents.</p></article>
-      <article class="step-card"><span>05</span><h3>You Get Approved</h3><p>Use your verified income to meet requirements and secure your new home.</p></article>
+      <article class="step-card"><span>05</span><h3>Prepare for your application</h3><p>Use your accurate documentation when applying. The housing provider makes the final decision.</p></article>
     </div></section>
     <section class="section"><div class="section-heading"><p class="eyebrow">THIS SERVICE IS PERFECT FOR YOU IF:</p><h2>THIS SERVICE IS PERFECT FOR YOU IF:</h2></div><div class="tag-grid"><span>You are self-employed or a sole proprietor</span><span>You have inconsistent or variable income</span><span>You get paid in cash or non-traditional ways</span><span>You need help meeting rental income requirements</span><span>You've been denied due to income proof</span><span>You want to increase your approval chances</span></div><div class="fact-grid fact-grid--wide"><div><strong>48-72 Hours</strong><span>TURNAROUND TIME</span></div><div><strong>Virtual - Nationwide</strong><span>SERVICE TYPE</span></div><div><strong>One-time payment</strong><span>PAYMENT</span></div><div><strong>Secure email delivery</strong><span>DOCUMENT DELIVERY</span></div><div><strong>1 Round of revisions included</strong><span>REVISIONS</span></div><div><strong>We're here every step</strong><span>SUPPORT</span></div></div></section>
     ${faq(incomeFaqs, true)}
@@ -384,9 +528,9 @@ function instantApprovalPage() {
     <section id="instant-how-it-works" class="section"><div class="section-heading"><p class="eyebrow">HOW IT WORKS</p><h2>HOW IT WORKS</h2></div><div class="steps-grid">
       <article class="step-card"><span>01</span><h3>Consultation</h3><p>We review your situation in a private consultation to determine eligibility.</p></article>
       <article class="step-card"><span>02</span><h3>Property Selection</h3><p>Choose from our network of qualifying properties that fit your needs.</p></article>
-      <article class="step-card"><span>03</span><h3>Approval Execution</h3><p>Our team secures the lease and meets all requirements on your behalf.</p></article>
+      <article class="step-card"><span>03</span><h3>Approval coordination</h3><p>Our team coordinates the qualifying housing opportunity and its provider requirements.</p></article>
       <article class="step-card"><span>04</span><h3>Lease Completion</h3><p>All lease documents are finalized and ready for your signature.</p></article>
-      <article class="step-card"><span>05</span><h3>Move In</h3><p>Receive your keys and move into your new home with confidence.</p></article>
+      <article class="step-card"><span>05</span><h3>Complete move-in steps</h3><p>After provider approval and lease completion, coordinate move-in directly with the housing provider.</p></article>
     </div></section>
     <section class="section section--tint"><div class="section-heading"><p class="eyebrow">IS INSTANT APPROVAL RIGHT FOR YOU?</p><h2>IS INSTANT APPROVAL RIGHT FOR YOU?</h2></div><div class="feature-grid">
       <article class="feature-card"><h3>Previously Denied</h3><p>You've been declined by apartments in the past and need a different approach.</p></article>
@@ -402,6 +546,25 @@ function instantApprovalPage() {
     </div></section>
     ${faq(instantFaqs, true)}
     <section class="cta-band"><div><h2>Your Next Home Is Closer Than You Think.</h2><p>Book your private consultation today and let our team create your fastest path to move-in.</p></div><div><a class="button button--light" href="/book-consultation/">Book a Consultation</a><p>Speak with a housing specialist and see if you qualify.</p><p>Have Questions? Call us directly. We're here to help. <a href="tel:${site.phoneHref}">${site.phone}</a></p></div></section>`;
+}
+
+function autoApprovalPage() {
+  return `
+    <section class="page-hero">
+      <div class="page-hero__copy">
+        <p class="eyebrow">30-day credit-building service</p>
+        <h1>A clearer path toward your auto goals.</h1>
+        <p class="page-hero__lead">The Auto Approval Program is a 30-day credit-building service. Talk with the RentAgain team to understand the program, current costs, and whether it fits your situation.</p>
+        <div class="button-row"><a class="button button--primary" href="/book-online/">Book an auto consultation</a><a class="button button--outline" href="tel:${site.phoneHref}">Call ${site.phone}</a></div>
+      </div>
+      <div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Auto Approval Program</span><strong>Understand your next steps.</strong><span class="hero-note__line"></span><span class="hero-note__small">30-day credit-building service<br>Personal consultation<br>Program details before you decide</span></div></div>
+    </section>
+    <section class="section section--tint"><div class="section-heading"><p class="eyebrow">What to expect</p><h2>Get the details before you get started.</h2><p class="section-heading__note">A specialist can explain the program scope, costs, and process during your consultation. Ask questions and decide whether the service is right for you.</p></div><div class="steps-grid">
+      <article class="step-card"><span>01</span><h3>Talk with the team</h3><p>Share your goals and ask about the current Auto Approval Program.</p></article>
+      <article class="step-card"><span>02</span><h3>Review the program</h3><p>Confirm the steps, costs, timing, and what the service does and does not include.</p></article>
+      <article class="step-card"><span>03</span><h3>Choose your next step</h3><p>Credit-building support does not guarantee a lender's approval or financing terms.</p></article>
+    </div></section>
+    <section class="cta-band"><div><h2>Want to learn whether it fits?</h2><p>Ask a specialist about the 30-day Auto Approval Program.</p></div><div><a class="button button--light" href="/book-online/">Book a consultation</a><p>The lender makes the final financing decision.</p></div></section>`;
 }
 
 function consultationPage() {
@@ -441,7 +604,7 @@ function bookingPage() {
     <section class="page-hero"><div class="page-hero__copy"><p class="eyebrow">Direct Calendar</p><h1>BOOK A CONSULTATION</h1><p class="page-hero__lead">Speak with an expert to review your rental approval options and find the service that fits your needs.</p></div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Select a Date &amp; Time</span><strong>Choose a consultation</strong><span class="hero-note__line"></span><span class="hero-note__small">Choose a service below to open its live calendar.</span></div></div></section>
     <section class="section section--tint"><div class="booking-breadcrumb"><a href="/">Home</a><span>Services</span><span>Service Information</span></div><div class="section-heading"><p class="eyebrow">Select a Date &amp; Time</p><h2>Select a Date &amp; Time</h2></div><div class="booking-grid">
       <article class="booking-card"><span class="booking-card__icon" aria-hidden="true">⌂</span><h3>Housing Approval Consultation</h3><div class="booking-card__meta"><span>15 min</span></div><a class="button button--primary" href="${housingUrl}" target="_blank" rel="noopener noreferrer">Book Now</a></article>
-      <article class="booking-card"><span class="booking-card__icon booking-card__icon--gold" aria-hidden="true">✳</span><h3>Car Approval Consultation</h3><div class="booking-card__meta"><span>15 min</span></div><a class="button button--primary" href="${carUrl}" target="_blank" rel="noopener noreferrer">Book Now</a></article>
+      <article class="booking-card"><span class="booking-card__icon booking-card__icon--gold" aria-hidden="true">✳</span><h3>Auto Approval Consultation</h3><div class="booking-card__meta"><span>15 min</span></div><a class="button button--primary" href="${carUrl}" target="_blank" rel="noopener noreferrer">Book Now</a></article>
     </div></section>
     <section class="section"><div class="section-heading"><p class="eyebrow">Need help choosing?</p><h2>Request a consultation</h2><p>This sends a request to Rent Again; it does not reserve a calendar time. Use one of the live calendars above to book a confirmed appointment.</p></div>${consultationRequestForm()}</section>`;
 }
@@ -521,7 +684,7 @@ function accountPage() {
 
 function staffPage() {
   return `
-    <section class="page-hero"><div class="page-hero__copy"><p class="eyebrow">Authorized staff</p><h1>STAFF CONSOLE</h1><p class="page-hero__lead">Sign in with an authorized staff account to review consultation requests and update their status.</p></div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Restricted access</span><strong>For the Rent Again team.</strong><span class="hero-note__line"></span><span class="hero-note__small">Only accounts provisioned by a project administrator can access request details.</span></div></div></section>
+    <section class="page-hero"><div class="page-hero__copy"><p class="eyebrow">Authorized staff</p><h1>STAFF CONSOLE</h1><p class="page-hero__lead">Sign in with an authorized staff account to review consultation requests and keep clients informed about progress.</p></div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Restricted access</span><strong>For the Rent Again team.</strong><span class="hero-note__line"></span><span class="hero-note__small">Only accounts provisioned by a project administrator can access request details.</span></div></div></section>
     <section class="section"><div class="account-panel">
       <p id="staff-config-status" class="intake-form__status" role="status" aria-live="polite"></p>
       <form class="intake-form" id="staff-login" method="post" action="/staff/">
@@ -547,7 +710,8 @@ function privacyPage() {
       <p>The consultation form collects your name, email address, phone number, service of interest, property type, target city and state, move timeline, and consent to be contacted. Please do not submit Social Security numbers, credit reports, bank statements, payroll records, or other sensitive documents through the form.</p>
       <h2>How information is used and stored</h2>
       <p>Once the online request feature is enabled, consultation details will be stored in a dedicated Rent Again Supabase project so the team can respond. Requests submitted while signed in are associated with that account and can be viewed in the client account. Requests submitted while signed out are not linked to an account.</p>
-      <p>Authorized Rent Again staff provisioned in the project can review consultation requests and update their status through the staff console.</p>
+      <p>Authorized Rent Again staff provisioned in the project can review consultation requests and update their progress through the staff console. Progress reflects updates entered by RentAgain; housing providers make all final application decisions.</p>
+      <p>The self-guided readiness checklist runs in your browser. Its selections are not transmitted to RentAgain or saved.</p>
       <p>Client intake summaries are generated only from a request linked to the signed-in account. The PDF is stored in a private Supabase Storage bucket and its download link expires after five minutes. It repeats information submitted by the client; it is not independent verification or proof of income, identity, rental history, landlord approval, or eligibility.</p>
       <h2>Retention and your choices</h2>
       <p>When the backend is enabled, requests and documents remain stored until deleted; this build does not automatically delete records. Signed-in clients can delete their account and linked requests from the account page. Guest requests are not linked to an account; contact <a href="mailto:${site.email}">${site.email}</a> to ask about access, correction, or deletion of a guest request.</p>
@@ -567,7 +731,7 @@ function calendarPage(kind) {
     ? "Our Auto Approval Program is a 30-day credit-building service. Talk with us to start your service"
     : "Housing/APT Approval package Or Instant Approval Service";
   return `
-    <section class="page-hero"><div class="page-hero__copy"><p class="eyebrow">Schedule your service</p><h1>Schedule your service</h1><p class="page-hero__lead">${serviceDescription}</p><p>Check out our availability and book the date and time that works for you</p><div class="button-row"><a class="button button--primary" href="${fullUrl}" target="_blank" rel="noopener noreferrer">Book Now</a></div></div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Schedule your service</span><strong>${isCar ? "Car Approval Consultation" : "Housing Approval Consultation"}</strong><span class="hero-note__line"></span><span class="hero-note__small">Filter by:<br>Staff Member (All)</span></div></div></section>
+    <section class="page-hero"><div class="page-hero__copy"><p class="eyebrow">Schedule your service</p><h1>Schedule your service</h1><p class="page-hero__lead">${serviceDescription}</p><p>Check out our availability and book the date and time that works for you</p><div class="button-row"><a class="button button--primary" href="${fullUrl}" target="_blank" rel="noopener noreferrer">Book Now</a></div></div><div class="page-hero__aside"><div class="hero-note"><span class="hero-note__label">Schedule your service</span><strong>${isCar ? "Auto Approval Consultation" : "Housing Approval Consultation"}</strong><span class="hero-note__line"></span><span class="hero-note__small">Filter by:<br>Staff Member (All)</span></div></div></section>
     <section class="section section--tint"><div class="booking-bridge"><div><p class="eyebrow">Schedule your service</p><h2>Check out our availability and book the date and time that works for you</h2><a class="button button--primary" href="${fullUrl}" target="_blank" rel="noopener noreferrer">Continue to booking</a></div><div class="booking-bridge__note"><span aria-hidden="true">↗</span><p>Filter by: Staff Member (All)</p></div></div></section>`;
 }
 
@@ -582,6 +746,7 @@ const routes = {
   "/cosigner": { title: "Cosigner | RentAgain", render: coApplicantPage },
   "/verified-income": { title: "Verified Income | RentAgain", render: verifiedIncomePage },
   "/instant-approval": { title: "Instant Approval | RentAgain", render: instantApprovalPage },
+  "/auto-approval": { title: "Auto Approval | RentAgain", render: autoApprovalPage },
   "/book-consultation": { title: "Book Consultation | RentAgain", render: consultationPage },
   "/book-online": { title: "Book Online | RentAgain", render: bookingPage },
   "/account": { title: "Client Account | RentAgain", render: accountPage },
@@ -614,7 +779,7 @@ function navigation(currentPath) {
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span class="visually-hidden">Menu</span></button>
       <nav class="site-nav" id="primary-nav" aria-label="Main navigation">
         ${links.map(({ path, label }) => `<a href="${path}"${normalizedPath(path) === currentPath ? ' aria-current="page"' : ""}>${label}</a>`).join("")}
-        <details class="nav-dropdown"><summary>Services</summary><div class="nav-dropdown__menu"><a href="/instant-approval/">Instant Approval</a><a href="/cosigner/">Cosigner</a><a href="/book-consultation/">Book Consultation</a><a href="/verified-income/">Verified Income</a><a href="/housing-packages/">Housing Packages</a></div></details>
+        <details class="nav-dropdown"><summary>Services</summary><div class="nav-dropdown__menu"><a href="/instant-approval/">Instant Approval</a><a href="/cosigner/">Co-Applicant Program</a><a href="/book-consultation/">Book Consultation</a><a href="/verified-income/">Verified Income</a><a href="/housing-packages/">Housing Packages</a><a href="/auto-approval/">Auto Approval</a></div></details>
         <a class="site-nav__mobile-login" href="/account/">Client Login</a>
       </nav>
       <div class="site-header__actions"><a class="site-header__login" href="/account/">Client Login</a><a class="button button--small button--outline" href="/book-consultation/">Book a Consultation</a><a class="button button--small button--primary site-header__cta" href="/book-online/">Get Started ➜</a></div>
@@ -661,6 +826,59 @@ document.addEventListener("keydown", (event) => {
     nav?.classList.remove("site-nav--open");
   }
 });
+
+function initializeReadinessGuide() {
+  const form = document.querySelector("#readiness-guide");
+  const results = document.querySelector("#readiness-results");
+  if (!form || !results) return;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const topic = form.querySelector('input[name="readiness-topic"]:checked')?.value;
+    const checkedItems = [...form.querySelectorAll('input[name="readiness-check"]:checked')];
+    const uncheckedItems = [...form.querySelectorAll('input[name="readiness-check"]:not(:checked)')];
+    const serviceByTopic = {
+      housing: { name: "Housing Approval Program", href: "/housing-packages/", detail: "Review the housing program and discuss how its profile and application support may fit." },
+      income: { name: "Verified Income Program", href: "/verified-income/", detail: "Review the income documentation service and ask what authentic records may be needed." },
+      coapplicant: { name: "Co-Applicant Program", href: "/cosigner/", detail: "Review the co-applicant program and ask about roles, responsibilities, and provider requirements." },
+      time: { name: "Instant Approval Service", href: "/instant-approval/", detail: "Review the Instant Approval Service and confirm eligibility, current availability, costs, and timing with the team." },
+      auto: { name: "Auto Approval Program", href: "/auto-approval/", detail: "Review the 30-day Auto Approval Program and confirm the current scope and costs with the team." },
+      unsure: { name: "A consultation", href: "/book-consultation/", detail: "A specialist can help you understand the available services and what to ask next." },
+    };
+    const service = serviceByTopic[topic] ?? serviceByTopic.unsure;
+
+    results.replaceChildren();
+    const heading = document.createElement("h3");
+    heading.textContent = "Your next steps";
+    const summary = document.createElement("p");
+    summary.textContent = `You marked ${checkedItems.length} of ${form.querySelectorAll('input[name="readiness-check"]').length} planning items as ready. This is a checklist, not an approval score or eligibility decision.`;
+    const suggestion = document.createElement("p");
+    suggestion.textContent = service.detail;
+    const link = document.createElement("a");
+    link.className = "button button--primary";
+    link.href = service.href;
+    link.textContent = `Explore ${service.name}`;
+    results.append(heading, summary, suggestion);
+
+    if (uncheckedItems.length) {
+      const listHeading = document.createElement("h4");
+      listHeading.textContent = "Planning items to consider";
+      const list = document.createElement("ul");
+      for (const input of uncheckedItems) {
+        const item = document.createElement("li");
+        item.textContent = input.closest("label")?.querySelector("span")?.textContent ?? "";
+        list.append(item);
+      }
+      results.append(listHeading, list);
+    }
+
+    results.append(link);
+    results.hidden = false;
+    results.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+}
 
 function initializeSupabaseFeatures() {
   const config = window.RENTAGAIN_SUPABASE;
@@ -881,7 +1099,7 @@ async function renderAccountSession(client, session) {
   try {
     ({ data: requests, error } = await client
       .from("consultation_requests")
-      .select("id, service, created_at, status")
+      .select("id, service, created_at, status, status_updated_at")
       .order("created_at", { ascending: false }));
   } catch (requestError) {
     console.error("Could not load client requests:", requestError);
@@ -895,21 +1113,36 @@ async function renderAccountSession(client, session) {
   }
   const clientRequests = requests ?? [];
   status.textContent = clientRequests.length ? "" : "No signed-in consultation requests were found.";
+  const serviceLabels = {
+    housing: "Housing Approval Program",
+    co_applicant: "Co-Applicant Program",
+    income_verification: "Verified Income Program",
+    instant_approval: "Instant Approval Service",
+    auto_approval: "Auto Approval Program",
+    not_sure: "Service to be discussed",
+  };
   for (const request of clientRequests) {
     const card = document.createElement("article");
     card.className = "account-request";
     const heading = document.createElement("h3");
-    heading.textContent = request.service.replaceAll("_", " ");
+    heading.textContent = serviceLabels[request.service] ?? "Consultation request";
     const date = document.createElement("p");
-    date.textContent = new Date(request.created_at).toLocaleString();
+    date.textContent = `Request created ${new Date(request.created_at).toLocaleString()}`;
     const state = document.createElement("p");
-    state.textContent = `Request status: ${request.status}`;
+    state.className = "account-request__status";
+    const statusInfo = requestStatuses.find((item) => item.value === request.status);
+    state.textContent = statusInfo?.label ?? "Request received";
+    const statusDescription = document.createElement("p");
+    statusDescription.textContent = statusInfo?.description ?? "Your request is being handled by the RentAgain team.";
+    const updatedAt = document.createElement("p");
+    updatedAt.className = "account-request__updated";
+    updatedAt.textContent = `Last updated ${new Date(request.status_updated_at ?? request.created_at).toLocaleString()}`;
     const button = document.createElement("button");
     button.className = "button button--outline";
     button.type = "button";
     button.textContent = "Generate intake summary";
     button.addEventListener("click", () => generateIntakeSummary(client, request.id, card, status));
-    card.append(heading, date, state, button);
+    card.append(heading, date, state, statusDescription, updatedAt, renderRequestProgress(request.status), button);
     list.append(card);
   }
 }
@@ -972,12 +1205,13 @@ async function loadStaffRequests(client) {
       new Date(request.created_at).toLocaleString(),
     ].join(" · ");
     const statusLabel = document.createElement("label");
-    statusLabel.textContent = "Request status";
+    statusLabel.className = "staff-request-status";
+    statusLabel.textContent = "Update progress";
     const statusSelect = document.createElement("select");
-    for (const value of ["new", "contacted", "closed"]) {
+    for (const { value, label } of requestStatuses) {
       const option = document.createElement("option");
       option.value = value;
-      option.textContent = value[0].toUpperCase() + value.slice(1);
+      option.textContent = label;
       option.selected = request.status === value;
       statusSelect.append(option);
     }
@@ -1060,4 +1294,5 @@ async function generateIntakeSummary(client, requestId, container, status) {
   status.textContent = "Your summary is ready. It contains information you submitted and is not independent verification.";
 }
 
+initializeReadinessGuide();
 initializeSupabaseFeatures();

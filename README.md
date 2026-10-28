@@ -7,12 +7,13 @@ A responsive static website for Rent Again, designed for Cloudflare Pages. The f
 - Responsive pages for the main Rent Again services, consultations, calendars, client account, and privacy notice.
 - Existing housing and auto appointment calendars remain available on `www.rentagain.org`. Opening a calendar books through that existing provider; a form on this site is only a request and does not reserve a time.
 - Consultation request intake stores only contact details and non-sensitive service/location/timing preferences. Cloudflare Turnstile verification is required before a request is accepted.
+- A private, self-guided readiness checklist organizes next steps without scoring applicants or predicting a provider decision. Checklist answers stay in the browser and are not submitted or saved.
 - Passwordless Supabase Auth gives clients access to requests submitted while signed in.
-- A restricted staff console lets provisioned staff review the 100 most recent requests and update request status. Staff membership is controlled in the dedicated Supabase project.
+- A restricted staff console lets provisioned staff review the 100 most recent requests and update progress. Clients can see the latest progress step and update time in their account. Housing providers make all final application decisions.
 - Clients can delete their signed-in account, linked consultation requests, and private summaries from the account page.
 - Authenticated clients can generate a private PDF intake summary from their own submitted request. It is explicitly identified as client-submitted, not independently verified, and not proof of income, identity, rental history, landlord approval, or eligibility.
 - Generated summaries are stored in a private Supabase Storage bucket and shared using five-minute signed links.
-- No payment processing, automatic appointment booking, approval decision, income verification, fabricated landlord document, or client-upload flow for sensitive financial records is implemented.
+- The site does not implement payment processing, automatic appointment booking, automated approval decisions, fabricated landlord documents, or client uploads of sensitive financial records. The housing provider makes the final application decision.
 
 The public calendar handoff remains in place until the business supplies an appointment system, availability, timezone, and booking rules. This preserves current booking access rather than pretending a consultation request is a confirmed appointment.
 
@@ -53,6 +54,8 @@ Before enabling the browser features:
    supabase db push
    ```
 
+   The progress tracker migration follows the initial consultation migration. Apply it with `supabase db push` before deploying the matching application build.
+
 4. Supabase supplies `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` to Edge Functions; do not try to set those reserved variables as custom secrets. The allowed origins are already configured. Never place `TURNSTILE_SECRET_KEY` or a Supabase service-role key in Cloudflare Pages variables or browser assets.
 
 5. To redeploy functions after a code change:
@@ -65,7 +68,7 @@ Before enabling the browser features:
    ```
 
 6. In Cloudflare Pages, set build variables `SUPABASE_URL=https://moavkqlqvyfwnvfqevrg.supabase.co`, `SUPABASE_ANON_KEY=<public-anon-or-publishable-key>`, and `TURNSTILE_SITE_KEY=<public-turnstile-site-key>`. Set `RENTAGAIN_BACKEND_ENABLED=true` only after SMTP and Turnstile are configured, then trigger a new Pages deployment so the build picks up the variables.
-7. Test a magic-link sign-in and consultation submission before accepting real client data.
+7. Test a magic-link sign-in, consultation submission, staff progress update, and client progress display before accepting real client data. Progress is updated by staff; a recorded provider outcome should only be used after the provider has communicated it.
 8. Provision staff only after the staff member has signed in once. In the Supabase SQL editor, grant access to the matching Auth user ID, for example:
 
    ```sql
