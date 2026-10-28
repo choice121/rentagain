@@ -29,15 +29,15 @@ for (const routeFile of routeFiles) {
 
 const app = fs.readFileSync(path.join(dist, "assets", "app.js"), "utf8");
 const renderedRoutes = [
-  { path: "/", heading: "A rental denial" },
-  { path: "/housing-packages/", heading: "Build a stronger rental profile." },
-  { path: "/cosigner/", heading: "A stronger application starts with the right people." },
-  { path: "/verified-income/", heading: "Make your income easier to understand." },
-  { path: "/instant-approval/", heading: "A different route to your next home." },
-  { path: "/book-consultation/", heading: "Let’s find the right next step." },
-  { path: "/book-online/", heading: "Choose the conversation you need." },
-  { path: "/booking-calendar/housing-approval-consultation/", heading: "Schedule your housing consultation." },
-  { path: "/booking-calendar/car-approval-consultation/", heading: "Schedule your car consultation." },
+  { path: "/", heading: "Get Back Into Housing -" },
+  { path: "/housing-packages/", heading: "Build A Stronger Rental Profile." },
+  { path: "/cosigner/", heading: "Stronger Application. Better Approval Odds." },
+  { path: "/verified-income/", heading: "Verify Your Income. Strengthen Your Approval." },
+  { path: "/instant-approval/", heading: "INSTANT APPROVAL SERVICE" },
+  { path: "/book-consultation/", heading: "Let's Find The Right Solution For You." },
+  { path: "/book-online/", heading: "BOOK A CONSULTATION" },
+  { path: "/booking-calendar/housing-approval-consultation/", heading: "Schedule your service" },
+  { path: "/booking-calendar/car-approval-consultation/", heading: "Schedule your service" },
 ];
 
 for (const route of renderedRoutes) {
@@ -83,8 +83,9 @@ for (const route of renderedRoutes) {
 assert.match(app, /bookingRoot: "https:\/\/www\.rentagain\.org"/);
 assert.match(app, /\/booking-calendar\/housing-approval-consultation/);
 assert.match(app, /\/booking-calendar\/car-approval-consultation/);
-assert.match(app, /do not guarantee that an application will be accepted/i);
-assert.match(app, /We do not create or alter income, payroll, or employment information/i);
+assert.match(app, /info@vontagain\.org/);
+assert.match(app, /successImages\.map/);
+assert.match(app, /challengeItems\.map/);
 assert.doesNotMatch(app, /setConfirmed\(true\)|Case #RA-|2026-10-27/);
 
 const redirects = fs.readFileSync(path.join(dist, "_redirects"), "utf8");
