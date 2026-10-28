@@ -259,6 +259,8 @@ h1 { margin-bottom: 1.15rem; font-size: clamp(3.2rem, 6.3vw, 6.1rem); font-weigh
 .site-footer__links { display: flex; gap: clamp(3rem, 8vw, 8rem); }
 .site-footer__links > div { display: grid; align-content: start; gap: .75rem; }
 .footer-label { margin: 0 0 .3rem; color: #d9c28d; font-size: .67rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+.footer-socials { display: flex; align-items: center; gap: .55rem; }
+.footer-socials img { display: block; width: 22px; height: 22px; }
 .site-footer__links a { color: #d3e1d5; font-size: .8rem; }
 .site-footer__links a:hover { color: var(--white); }
 .site-footer__bottom { display: flex; justify-content: space-between; gap: 1rem; padding-top: 1rem; border-top: 1px solid #ffffff38; color: #aac0ae; font-size: .65rem; line-height: 1.6; }

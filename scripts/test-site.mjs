@@ -90,6 +90,8 @@ assert.match(app, /bookingRoot: "https:\/\/www\.rentagain\.org"/);
 assert.match(app, /\/booking-calendar\/housing-approval-consultation/);
 assert.match(app, /\/booking-calendar\/car-approval-consultation/);
 assert.match(app, /info@vontagain\.org/);
+assert.match(app, /class="footer-socials" aria-hidden="true"/);
+assert.equal([...app.matchAll(/bea572_(?:37e807f014a94a59a0bcaa31302ae0c8|42e56c2aab1045e7b1d8a2f0fc6f4fcc|3c35867aae664e648a931e54c2370089|8c12aae5a0114da197dea3c2ea03c065)~mv2\.png/g)].length, 4, "all source footer social icons are retained");
 assert.match(app, /successStories\.map/);
 assert.equal([...app.matchAll(/01ef68_[a-f0-9]+~mv2\.(?:jpg|png)/g)].length, 18, "all source success-story photos are retained");
 assert.doesNotMatch(app, /Approved in 48 Hours with Previous Eviction|Income Multiplier Requirement Met via ADP|Overcame 530 Credit Score/);
