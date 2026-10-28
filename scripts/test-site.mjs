@@ -81,6 +81,9 @@ for (const route of renderedRoutes) {
   assert.ok(document.title.endsWith("RentAgain") || route.path === "/", `${route.path} sets a page title`);
 
   if (route.path === "/") {
+    assert.match(appRoot.innerHTML, /fictional profiles and quotes are design-preview copy, not real client reviews or endorsements/i);
+    assert.equal((appRoot.innerHTML.match(/Sample · fictional profile/g) ?? []).length, 3, "each sample testimonial is clearly labeled");
+    assert.match(appRoot.innerHTML, /Replace these samples with feedback from real clients only after receiving their permission/);
     listeners["menu-click"]();
     assert.equal(attributes["aria-expanded"], "true", "mobile navigation opens accessibly");
     assert.ok(classes.has("site-nav--open"), "mobile navigation becomes visible");
@@ -158,8 +161,8 @@ assert.match(app, /decision is outside RentAgain's control/);
 assert.match(app, /info@vontagain\.org/);
 assert.match(app, /class="footer-socials" aria-hidden="true"/);
 assert.equal([...app.matchAll(/bea572_(?:37e807f014a94a59a0bcaa31302ae0c8|42e56c2aab1045e7b1d8a2f0fc6f4fcc|3c35867aae664e648a931e54c2370089|8c12aae5a0114da197dea3c2ea03c065)~mv2\.png/g)].length, 4, "all source footer social icons are retained");
-assert.match(app, /successStories\.map/);
-assert.equal([...app.matchAll(/01ef68_[a-f0-9]+~mv2\.(?:jpg|png)/g)].length, 18, "all source success-story photos are retained");
+assert.match(app, /testimonialPreviews\.map/);
+assert.doesNotMatch(app, /successStories|SUCCESS STORIES/);
 assert.doesNotMatch(app, /Approved in 48 Hours with Previous Eviction|Income Multiplier Requirement Met via ADP|Overcame 530 Credit Score/);
 assert.match(app, /challengeItems\.map/);
 assert.doesNotMatch(app, /standard scoring algorithms reject|strict 3x-rent thresholds|4-6 weeks of uncertain waiting/i);
