@@ -178,26 +178,26 @@ const instantFaqs = [
   },
 ];
 
-const successStories = [
-  "01ef68_a6e50e592af0463788861788b5474e45~mv2.jpg",
-  "01ef68_61271eabbfdc4ae5a8c3390d169a0e96~mv2.jpg",
-  "01ef68_8b79258f22b842299b2a17b6d8b5cc17~mv2.jpg",
-  "01ef68_9905d97fc64543eb8d3d044128c9fb98~mv2.png",
-  "01ef68_b220d9666dd3486c84daa0854400eb34~mv2.jpg",
-  "01ef68_c34ff10b6cba46adb3829571530084f2~mv2.jpg",
-  "01ef68_b8a7b864cb3242cab17222e5add39d05~mv2.jpg",
-  "01ef68_e90dc2c4a6184468841baf7f5d05c0a4~mv2.jpg",
-  "01ef68_24b2b83815eb42d28ab4868b08130a26~mv2.jpg",
-  "01ef68_8ca633c8d5c94b9fbfc5984e42273cac~mv2.jpg",
-  "01ef68_78c6dc8bac2b45d0bee5535e1a774ef7~mv2.jpg",
-  "01ef68_0287af425b844275bcc128822137540d~mv2.png",
-  "01ef68_9a65f1a8adec40f4808735533399b004~mv2.jpg",
-  "01ef68_a85ad790c4174158942da35531d864a0~mv2.jpg",
-  "01ef68_c26375599de44ccba3fd6d5ec5256423~mv2.jpg",
-  "01ef68_7516fd9f80384bbbbfa31d0ac91cd07b~mv2.jpg",
-  "01ef68_99c7ad2c46514fc38c3c1f54bb51da7f~mv2.jpg",
-  "01ef68_278f2451bddc4a8eb2c2bec489bac112~mv2.jpg",
-].map((image) => `https://static.wixstatic.com/media/${image}`);
+const testimonialPreviews = [
+  {
+    initials: "JR",
+    name: "Jordan R.",
+    context: "Exploring rental application support",
+    quote: "I wanted to understand my options before deciding what to do next. Having a chance to talk through my questions helped me make a more informed plan.",
+  },
+  {
+    initials: "MT",
+    name: "Morgan T.",
+    context: "Preparing income information",
+    quote: "Getting clear on which information to gather made the process feel less overwhelming. I knew what I still needed to confirm before moving forward.",
+  },
+  {
+    initials: "AC",
+    name: "Alex C.",
+    context: "Comparing available services",
+    quote: "I appreciated being able to review the service details and ask questions first. It helped me decide which next step made sense for my situation.",
+  },
+];
 
 const challengeItems = [
   ["Credit Challenges", "bea572_f6d2188bd2274dc08b886c36321a3463~mv2.png"],
@@ -379,10 +379,22 @@ function homePage() {
       <div><p>Many renters struggle with credit issues, rental history challenges, income concerns, collections, or previous denials.</p><p>At Rent Again, we focus on helping clients understand their options and create a path forward toward securing housing.</p></div>
     </section>
 
-    <section class="section section--tint">
-      <div class="section-heading"><h2>SUCCESS STORIES</h2></div>
-      <div class="story-grid" role="list" aria-label="Rent Again success stories">${successStories.map((image) => `
-        <article class="story-card" role="listitem"><img src="${image}" alt="Rent Again success story photo" loading="lazy"></article>`).join("")}</div>
+    <section class="section section--tint" aria-labelledby="testimonial-preview-title">
+      <div class="section-heading">
+        <p class="eyebrow">Illustrative examples only</p>
+        <h2 id="testimonial-preview-title">A MORE INFORMED NEXT STEP</h2>
+        <p>These fictional profiles and quotes are design-preview copy, not real client reviews or endorsements. They do not describe actual outcomes.</p>
+      </div>
+      <div class="testimonial-grid" role="list" aria-label="Fictional testimonial design previews">${testimonialPreviews.map(({ initials, name, context, quote }) => `
+        <article class="testimonial-card" role="listitem">
+          <span class="testimonial-card__sample">Sample · fictional profile</span>
+          <blockquote>“${quote}”</blockquote>
+          <div class="testimonial-card__profile">
+            <span class="testimonial-card__avatar" aria-hidden="true">${initials}</span>
+            <div><strong>${name}</strong><span>${context}</span></div>
+          </div>
+        </article>`).join("")}</div>
+      <p class="testimonial-disclaimer">Replace these samples with feedback from real clients only after receiving their permission to publish.</p>
     </section>
 
     <section id="how-it-works" class="section">
