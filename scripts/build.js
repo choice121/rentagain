@@ -1,75 +1,43 @@
-import fs from 'fs';
-import path from 'path';
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const rootDir = process.cwd();
-const distDir = path.join(rootDir, 'dist');
-
-console.log('🚀 Building RentAgain 100% Identical Multi-Device Production Mirror...');
-
-// Clean and recreate dist
-if (fs.existsSync(distDir)) {
-  fs.rmSync(distDir, { recursive: true, force: true });
-}
-fs.mkdirSync(distDir, { recursive: true });
-
-// Copy all static desktop routes to dist
-const desktopRoutes = [
-  'index.html',
-  'housing-packages/index.html',
-  'cosigner/index.html',
-  'verified-income/index.html',
-  'instant-approval/index.html',
-  'book-online/index.html',
-  'book-consultation/index.html',
-  'booking-calendar/housing-approval-consultation/index.html',
-  'booking-calendar/car-approval-consultation/index.html'
+const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const sourceDir = path.join(rootDir, "site");
+const distDir = path.join(rootDir, "dist");
+const routes = [
+  { path: "/", title: "RentAgain | A better path forward", description: "Personalized housing support for renters facing credit, income, or rental-history challenges." },
+  { path: "/housing-packages/", title: "Housing Approval Program | RentAgain", description: "Explore personalized housing approval support, rental history documentation, and application strategy." },
+  { path: "/cosigner/", title: "Co-Applicant Program | RentAgain", description: "Learn about RentAgain's co-applicant program and how a genuine, consenting co-applicant may participate." },
+  { path: "/verified-income/", title: "Income Verification | RentAgain", description: "Get help organizing accurate income documentation for a rental application." },
+  { path: "/instant-approval/", title: "Instant Approval Service | RentAgain", description: "Explore RentAgain's guided housing options for eligible renters." },
+  { path: "/book-consultation/", title: "Free Consultation | RentAgain", description: "Book a free consultation to discuss your housing goals and next steps." },
+  { path: "/book-online/", title: "Book Online | RentAgain", description: "Choose an online housing or car approval consultation." },
+  { path: "/booking-calendar/housing-approval-consultation/", title: "Housing Approval Consultation | RentAgain", description: "Continue to the RentAgain housing approval consultation calendar." },
+  { path: "/booking-calendar/car-approval-consultation/", title: "Car Approval Consultation | RentAgain", description: "Continue to the RentAgain car approval consultation calendar." },
 ];
 
-let totalBytes = 0;
-console.log('🖥️ Copying Desktop Pages...');
-for (const p of desktopRoutes) {
-  const src = path.join(rootDir, p);
-  const dest = path.join(distDir, p);
-  if (fs.existsSync(src)) {
-    fs.mkdirSync(path.dirname(dest), { recursive: true });
-    fs.copyFileSync(src, dest);
-    const size = fs.statSync(dest).size;
-    totalBytes += size;
-    console.log(`  ✓ /${p} (${(size / 1024).toFixed(1)} KB)`);
-  }
+if (!fs.existsSync(path.join(sourceDir, "index.html"))) {
+  throw new Error(`Missing site entry point: ${path.join(sourceDir, "index.html")}`);
 }
 
-// Copy all mobile routes to dist/m
-const mobileRoutes = [
-  'm/index.html',
-  'm/housing-packages/index.html',
-  'm/cosigner/index.html',
-  'm/verified-income/index.html',
-  'm/instant-approval/index.html',
-  'm/book-online/index.html',
-  'm/book-consultation/index.html',
-  'm/booking-calendar/housing-approval-consultation/index.html',
-  'm/booking-calendar/car-approval-consultation/index.html'
-];
+fs.rmSync(distDir, { recursive: true, force: true });
+fs.mkdirSync(path.join(distDir, "assets"), { recursive: true });
+fs.copyFileSync(path.join(sourceDir, "app.js"), path.join(distDir, "assets", "app.js"));
+fs.copyFileSync(path.join(sourceDir, "styles.css"), path.join(distDir, "assets", "styles.css"));
 
-console.log('📱 Copying Mobile Pages...');
-for (const p of mobileRoutes) {
-  const src = path.join(rootDir, p);
-  const dest = path.join(distDir, p);
-  if (fs.existsSync(src)) {
-    fs.mkdirSync(path.dirname(dest), { recursive: true });
-    fs.copyFileSync(src, dest);
-    const size = fs.statSync(dest).size;
-    totalBytes += size;
-    console.log(`  ✓ /${p} (${(size / 1024).toFixed(1)} KB)`);
-  }
+const template = fs.readFileSync(path.join(sourceDir, "index.html"), "utf8");
+for (const route of routes) {
+  const html = template
+    .replace("{{TITLE}}", route.title)
+    .replace("{{DESCRIPTION}}", route.description);
+  const destination = route.path === "/"
+    ? path.join(distDir, "index.html")
+    : path.join(distDir, route.path, "index.html");
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.writeFileSync(destination, html);
 }
 
-// Copy public directory if exists
-const publicDir = path.join(rootDir, 'public');
-if (fs.existsSync(publicDir)) {
-  fs.cpSync(publicDir, distDir, { recursive: true });
-  console.log('  ✓ Copied public assets to dist');
-}
-
-console.log(`\n🎉 Mirror Build Complete! ${(totalBytes / (1024 * 1024)).toFixed(2)} MB across ${desktopRoutes.length + mobileRoutes.length} pages in dist/`);
+fs.copyFileSync(path.join(sourceDir, "404.html"), path.join(distDir, "404.html"));
+fs.copyFileSync(path.join(sourceDir, "_redirects"), path.join(distDir, "_redirects"));
+console.log(`Built RentAgain responsive site with ${routes.length} routes in dist/.`);
