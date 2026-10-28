@@ -6,15 +6,15 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const sourceDir = path.join(rootDir, "site");
 const distDir = path.join(rootDir, "dist");
 const routes = [
-  { path: "/", title: "RentAgain | A better path forward", description: "Personalized housing support for renters facing credit, income, or rental-history challenges." },
-  { path: "/housing-packages/", title: "Housing Approval Program | RentAgain", description: "Explore personalized housing approval support, rental history documentation, and application strategy." },
-  { path: "/cosigner/", title: "Co-Applicant Program | RentAgain", description: "Learn about RentAgain's co-applicant program and how a genuine, consenting co-applicant may participate." },
-  { path: "/verified-income/", title: "Income Verification | RentAgain", description: "Get help organizing accurate income documentation for a rental application." },
-  { path: "/instant-approval/", title: "Instant Approval Service | RentAgain", description: "Explore RentAgain's guided housing options for eligible renters." },
-  { path: "/book-consultation/", title: "Free Consultation | RentAgain", description: "Book a free consultation to discuss your housing goals and next steps." },
-  { path: "/book-online/", title: "Book Online | RentAgain", description: "Choose an online housing or car approval consultation." },
-  { path: "/booking-calendar/housing-approval-consultation/", title: "Housing Approval Consultation | RentAgain", description: "Continue to the RentAgain housing approval consultation calendar." },
-  { path: "/booking-calendar/car-approval-consultation/", title: "Car Approval Consultation | RentAgain", description: "Continue to the RentAgain car approval consultation calendar." },
+  { path: "/", title: "Home | RentAgain", description: "Rent Again helps renters understand their options and create a clear path forward toward securing housing." },
+  { path: "/housing-packages/", title: "Housing Packages | RentAgain", description: "Explore the Standard and Expedited Housing Packages, program details, and consultation options." },
+  { path: "/cosigner/", title: "Cosigner | RentAgain", description: "Learn about the Rent Again Co-Applicant Program and how to get started." },
+  { path: "/verified-income/", title: "Verified Income | RentAgain", description: "Learn about Rent Again's income verification service and consultation options." },
+  { path: "/instant-approval/", title: "Instant Approval | RentAgain", description: "Explore Rent Again's Instant Approval Service, service fees, and consultation options." },
+  { path: "/book-consultation/", title: "Book Consultation | RentAgain", description: "Book a free consultation with Rent Again to discuss your situation and options." },
+  { path: "/book-online/", title: "Book Online | RentAgain", description: "Select a date and time to book a Housing Approval or Car Approval consultation." },
+  { path: "/booking-calendar/housing-approval-consultation/", title: "Schedule your service | RentAgain", description: "Check availability and book a Housing Approval consultation." },
+  { path: "/booking-calendar/car-approval-consultation/", title: "Schedule your service | RentAgain", description: "Check availability and book an Auto Approval consultation." },
 ];
 
 if (!fs.existsSync(path.join(sourceDir, "index.html"))) {
