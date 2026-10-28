@@ -1,5 +1,16 @@
 project_id = "rentagain"
 
+[auth]
+site_url = "https://rentagain.pages.dev"
+additional_redirect_urls = [
+  "https://rentagain.pages.dev/account/",
+  "https://rentagain.pages.dev/staff/",
+  "https://rentagain.org/account/",
+  "https://rentagain.org/staff/",
+  "https://www.rentagain.org/account/",
+  "https://www.rentagain.org/staff/",
+]
+
 [db.migrations]
 enabled = true
 schema_paths = []
