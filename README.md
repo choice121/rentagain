@@ -1,35 +1,104 @@
 # RentAgain
 
-A modern, responsive static website for RentAgain, built for Cloudflare Pages.
+A responsive static website for Rent Again, designed for Cloudflare Pages. The frontend remains static; all client data and document-generation operations use Supabase Edge Functions, PostgreSQL, Auth, and private Storage.
 
-## What is included
+## What works in this redesign
 
-- A new responsive design for desktop, tablet, and mobile.
-- Dedicated pages for housing packages, the co-applicant program, income verification, instant approval, consultations, and both booking calendars.
-- Legacy `/m/` URLs redirect to their responsive equivalents.
-- Consultation booking links continue to the existing RentAgain calendar on `www.rentagain.org`.
-- Phone and email contact links remain available throughout the site.
-- Service pages, package details, booking pages, and contact links are included in the redesign.
+- Responsive pages for the main Rent Again services, consultations, calendars, client account, and privacy notice.
+- Existing housing and auto appointment calendars remain available on `www.rentagain.org`. Opening a calendar books through that existing provider; a form on this site is only a request and does not reserve a time.
+- Consultation request intake stores only contact details and non-sensitive service/location/timing preferences. Cloudflare Turnstile verification is required before a request is accepted.
+- Passwordless Supabase Auth gives clients access to requests submitted while signed in.
+- A restricted staff console lets provisioned staff review the 100 most recent requests and update request status. Staff membership is controlled in the dedicated Supabase project.
+- Clients can delete their signed-in account, linked consultation requests, and private summaries from the account page.
+- Authenticated clients can generate a private PDF intake summary from their own submitted request. It is explicitly identified as client-submitted, not independently verified, and not proof of income, identity, rental history, landlord approval, or eligibility.
+- Generated summaries are stored in a private Supabase Storage bucket and shared using five-minute signed links.
+- No payment processing, automatic appointment booking, approval decision, income verification, fabricated landlord document, or client-upload flow for sensitive financial records is implemented.
 
-This deployment is a front-end redesign only. It does not collect or store lead forms, process payments, authenticate clients, or implement a client portal. Booking currently continues on the existing RentAgain site. Connect and test the intended backend and booking providers before moving the primary domain.
+The public calendar handoff remains in place until the business supplies an appointment system, availability, timezone, and booking rules. This preserves current booking access rather than pretending a consultation request is a confirmed appointment.
 
 ## Build and test
 
-The site uses only Node.js built-ins:
+The static build uses Node.js built-ins:
 
 ```bash
 npm run build
 npm test
 ```
 
-The build writes the Cloudflare Pages site to `dist/`. In Cloudflare Pages, use `npm run build` as the build command and `dist` as the build output directory.
+The build writes route-specific pages and a browser-safe Supabase config to `dist/`. Backend browser features are disabled by default. Never put a Supabase `service_role` key in Cloudflare Pages variables or browser assets.
+
+For a local static build, set:
+
+```text
+SUPABASE_URL=https://<dedicated-project-ref>.supabase.co
+SUPABASE_ANON_KEY=<publishable-or-anon-key>
+TURNSTILE_SITE_KEY=<public-turnstile-site-key>
+RENTAGAIN_BACKEND_ENABLED=true
+```
+
+The publishable/anon key and Turnstile site key are public browser values. `SUPABASE_SERVICE_ROLE_KEY` and `TURNSTILE_SECRET_KEY` are server secrets and belong only in Supabase Edge Function secrets.
+
+## Supabase setup
+
+Use a **dedicated Supabase project for Rent Again**. Do not point this site at Choice Properties' shared Supabase project; client intake and document data must remain isolated.
+
+1. Create a Supabase project and configure passwordless email sign-in with a production SMTP provider.
+2. Link this repository to that project with the Supabase CLI and apply the migration:
+
+   ```bash
+   supabase link --project-ref <rentagain-project-ref>
+   supabase db push
+   ```
+
+3. Create a Cloudflare Turnstile widget for the production Rent Again domains. Configure its site key in Cloudflare Pages as `TURNSTILE_SITE_KEY`.
+4. Configure Edge Function secrets in Supabase. Supabase supplies `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` to Edge Functions; set the remaining values:
+
+   ```bash
+   supabase secrets set SUPABASE_ANON_KEY=<publishable-or-anon-key> TURNSTILE_SECRET_KEY=<turnstile-secret> SITE_ORIGINS=https://rentagain.pages.dev,https://www.rentagain.org,https://rentagain.org
+   ```
+
+5. Deploy the functions:
+
+   ```bash
+   supabase functions deploy submit-consultation --no-verify-jwt
+   supabase functions deploy generate-client-intake-summary
+   supabase functions deploy delete-client-account
+   supabase functions deploy staff-consultation-requests
+   ```
+
+6. In Supabase Auth, allow redirects to the `/account/` and `/staff/` URLs on the preview and production domains. Review SMTP delivery and test sign-in links.
+7. Set Cloudflare Pages build variables `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `TURNSTILE_SITE_KEY`, and `RENTAGAIN_BACKEND_ENABLED=true`; then rebuild and deploy.
+8. Provision staff only after the staff member has signed in once. In the Supabase SQL editor, grant access to the matching Auth user ID, for example:
+
+   ```sql
+   insert into public.rentagain_staff_members (user_id)
+   select id from auth.users where email = 'staff@example.com';
+   ```
+
+   Do not grant staff access based only on a user-controlled email submitted in the browser. Remove access by deleting the corresponding staff-membership row.
+9. Submit test requests as a guest and as an authenticated client. Confirm guests cannot read requests, clients can only read their own records, unprovisioned users cannot access the staff console, provisioned staff can update statuses, generated PDFs stay private, signed links expire, and the original calendar links still open.
+
+Do not set `RENTAGAIN_BACKEND_ENABLED=true` until the dedicated project, migration, functions, Turnstile, Auth redirect allowlist, and SMTP have been configured and tested. The business should also review the privacy notice and choose a documented retention/deletion process before accepting real client data.
+
+## Data and document safeguards
+
+- The migration enables row-level security and grants clients access only to their own signed-in requests/documents. Guest intake is written by a server-side Edge Function and is not publicly readable.
+- A database-backed rate limit and Turnstile verification protect public intake. Origin allowlisting is enforced in the Edge Functions.
+- The service-role key and Turnstile secret are never rendered into the browser.
+- The only generated file is a client intake summary using the client's saved form fields. It is not a landlord approval, paystub, income/employment verification, credit report, lease, or eligibility certificate.
+- The staff Edge Function requires a valid Supabase session and a row in `rentagain_staff_members` before returning or changing consultation requests. The browser never receives the service-role key.
+- Signed-in account deletion removes the user's generated Storage objects, linked requests, and Auth account. Guest requests are not linked to an account and must be handled by authorized staff.
+- The current migration does not automatically delete client records. Rent Again must operate deletion requests and establish an appropriate retention period.
+- The staff console does not send lead email notifications, and the site does not promise a response time. Staff must check the console until an approved notification workflow is configured.
 
 ## Project layout
 
-- `site/` — website template, styles, route rendering, and Pages redirects.
-- `scripts/build.js` — generates route-specific static HTML in `dist/`.
-- `scripts/test-site.mjs` — checks route output, metadata, legacy redirects, and booking bridges.
-- `functions/_middleware.js` — passes requests through; responsive layout is handled in the browser.
+- `site/` — static template, styles, route rendering, Supabase client integration, and redirects.
+- `scripts/build.js` — generates route-specific static HTML and browser configuration in `dist/`.
+- `scripts/test-site.mjs` — checks routes, booking bridges, form/config behavior, and key Supabase safeguards.
+- `supabase/migrations/` — database schema, row-level security, rate limiting, and private Storage policies.
+- `supabase/functions/` — consultation intake, authenticated client PDF generation, account deletion, and staff request management.
+- `functions/_middleware.js` — Cloudflare Pages pass-through middleware.
 
 ## Contact
 

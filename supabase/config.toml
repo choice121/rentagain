@@ -1,0 +1,17 @@
+project_id = "rentagain"
+
+[db.migrations]
+enabled = true
+schema_paths = []
+
+[functions.submit-consultation]
+verify_jwt = false
+
+[functions.generate-client-intake-summary]
+verify_jwt = true
+
+[functions.delete-client-account]
+verify_jwt = true
+
+[functions.staff-consultation-requests]
+verify_jwt = true
